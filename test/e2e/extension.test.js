@@ -19,6 +19,7 @@ const FIXTURES = {
   "/feed": "feed.html",
   "/forum": "forum.html",
   "/spa": "spa.html",
+  "/table": "table.html",
 };
 
 before(async () => {
@@ -113,6 +114,44 @@ test("blurs GTA VI units and leaves everything else", async () => {
     await page.$eval("#trailer", (el) => el.getAttribute("data-novice-tag")),
     "GTA VI",
   );
+  await page.close();
+});
+
+test("a blurred table row keeps the table's columns and shows its tag", async () => {
+  const page = await context.newPage();
+  await page.goto(`${base}/table`);
+  await page.waitForSelector("#spoiler[data-novice='blur']", {
+    state: "attached",
+  });
+  const widths = (id) =>
+    page.$eval(`#${id}`, (row) =>
+      [...row.cells].map((cell) => cell.getBoundingClientRect().width),
+    );
+  assert.deepEqual(await widths("plain"), [0, 200, 300, 100]);
+  assert.deepEqual(await widths("spoiler"), [0, 200, 300, 100]);
+  const chip = await page.$eval("#spoiler-name", (cell) => ({
+    host: cell.hasAttribute("data-novice-chip"),
+    tag: getComputedStyle(cell, "::before").content,
+    blur: getComputedStyle(cell).filter,
+  }));
+  assert.deepEqual(chip, { host: true, tag: '"GTA VI"', blur: "none" });
+  assert.equal(
+    await page.$eval(
+      "#spoiler",
+      (row) => getComputedStyle(row, "::before").content,
+    ),
+    "none",
+  );
+  await page.click("#spoiler");
+  await page.waitForSelector("#spoiler[data-novice='revealed']", {
+    state: "attached",
+  });
+  const leftovers = await page.$eval("#spoiler-name", (cell) =>
+    cell
+      .getAttributeNames()
+      .filter((a) => a.startsWith("data-novice") || a === "style"),
+  );
+  assert.deepEqual(leftovers, []);
   await page.close();
 });
 
