@@ -5,6 +5,7 @@ import {
   findSpoiler,
   findStorySpoiler,
   findUrlSpoiler,
+  isNovicePage,
 } from "../../src/spoilers.js";
 
 const spoilerLevel = (text) => findSpoiler(text)?.level ?? null;
@@ -244,6 +245,70 @@ test("allows other URLs", () => {
   ]) {
     assert.equal(urlMentionsGta6(url), false, url);
   }
+});
+
+test("knows the pages of NoVice's repository that only its maintainer writes", () => {
+  for (const url of [
+    "https://github.com/kpulka247/novice",
+    "https://github.com/kpulka247/novice/",
+    "https://github.com/kpulka247/novice?tab=readme",
+    "https://github.com/kpulka247/novice#readme",
+    "https://github.com/kpulka247/novice/tree/dev",
+    "https://github.com/kpulka247/novice/tree/main/src",
+    "https://github.com/kpulka247/novice/blob/main/CONTRIBUTING.md",
+  ]) {
+    assert.equal(isNovicePage(url), true, url);
+  }
+  for (const url of [
+    "https://github.com/kpulka247/novice/issues/1",
+    "https://github.com/kpulka247/novice/pulls",
+    "https://github.com/kpulka247/novice/discussions",
+    "https://github.com/kpulka247/novice/releases",
+    "https://github.com/kpulka247/novice/commit/1ded695",
+    "https://github.com/kpulka247/novice/blob/1ded695/README.md",
+    "https://github.com/kpulka247/novice/tree/main-fork",
+    "https://github.com/kpulka247/novice-fan",
+    "https://github.com/someone/novice",
+    "https://example.com/?ref=https://github.com/kpulka247/novice",
+    "https://github.com.evil.example/kpulka247/novice",
+  ]) {
+    assert.equal(isNovicePage(url), false, url);
+  }
+});
+
+test("on NoVice's own pages, lets the game's name through and nothing else", () => {
+  const own = { nameAllowed: true };
+  for (const text of [
+    "NoVice - Block GTA 6 Spoilers",
+    "Play GTA VI knowing nothing about it",
+    "Grand Theft Auto VI",
+    "Rockstar Games",
+  ]) {
+    assert.equal(findSpoiler(text, null, own), null, text);
+  }
+  assert.equal(
+    findUrlSpoiler(
+      "https://chromewebstore.google.com/detail/novice-block-gta-6-spoile/caledcpfdapmmhmflbpjmjnenmjggghp",
+      null,
+      own,
+    ),
+    null,
+  );
+  assert.equal(
+    findUrlSpoiler("https://www.rockstargames.com/VI", null, own),
+    null,
+  );
+  for (const text of [
+    "GTA 6: Lucia dies in the last mission",
+    "Jason Duval",
+    "the places of Leonida",
+  ]) {
+    assert.equal(findSpoiler(text, null, own)?.level, "gta6", text);
+  }
+  assert.equal(
+    findSpoiler("GTA 6 has a twist", compileKeywords(["twist"]), own)?.level,
+    "gta6",
+  );
 });
 
 test("names the words that matched", () => {

@@ -131,6 +131,7 @@ export function createBlocker(host, reveals) {
   let style = "blur";
   let keywords = null;
   let aboutGta = false;
+  let rules = { nameAllowed: false };
   const expanderSelector = expanderSelectorFor(host);
   const pendingExpanders = new Set();
   let chipWidthsInstalled = false;
@@ -150,7 +151,7 @@ export function createBlocker(host, reveals) {
     match?.level === "franchise" && !strict ? null : match;
   const matchOf = (text) =>
     stronger(
-      accept(findSpoiler(text, keywords)),
+      accept(findSpoiler(text, keywords, rules)),
       aboutGta ? findStorySpoiler(text) : null,
     );
 
@@ -245,7 +246,7 @@ export function createBlocker(host, reveals) {
       typeof resolved === "string" && resolved
         ? resolved
         : element.getAttribute(attr);
-    return accept(findUrlSpoiler(url, keywords));
+    return accept(findUrlSpoiler(url, keywords, rules));
   }
 
   function attrsMatch(element) {
@@ -323,8 +324,9 @@ export function createBlocker(host, reveals) {
         checkElement(element);
       }
     },
-    configure(settings, pageAboutGta) {
-      aboutGta = pageAboutGta;
+    configure(settings, page) {
+      aboutGta = page.aboutGta;
+      rules = { nameAllowed: page.nameAllowed };
       strict = settings.strict;
       style = settings.style;
       keywords = compileKeywords(settings.keywords);
