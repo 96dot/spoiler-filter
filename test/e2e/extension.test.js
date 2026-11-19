@@ -339,6 +339,39 @@ test("covers a page whose URL is about GTA VI before it renders", async () => {
   await page.close();
 });
 
+test("on NoVice's own front page, blurs spoilers but not the game's name", async () => {
+  await context.route("https://github.com/**", (route) =>
+    route.fulfill({
+      contentType: "text/html",
+      body: `<title>kpulka247/novice: NoVice - Block GTA 6 Spoilers</title>
+        <p id="name">Play GTA VI knowing nothing about it.</p>
+        <p id="spoiler">feat: block GTA 6 posts saying Lucia dies</p>`,
+    }),
+  );
+  const page = await context.newPage();
+  await page.goto("https://github.com/kpulka247/novice");
+  await page.waitForSelector("#spoiler[data-novice='blur']", {
+    state: "attached",
+  });
+  assert.equal(await page.$("novice-shield"), null);
+  assert.equal(await stateOf(page, "name"), "visible");
+  // GitHub opens an issue without reloading the page, and anyone writes there.
+  await page.evaluate(() => {
+    history.pushState(null, "", "/kpulka247/novice/issues/1");
+    document.title = "Spoiler report: GTA 6";
+  });
+  await page.waitForSelector("novice-shield", { state: "attached" });
+  await page.waitForSelector("#name[data-novice='blur']", {
+    state: "attached",
+  });
+  await page.goBack();
+  await page.waitForSelector("novice-shield", { state: "detached" });
+  await page.waitForSelector("#name:not([data-novice])", { state: "attached" });
+  assert.equal(await stateOf(page, "spoiler"), "blur");
+  await page.close();
+  await context.unroute("https://github.com/**");
+});
+
 test("a blurred unit the site made click-through still takes the click", async () => {
   const page = await openFeed();
   const box = await page.locator("#ghost").boundingBox();

@@ -230,6 +230,13 @@ const compile = (groups, end) =>
   );
 
 const EXPLICIT = compile(EXPLICIT_TERMS, `(?!${WORD_CHAR})`);
+// Everything about the game except its name: characters, places and story.
+const EXPLICIT_UNNAMED = compile(
+  Object.fromEntries(
+    Object.entries(EXPLICIT_TERMS).filter(([group]) => group !== "title"),
+  ),
+  `(?!${WORD_CHAR})`,
+);
 const FRANCHISE = compile(FRANCHISE_TERMS, `(?!${LETTER})`);
 const STORY = compile(STORY_TERMS, `(?!${WORD_CHAR})`);
 
@@ -241,6 +248,15 @@ const ROCKSTAR_SOURCES = [
   /^https?:\/\/(?:www\.)?tiktok\.com\/@rockstargames(?:[/?#]|$)/i,
   /^https?:\/\/(?:www\.)?twitch\.tv\/rockstargames(?:[/?#]|$)/i,
 ];
+
+// On NoVice's own repository pages, "GTA 6" is the product's name, so the name
+// alone does not cover or blur them. Characters, places, story spoilers and the
+// user's keywords still blur there. Issues, pull requests, commits and file
+// views at a commit hash show anyone's text, so they keep full protection.
+const NOVICE_PAGES =
+  /^https:\/\/github\.com\/kpulka247\/novice(?:\/(?:tree|blob)\/(?:main|dev)(?:[/?#]|$)|\/?(?:[?#]|$))/i;
+
+export const isNovicePage = (url) => NOVICE_PAGES.test(url);
 
 // Channel links catch a creator's posts even where the card hides their name.
 const CREATOR_HANDLES = [
@@ -300,9 +316,18 @@ export function compileKeywords(keywords) {
   );
 }
 
-export function findSpoiler(text, keywords = null) {
+export function findSpoiler(
+  text,
+  keywords = null,
+  { nameAllowed = false } = {},
+) {
   if (!text) return null;
   const cleaned = clean(text);
+  if (nameAllowed) {
+    return (
+      find(EXPLICIT_UNNAMED, cleaned, "gta6") ?? find(keywords, cleaned, "gta6")
+    );
+  }
   return (
     find(EXPLICIT, cleaned, "gta6") ??
     find(keywords, cleaned, "gta6") ??
@@ -314,8 +339,18 @@ export function findStorySpoiler(text) {
   return text ? find(STORY, clean(text), "gta6") : null;
 }
 
-export function findUrlSpoiler(url, keywords = null) {
+export function findUrlSpoiler(
+  url,
+  keywords = null,
+  { nameAllowed = false } = {},
+) {
   if (!url) return null;
+  if (nameAllowed) {
+    const decoded = clean(decodeUrl(url));
+    return (
+      find(EXPLICIT_UNNAMED, decoded, "gta6") ?? find(keywords, decoded, "gta6")
+    );
+  }
   if (ROCKSTAR_SOURCES.some((source) => source.test(url))) {
     return { level: "gta6", term: "Rockstar Games" };
   }

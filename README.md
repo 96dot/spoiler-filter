@@ -96,6 +96,8 @@ Every merge to `main` is released automatically with [semantic-release](https://
 
 Read **[CONTRIBUTING.md](./CONTRIBUTING.md)** for the project layout, the target branch (`dev`), and the Pull Request naming rules.
 
+If NoVice saved you from a spoiler, you can [buy me a coffee](https://ko-fi.com/kpulka) ☕.
+
 ## License
 
 [GPL-3.0](./LICENSE). The license covers the code. It does not give you the right to use the NoVice name, logo, or store graphics.
