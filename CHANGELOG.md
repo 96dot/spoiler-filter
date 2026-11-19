@@ -1,3 +1,9 @@
+## [1.3.1](https://github.com/kpulka247/novice/compare/v1.3.0...v1.3.1) (2026-11-19)
+
+### Bug Fixes
+
+* stop covering the novice repo's own front page and files ([#6](https://github.com/kpulka247/novice/issues/6)) ([130ad35](https://github.com/kpulka247/novice/commit/130ad3559bc2fa8640d2a4ade10c1a3a658e9e7d))
+
 ## [1.3.0](https://github.com/kpulka247/novice/compare/v1.2.0...v1.3.0) (2026-11-18)
 
 ### Features
