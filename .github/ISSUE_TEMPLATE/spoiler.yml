@@ -1,0 +1,52 @@
+name: A spoiler got through
+description: Report GTA VI content that NoVice did not blur.
+labels: ["spoiler report"]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Do not paste the spoiler. Other people read issues too. Describe where it was and what kind of content it was.
+  - type: input
+    id: url
+    attributes:
+      label: Page address
+      description: The full URL of the page.
+      placeholder: https://www.youtube.com/results?search_query=...
+    validations:
+      required: true
+  - type: dropdown
+    id: kind
+    attributes:
+      label: What got through
+      options:
+        - A video tile or thumbnail
+        - A post or a comment
+        - A search result
+        - An image
+        - A whole page that was not covered
+        - Something else
+    validations:
+      required: true
+  - type: textarea
+    id: where
+    attributes:
+      label: Where on the page
+      description: For example "the third video in the Shorts shelf". Do not repeat the spoiler.
+    validations:
+      required: true
+  - type: input
+    id: browser
+    attributes:
+      label: Browser and version
+      placeholder: Chrome 142, Firefox 145
+    validations:
+      required: true
+  - type: dropdown
+    id: strict
+    attributes:
+      label: Strict mode
+      options:
+        - "On"
+        - "Off"
+    validations:
+      required: true

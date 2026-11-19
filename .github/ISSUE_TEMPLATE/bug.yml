@@ -1,0 +1,33 @@
+name: Something is broken
+description: Report a broken page, a wrong blur, or a problem with the popup.
+labels: ["bug"]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        If NoVice missed a spoiler, use the spoiler report instead. Keep spoilers out of this issue.
+  - type: textarea
+    id: what
+    attributes:
+      label: What happened
+      description: What you did, what you expected, and what you saw instead. Add a screenshot if it helps.
+    validations:
+      required: true
+  - type: input
+    id: url
+    attributes:
+      label: Page address
+      description: The URL where it happens, if it happens on one page.
+  - type: input
+    id: browser
+    attributes:
+      label: Browser and version
+      placeholder: Chrome 142, Firefox 145
+    validations:
+      required: true
+  - type: input
+    id: version
+    attributes:
+      label: NoVice version
+      description: The version is on the browser's extensions page.
+      placeholder: 1.3.1
