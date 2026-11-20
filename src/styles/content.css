@@ -1,10 +1,26 @@
 @import "./tokens.css";
 
+@property --novice-blur {
+  syntax: "<length>";
+  inherits: true;
+  initial-value: 24px;
+}
+
+@keyframes novice-preview {
+  from {
+    --novice-blur: 24px;
+  }
+  to {
+    --novice-blur: 12px;
+  }
+}
+
 [data-novice="hide"] {
   display: none !important;
 }
 
 [data-novice="blur"] {
+  --novice-blur: 24px;
   --novice-tag-width: var(--novice-chip-gta6, 30px);
   --novice-eye: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='white' stroke-opacity='0.8' stroke-width='2.2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M3 3l18 18'/%3E%3Cpath d='M10.6 6.1A10 10 0 0 1 12 6c6 0 9.5 6 9.5 6a17 17 0 0 1-2.7 3.4'/%3E%3Cpath d='M6.6 6.6A17 17 0 0 0 2.5 12s3.5 6 9.5 6a9.6 9.6 0 0 0 5.4-1.6'/%3E%3Cpath d='M9.9 9.9a3 3 0 0 0 4.2 4.2'/%3E%3C/svg%3E");
   clip-path: inset(0) !important;
@@ -12,7 +28,7 @@
   cursor: pointer !important;
   user-select: none !important;
   color: transparent !important;
-  text-shadow: 0 0 12px rgba(128, 128, 128, 0.9) !important;
+  text-shadow: 0 0 calc(var(--novice-blur) / 2) rgba(128, 128, 128, 0.9) !important;
 }
 
 [data-novice="blur"][data-novice-level="franchise"] {
@@ -21,6 +37,9 @@
 
 [data-novice="blur"]:hover,
 [data-novice="blur"]:focus-visible {
+  /* Start fully blurred even when an item is first covered under the pointer.
+     Leaving hover/focus removes the animation and restores protection at once. */
+  animation: novice-preview 1.5s ease-out forwards !important;
   --novice-tag-width: var(--novice-term-width);
   --novice-eye: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='white' stroke-opacity='0.8' stroke-width='2.2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M2.5 12s3.5-6 9.5-6 9.5 6 9.5 6-3.5 6-9.5 6-9.5-6-9.5-6z'/%3E%3Ccircle cx='12' cy='12' r='3'/%3E%3C/svg%3E");
 }
@@ -34,7 +53,7 @@
 }
 
 [data-novice="blur"] > * {
-  filter: blur(24px) !important;
+  filter: blur(var(--novice-blur)) !important;
   pointer-events: none !important;
 }
 
@@ -47,7 +66,7 @@ tr[data-novice="blur"] > * {
 }
 
 tr[data-novice="blur"] > * > * {
-  filter: blur(24px) !important;
+  filter: blur(var(--novice-blur)) !important;
   pointer-events: none !important;
 }
 
@@ -168,4 +187,11 @@ tr[data-novice="blur"] > * > * {
 
 html[data-novice-shield] {
   overflow: hidden !important;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  [data-novice="blur"]:hover,
+  [data-novice="blur"]:focus-visible {
+    animation-duration: 0s !important;
+  }
 }

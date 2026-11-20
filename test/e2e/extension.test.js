@@ -729,3 +729,133 @@ test("popup manages domain exclusions and unmutes open pages including embedded 
     await setSettings({ keywords: [], allowedSites: [] });
   }
 });
+
+const blurRadius = (page, selector) =>
+  page.$eval(selector, (el) =>
+    Number(getComputedStyle(el).filter.match(/blur\(([\d.]+)px\)/)?.[1]),
+  );
+const waitForBlur = (page, selector, radius) =>
+  page.waitForFunction(
+    ({ selector, radius }) =>
+      getComputedStyle(document.querySelector(selector)).filter ===
+      `blur(${radius}px)`,
+    { selector, radius },
+  );
+
+test("hover gradually previews half blur, restores full blur on leave, and still allows click reveal", async () => {
+  const page = await openFeed();
+  try {
+    assert.equal(await blurRadius(page, "#gcard > img"), 24);
+    await page.hover("#gcard");
+    await page.waitForFunction(() => {
+      const blur = parseFloat(
+        getComputedStyle(document.querySelector("#gcard")).getPropertyValue(
+          "--novice-blur",
+        ),
+      );
+      return blur > 12 && blur < 24;
+    });
+    const midway = await blurRadius(page, "#gcard > img");
+    assert.ok(midway > 12 && midway < 24, `gradually unblurs: ${midway}`);
+    await waitForBlur(page, "#gcard > img", 12);
+    assert.equal(
+      await stateOf(page, "gcard"),
+      "blur",
+      "hover does not permanently reveal",
+    );
+    assert.equal(
+      await blurRadius(page, "#card > h3"),
+      24,
+      "other items stay fully blurred",
+    );
+    await page.mouse.move(0, 0);
+    await waitForBlur(page, "#gcard > img", 24);
+    await page.hover("#trailer");
+    await page.waitForFunction(() =>
+      getComputedStyle(document.querySelector("#trailer")).textShadow.endsWith(
+        " 6px",
+      ),
+    );
+    assert.equal(
+      await stateOf(page, "trailer"),
+      "blur",
+      "plain text also previews at half blur",
+    );
+    await page.mouse.move(0, 0);
+    await page.waitForFunction(() =>
+      getComputedStyle(document.querySelector("#trailer")).textShadow.endsWith(
+        " 12px",
+      ),
+    );
+    await page.click("#gcard");
+    assert.equal(await stateOf(page, "gcard"), "revealed");
+    assert.equal(
+      await page.$eval("#gcard > img", (el) => getComputedStyle(el).filter),
+      "none",
+    );
+  } finally {
+    await page.close();
+  }
+});
+
+test("table cells preview without blurring the chip, and keyboard focus respects reduced motion", async () => {
+  const page = await context.newPage();
+  try {
+    await page.goto(`${base}/table`);
+    await page.waitForSelector("#spoiler[data-novice='blur']", {
+      state: "attached",
+    });
+    assert.equal(await blurRadius(page, "#spoiler-name > a"), 24);
+    await page.hover("#spoiler-name");
+    await waitForBlur(page, "#spoiler-name > a", 12);
+    assert.equal(
+      await page.$eval("#spoiler-name", (el) => getComputedStyle(el).filter),
+      "none",
+      "chip host stays sharp",
+    );
+    await page.mouse.move(0, 0);
+    await waitForBlur(page, "#spoiler-name > a", 24);
+    await page.emulateMedia({ reducedMotion: "reduce" });
+    await page.keyboard.press("Tab");
+    await page.focus("#spoiler");
+    assert.equal(
+      await page.$eval("#spoiler", (el) => el.matches(":focus-visible")),
+      true,
+    );
+    await waitForBlur(page, "#spoiler-name > a", 12);
+    assert.equal(
+      await page.$eval(
+        "#spoiler",
+        (el) => getComputedStyle(el).animationDuration,
+      ),
+      "0s",
+    );
+    await page.focus("#plain-name > a");
+    await waitForBlur(page, "#spoiler-name > a", 24);
+  } finally {
+    await page.close();
+  }
+});
+
+test("a keyword covered under the pointer starts at full blur rather than animating from clear", async () => {
+  const page = await openFeed();
+  try {
+    await page.hover("#pasta");
+    await setSettings({ keywords: ["carbonara"] });
+    await page.waitForSelector("#pasta[data-novice='blur']", {
+      state: "attached",
+    });
+    const radius = await page.$eval("#pasta", (el) =>
+      parseFloat(getComputedStyle(el).getPropertyValue("--novice-blur")),
+    );
+    assert.ok(radius > 12 && radius <= 24, `starts protected: ${radius}`);
+    await page.waitForFunction(() =>
+      getComputedStyle(document.querySelector("#pasta")).textShadow.endsWith(
+        " 6px",
+      ),
+    );
+  } finally {
+    await setSettings({ keywords: [] });
+    await page.close();
+  }
+});

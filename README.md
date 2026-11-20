@@ -31,6 +31,8 @@ On the feature branch, **Custom keywords → Import keywords** accepts comma-sep
 
 The feature branch also adds **Excluded sites**. Enter a domain or website URL to exclude its hostname and subdomains, including embedded frames on excluded pages. Remove its **×** chip to restore protection immediately.
 
+Hover over a blurred item (or focus it with the keyboard) to preview it at half blur: the blur gradually reduces from 24px to 12px over 1.5 seconds. Moving away restores full blur immediately. Click to reveal the item completely. The hover animation respects your system’s reduced-motion preference.
+
 ## Build and install locally
 
 Install Node.js 22 or later, pnpm 11, and Git, then:
