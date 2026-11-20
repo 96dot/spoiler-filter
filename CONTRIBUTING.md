@@ -1,16 +1,16 @@
-# Contributing to NoVice
+# Contributing to Spoiler Filter
 
 Thank you for helping people go into GTA VI blind. Bug reports, new terms, site support, and code improvements are all welcome.
 
 ## Before you start
 
-This project is licensed under [GPL-3.0](./LICENSE). By opening a pull request, you agree that your contribution is licensed under GPL-3.0 too. The license does not cover the NoVice name, logo, or store graphics, so a fork that you publish must use a different name and icon.
+This is the independent 96dot fork of [NoVice](https://github.com/kpulka247/novice). The software and fork modifications are licensed under [GPL-3.0-only](./LICENSE); contributions use the same license. Preserve attribution and dated modification notices in [NOTICE.md](./NOTICE.md). The original NoVice name, logo, and store graphics are reserved by the upstream project. This fork uses the name Spoiler Filter and a newly drawn icon.
 
 Keep spoilers out of everything you post here: issues, pull requests, commit messages, and screenshots. Other people read them too.
 
 ## Report a spoiler that got through
 
-[Open a spoiler report](https://github.com/kpulka247/novice/issues/new?template=spoiler.yml). The form asks for the page address, what you saw, and your browser. Describe the spoiler without repeating it.
+[Open a spoiler report](https://github.com/96dot/spoiler-filter/issues/new?template=spoiler.yml). The form asks for the page address, what you saw, and your browser. Describe the spoiler without repeating it.
 
 To report a security problem, follow [SECURITY.md](./SECURITY.md) instead of opening an issue.
 
@@ -21,9 +21,9 @@ You need [Node.js](https://nodejs.org) 22 or later, [pnpm](https://pnpm.io/) 11,
 1. Fork the repository on GitHub.
 2. Clone your fork and add this repository as `upstream`. Replace `YOUR_GITHUB_USERNAME` with your username:
    ```bash
-   git clone https://github.com/YOUR_GITHUB_USERNAME/novice.git
-   cd novice
-   git remote add upstream https://github.com/kpulka247/novice.git
+   git clone https://github.com/YOUR_GITHUB_USERNAME/spoiler-filter.git
+   cd spoiler-filter
+   git remote add upstream https://github.com/96dot/spoiler-filter.git
    git fetch upstream
    ```
 3. Install the dependencies and the Chromium build that the end-to-end tests use:
@@ -55,7 +55,7 @@ You need [Node.js](https://nodejs.org) 22 or later, [pnpm](https://pnpm.io/) 11,
 | `src/popup/popup.js`             | The toolbar popup: the on and strict switches, the blur style, the per-site switch, and the custom keywords.                                                                                                                                                                                                                                                                                                                                                                    |
 | `src/background.js`              | The toolbar badge, and protecting tabs that were open at install time.                                                                                                                                                                                                                                                                                                                                                                                                          |
 | `public/manifest.json`           | The shared manifest. `webpack.config.js` adds the Chrome or Firefox background and the Firefox ID at build time.                                                                                                                                                                                                                                                                                                                                                                |
-| `scripts/build-icons.js`         | Renders the icons, store icon, README banner, and promo tiles from `src/assets/logo.svg`. Run it with `pnpm icons`.                                                                                                                                                                                                                                                                                                                                                             |
+| `scripts/build-icons.js`         | Renders this fork’s icons from `src/assets/logo.svg`. Run it with `pnpm icons`. Original upstream store graphics are not included.                                                                                                                                                                                                                                                                                                                                              |
 | `scripts/capture-screenshots.js` | Loads the extension into Chromium, opens YouTube, Wikipedia, Steam, and Twitch, and writes the README graphics and the framed store screenshots. Run it with `pnpm screenshots`.                                                                                                                                                                                                                                                                                                |
 
 ## Add a term, a site, or a language

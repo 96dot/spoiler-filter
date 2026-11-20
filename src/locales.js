@@ -2,7 +2,7 @@ export const DEFAULT_LOCALE = "en";
 
 export const MESSAGES = {
   en: {
-    extName: "NoVice - Block GTA 6 Spoilers",
+    extName: "Spoiler Filter - Block GTA 6 Spoilers",
     extDescription:
       "Blurs GTA 6 trailers, leaks, videos, posts and story spoilers across the web so you go in blind. Not affiliated with Rockstar.",
     countLabel: "spoilers blocked on this page",
@@ -35,7 +35,7 @@ export const MESSAGES = {
     shieldFound: "Matched:",
   },
   pl: {
-    extName: "NoVice - Block GTA 6 Spoilers",
+    extName: "Spoiler Filter - Block GTA 6 Spoilers",
     extDescription:
       "Rozmywa zwiastuny, przecieki, filmy, posty i spoilery fabuły GTA 6 w całym internecie. Nie jest powiązane z Rockstar.",
     countLabel: "zablokowanych spoilerów na tej stronie",
@@ -68,7 +68,7 @@ export const MESSAGES = {
     shieldFound: "Wykryto:",
   },
   de: {
-    extName: "NoVice - Block GTA 6 Spoilers",
+    extName: "Spoiler Filter - Block GTA 6 Spoilers",
     extDescription:
       "Verwischt GTA-6-Trailer, Leaks, Videos, Posts und Story-Spoiler im ganzen Web. Nicht mit Rockstar verbunden.",
     countLabel: "Spoiler auf dieser Seite blockiert",
@@ -101,7 +101,7 @@ export const MESSAGES = {
     shieldFound: "Gefunden:",
   },
   es: {
-    extName: "NoVice - Block GTA 6 Spoilers",
+    extName: "Spoiler Filter - Block GTA 6 Spoilers",
     extDescription:
       "Difumina tráilers, filtraciones, vídeos, publicaciones y spoilers de la historia de GTA 6 en toda la web. Sin relación con Rockstar.",
     countLabel: "spoilers bloqueados en esta página",
@@ -134,7 +134,7 @@ export const MESSAGES = {
     shieldFound: "Detectado:",
   },
   fr: {
-    extName: "NoVice - Block GTA 6 Spoilers",
+    extName: "Spoiler Filter - Block GTA 6 Spoilers",
     extDescription:
       "Floute les bandes-annonces, fuites, vidéos, posts et spoilers de GTA 6 sur tout le web. Non affilié à Rockstar.",
     countLabel: "spoilers bloqués sur cette page",
@@ -167,7 +167,7 @@ export const MESSAGES = {
     shieldFound: "Détecté :",
   },
   it: {
-    extName: "NoVice - Block GTA 6 Spoilers",
+    extName: "Spoiler Filter - Block GTA 6 Spoilers",
     extDescription:
       "Sfoca trailer, leak, video, post e spoiler della trama di GTA 6 su tutto il web. Non affiliato a Rockstar.",
     countLabel: "spoiler bloccati in questa pagina",
@@ -200,7 +200,7 @@ export const MESSAGES = {
     shieldFound: "Rilevato:",
   },
   pt_BR: {
-    extName: "NoVice - Block GTA 6 Spoilers",
+    extName: "Spoiler Filter - Block GTA 6 Spoilers",
     extDescription:
       "Desfoca trailers, vazamentos, vídeos, posts e spoilers da história de GTA 6 em toda a web. Sem vínculo com a Rockstar.",
     countLabel: "spoilers bloqueados nesta página",
@@ -233,7 +233,7 @@ export const MESSAGES = {
     shieldFound: "Detectado:",
   },
   nl: {
-    extName: "NoVice - Block GTA 6 Spoilers",
+    extName: "Spoiler Filter - Block GTA 6 Spoilers",
     extDescription:
       "Vervaagt GTA 6-trailers, leaks, video's, posts en verhaalspoilers op het hele web. Niet verbonden aan Rockstar.",
     countLabel: "spoilers geblokkeerd op deze pagina",
@@ -266,7 +266,7 @@ export const MESSAGES = {
     shieldFound: "Gevonden:",
   },
   sv: {
-    extName: "NoVice - Block GTA 6 Spoilers",
+    extName: "Spoiler Filter - Block GTA 6 Spoilers",
     extDescription:
       "Suddar ut GTA 6-trailers, läckor, videor, inlägg och storyspoilers på hela webben. Inte ansluten till Rockstar.",
     countLabel: "spoilers blockerade på den här sidan",
@@ -299,7 +299,7 @@ export const MESSAGES = {
     shieldFound: "Hittade:",
   },
   cs: {
-    extName: "NoVice - Block GTA 6 Spoilers",
+    extName: "Spoiler Filter - Block GTA 6 Spoilers",
     extDescription:
       "Rozmazává trailery, úniky, videa, příspěvky a spoilery příběhu GTA 6 na celém webu. Nesouvisí s Rockstar.",
     countLabel: "zablokovaných spoilerů na této stránce",
@@ -332,7 +332,7 @@ export const MESSAGES = {
     shieldFound: "Nalezeno:",
   },
   ru: {
-    extName: "NoVice - Block GTA 6 Spoilers",
+    extName: "Spoiler Filter - Block GTA 6 Spoilers",
     extDescription:
       "Размывает трейлеры, утечки, видео, посты и спойлеры сюжета GTA 6 по всему интернету. Не связано с Rockstar.",
     countLabel: "спойлеров заблокировано на этой странице",
@@ -365,7 +365,7 @@ export const MESSAGES = {
     shieldFound: "Найдено:",
   },
   uk: {
-    extName: "NoVice - Block GTA 6 Spoilers",
+    extName: "Spoiler Filter - Block GTA 6 Spoilers",
     extDescription:
       "Розмиває трейлери, витоки, відео, дописи та спойлери сюжету GTA 6 по всьому інтернету. Не пов'язано з Rockstar.",
     countLabel: "спойлерів заблоковано на цій сторінці",
@@ -398,7 +398,7 @@ export const MESSAGES = {
     shieldFound: "Знайдено:",
   },
   tr: {
-    extName: "NoVice - Block GTA 6 Spoilers",
+    extName: "Spoiler Filter - Block GTA 6 Spoilers",
     extDescription:
       "GTA 6 fragmanlarını, sızıntılarını, videolarını ve hikâye spoilerlarını tüm webde bulanıklaştırır. Rockstar ile ilgisi yoktur.",
     countLabel: "spoiler bu sayfada engellendi",
@@ -431,7 +431,7 @@ export const MESSAGES = {
     shieldFound: "Bulunan:",
   },
   ar: {
-    extName: "NoVice - Block GTA 6 Spoilers",
+    extName: "Spoiler Filter - Block GTA 6 Spoilers",
     extDescription:
       "يطمس عروض وتسريبات وفيديوهات ومنشورات وحرق أحداث GTA 6 في كل الويب. لا علاقة له بـ Rockstar.",
     countLabel: "حرق أحداث محجوب في هذه الصفحة",
@@ -464,7 +464,7 @@ export const MESSAGES = {
     shieldFound: "تم العثور على:",
   },
   hi: {
-    extName: "NoVice - Block GTA 6 Spoilers",
+    extName: "Spoiler Filter - Block GTA 6 Spoilers",
     extDescription:
       "पूरे वेब पर GTA 6 के ट्रेलर, लीक, वीडियो, पोस्ट और कहानी के स्पॉइलर धुंधले करता है। Rockstar से संबद्ध नहीं।",
     countLabel: "स्पॉइलर इस पेज पर ब्लॉक किए गए",
@@ -497,7 +497,7 @@ export const MESSAGES = {
     shieldFound: "मिला:",
   },
   id: {
-    extName: "NoVice - Block GTA 6 Spoilers",
+    extName: "Spoiler Filter - Block GTA 6 Spoilers",
     extDescription:
       "Mengaburkan trailer, bocoran, video, postingan, dan spoiler cerita GTA 6 di seluruh web. Tidak berafiliasi dengan Rockstar.",
     countLabel: "spoiler diblokir di halaman ini",
@@ -530,7 +530,7 @@ export const MESSAGES = {
     shieldFound: "Ditemukan:",
   },
   ja: {
-    extName: "NoVice - GTA 6 ネタバレブロッカー",
+    extName: "Spoiler Filter - GTA 6 ネタバレブロッカー",
     extDescription:
       "GTA 6 のトレーラー、リーク、動画、投稿、ストーリーのネタバレをウェブ全体でぼかします。Rockstar とは無関係です。",
     countLabel: "件のネタバレをこのページでブロックしました",
@@ -563,7 +563,7 @@ export const MESSAGES = {
     shieldFound: "検出:",
   },
   ko: {
-    extName: "NoVice - GTA 6 스포일러 차단기",
+    extName: "Spoiler Filter - GTA 6 스포일러 차단기",
     extDescription:
       "웹 전체에서 GTA 6 트레일러, 유출, 영상, 게시물, 스토리 스포일러를 흐리게 처리합니다. Rockstar와 관련이 없습니다.",
     countLabel: "개의 스포일러를 이 페이지에서 차단함",
@@ -596,7 +596,7 @@ export const MESSAGES = {
     shieldFound: "감지됨:",
   },
   zh_CN: {
-    extName: "NoVice - GTA 6 剧透拦截器",
+    extName: "Spoiler Filter - GTA 6 剧透拦截器",
     extDescription:
       "在整个网络上模糊 GTA 6 的预告片、泄露、视频、帖子和剧情剧透。与 Rockstar 无关。",
     countLabel: "条剧透已在此页面拦截",
@@ -628,7 +628,7 @@ export const MESSAGES = {
     shieldFound: "匹配：",
   },
   zh_TW: {
-    extName: "NoVice - GTA 6 劇透攔截器",
+    extName: "Spoiler Filter - GTA 6 劇透攔截器",
     extDescription:
       "在整個網路上模糊 GTA 6 的預告片、外流、影片、貼文和劇情劇透。與 Rockstar 無關。",
     countLabel: "則劇透已在此頁面攔截",

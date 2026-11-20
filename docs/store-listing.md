@@ -1,10 +1,12 @@
 # Store listing
 
-Text to paste into the Chrome Web Store and Firefox Add-ons forms. The extension name and summary are translated in `src/locales.js` (`extName` and `extDescription`), and both stores pick them up from the package. All store graphics are in `static/store/`. Regenerate the icon and promo tiles with `pnpm icons`, and the screenshots with `pnpm screenshots`. [publishing.md](publishing.md) says which file goes in which field.
+Draft text for a future, separate Spoiler Filter listing. This fork has no published store listing. Use the fork’s name, newly drawn icon, and newly captured screenshots; the upstream NoVice store artwork is not included. The extension name and summary are translated in `src/locales.js`. See [NOTICE.md](../NOTICE.md) for attribution and [publishing.md](publishing.md) for fork publishing notes.
 
 ## Name
 
-NoVice - Block GTA 6 Spoilers
+Spoiler Filter - Block GTA 6 Spoilers
+
+An independent fork of NoVice by kpulka247 and contributors, maintained by 96dot. Distributed under GPL-3.0-only; see the repository LICENSE and NOTICE.md.
 
 ## Summary (132 characters maximum)
 
@@ -30,7 +32,7 @@ Works on every website. Video sites, social feeds, forums, game stores, and sear
 
 You stay in control. Click the toolbar icon to switch between blur and remove, turn strict mode off, add your own keywords, or turn the extension off for one site.
 
-Changelog: https://github.com/kpulka247/novice/blob/main/CHANGELOG.md
+Changelog: https://github.com/96dot/spoiler-filter/blob/main/CHANGELOG.md
 
 Unofficial fan project, not affiliated with Rockstar Games or Take-Two Interactive.
 
@@ -64,4 +66,4 @@ The manifest declares `data_collection_permissions: { "required": ["none"] }`.
 
 ## Reviewer notes
 
-The extension has no remote code and no network requests. To test it, open https://www.youtube.com/results?search_query=rockstar+games. GTA VI videos are blurred. Click one to show it. Then open https://en.wikipedia.org/wiki/Grand_Theft_Auto_VI. The page is covered. The full source is at https://github.com/kpulka247/novice, and `pnpm install && pnpm build` reproduces the uploaded package.
+The extension has no remote code and no network requests. To test it, open https://www.youtube.com/results?search_query=rockstar+games. GTA VI videos are blurred. Click one to show it. Then open https://en.wikipedia.org/wiki/Grand_Theft_Auto_VI. The page is covered. The full source is at https://github.com/96dot/spoiler-filter, and `pnpm install && pnpm build` reproduces the uploaded package.

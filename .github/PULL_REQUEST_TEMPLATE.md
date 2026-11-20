@@ -13,7 +13,7 @@
 
 ## Checklist
 
-- [ ] The title follows [the naming rules](https://github.com/kpulka247/novice/blob/dev/CONTRIBUTING.md#name-your-pull-request), for example `fix: hide reddit search cards`.
+- [ ] The title follows [the naming rules](https://github.com/96dot/spoiler-filter/blob/dev/CONTRIBUTING.md#name-your-pull-request), for example `fix: hide reddit search cards`.
 - [ ] I tested the change in Chrome and Firefox, and the console shows no new errors.
 - [ ] `pnpm format`, `pnpm test`, `pnpm test:e2e`, and `pnpm lint:firefox` pass.
-- [ ] I agree to license this contribution under [GPL-3.0](https://github.com/kpulka247/novice/blob/main/LICENSE).
+- [ ] I agree to license this contribution under [GPL-3.0](https://github.com/96dot/spoiler-filter/blob/main/LICENSE).

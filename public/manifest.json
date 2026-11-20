@@ -3,7 +3,7 @@
   "name": "__MSG_extName__",
   "description": "__MSG_extDescription__",
   "default_locale": "en",
-  "homepage_url": "https://github.com/kpulka247/novice",
+  "homepage_url": "https://github.com/96dot/spoiler-filter",
   "permissions": ["storage", "scripting"],
   "host_permissions": ["<all_urls>"],
   "content_scripts": [

@@ -1,81 +1,14 @@
 import sharp from "sharp";
-import { mkdirSync, readFileSync } from "node:fs";
+import { mkdirSync } from "node:fs";
 
+// Modified by 96dot on 2026-11-19: generate the fork's independently drawn icon.
+// The upstream NoVice logo and store graphics are not used by this generator.
 const LOGO_FILE = "src/assets/logo.svg";
-const logo = readFileSync(LOGO_FILE, "utf8");
-const FONT = "Segoe UI, Inter, Arial, sans-serif";
-
-const nestedLogo = (x, y, size) =>
-  logo.replace(
-    "<svg ",
-    `<svg x="${x}" y="${y}" width="${size}" height="${size}" `,
-  );
-
-const sunGaps = [0, 1, 2, 3]
-  .map(
-    (i) =>
-      `<rect x="840" y="${500 + i * 36}" width="420" height="${4 + i * 3}" fill="#0d0b14"/>`,
-  )
-  .join("");
-
-const banner = `
-<svg xmlns="http://www.w3.org/2000/svg" width="1320" height="840" viewBox="0 0 1320 840">
-  <defs>
-    <linearGradient id="sun" x1="0" y1="0" x2="0" y2="1">
-      <stop offset="0" stop-color="#ffa24c"/>
-      <stop offset="1" stop-color="#ff3d9a"/>
-    </linearGradient>
-    <linearGradient id="line" x1="0" y1="0" x2="1" y2="0">
-      <stop offset="0" stop-color="#ff3d9a"/>
-      <stop offset="1" stop-color="#ffa24c"/>
-    </linearGradient>
-    <clipPath id="horizon"><rect width="1320" height="640"/></clipPath>
-  </defs>
-  <rect width="1320" height="840" fill="#0d0b14"/>
-  <g clip-path="url(#horizon)">
-    <circle cx="1050" cy="640" r="190" fill="url(#sun)"/>
-    ${sunGaps}
-  </g>
-  <rect x="0" y="639" width="1320" height="2" fill="url(#line)"/>
-  ${nestedLogo(110, 150, 140)}
-  <text x="100" y="440" font-family="${FONT}" font-weight="800" font-size="150" letter-spacing="-4" fill="#f5f3f8">NoVice</text>
-  <text x="108" y="530" font-family="${FONT}" font-weight="700" font-size="60" letter-spacing="-1" fill="#f5f3f8">Block GTA 6 Spoilers</text>
-
-  <text x="110" y="745" font-family="${FONT}" font-weight="600" font-size="40" fill="#a39cb3">Go in blind.</text>
-</svg>`;
-
 mkdirSync("public/icons", { recursive: true });
-mkdirSync("static/images", { recursive: true });
-mkdirSync("static/store", { recursive: true });
-
 for (const size of [16, 32, 48, 128]) {
   await sharp(LOGO_FILE, { density: 600 })
     .resize(size, size)
     .png()
     .toFile(`public/icons/icon${size}.png`);
 }
-
-await sharp(LOGO_FILE, { density: 600 })
-  .resize(128, 128)
-  .png()
-  .toFile("static/store/store-icon-128.png");
-
-const bannerMask = Buffer.from(
-  `<svg width="1320" height="840"><rect width="1320" height="840" rx="36" fill="#fff"/></svg>`,
-);
-await sharp(Buffer.from(banner))
-  .composite([{ input: bannerMask, blend: "dest-in" }])
-  .png()
-  .toFile("static/images/banner.png");
-await sharp(Buffer.from(banner))
-  .resize(440, 280)
-  .png()
-  .toFile("static/store/promo-tile-440x280.png");
-await sharp(Buffer.from(banner))
-  .resize(1400)
-  .extract({ left: 0, top: 100, width: 1400, height: 560 })
-
-  .png()
-  .toFile("static/store/marquee-1400x560.png");
-
-console.log("Icons, banner and store images generated.");
+console.log("Spoiler Filter icons generated.");

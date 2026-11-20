@@ -21,7 +21,7 @@ const BROWSER_MANIFEST = {
     background: { scripts: ["background.js"] },
     browser_specific_settings: {
       gecko: {
-        id: "novice@kpulka.com",
+        id: "spoiler-filter@96dot.github.io",
         strict_min_version: "140.0",
         data_collection_permissions: { required: ["none"] },
       },
@@ -112,6 +112,8 @@ const createConfig = (browser, mode) => {
             transform: (content) => buildManifest(content, browser),
           },
           { from: "public/icons", to: "icons" },
+          { from: "LICENSE", to: "LICENSE" },
+          { from: "NOTICE.md", to: "NOTICE.md" },
           { from: "src/popup/popup.html", to: "popup.html" },
         ],
       }),

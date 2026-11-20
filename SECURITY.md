@@ -1,4 +1,6 @@
-# Security policy
+# Upstream security policy (reference)
+
+The policy below describes the original NoVice project. It is retained for reference and does not establish a response-time or store-update commitment for the independent Spoiler Filter fork. The linked private reporting channel belongs to the upstream maintainers; use it only for issues reproducible in upstream NoVice.
 
 NoVice runs on every page you visit, so a security problem in it can affect any site. Report one privately.
 
