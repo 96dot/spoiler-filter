@@ -10,6 +10,8 @@ Modified on **2026-11-19**: renamed the GitHub repository to `96dot/spoiler-filt
 
 **Update v1.3.5 — 2026-11-20:** recheck recycled YouTube Shorts players, keep reveals scoped to each video instead of its channel, mute blurred Shorts and late-loaded players, and restore their prior mute state when protection is removed. Added browser regression coverage for scrolling, reveal reuse, and audio behavior.
 
+**Update v1.3.6 — 2026-11-20:** removed the page-wide GTA warning overlay, its title replacement, scroll lock, media pausing, and page-wide reveal exemptions. Individual spoiler filtering, click-to-reveal, and Shorts muting remain available. Updated navigation, page controls, and legacy-session regression coverage.
+
 The software, including these modifications and the new icon, is distributed under **GNU GPL version 3 only (SPDX: GPL-3.0-only)**. The complete, unmodified license text is in [LICENSE](LICENSE).
 
 This program is distributed in the hope that it will be useful, but **WITHOUT ANY WARRANTY**; without even the implied warranty of **MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE**. See the GNU General Public License for details.

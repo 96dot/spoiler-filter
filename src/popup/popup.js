@@ -127,9 +127,7 @@ function render(settings, status) {
       ? status.host
       : t("siteAllowed");
   $("count").textContent = status.count;
-  $("count-label").textContent = t(
-    status.shielded ? "countLabelPage" : "countLabel",
-  );
+  $("count-label").textContent = t("countLabel");
 }
 
 async function init() {

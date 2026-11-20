@@ -277,13 +277,13 @@ const articlePage = await openSite(english.context, ARTICLE);
 const article = await articlePage.screenshot();
 await articlePage.close();
 
-const shieldPage = await openYouTube(english.context, GTA6_PAGE);
-const shield = await shieldPage.screenshot();
-const [shieldTab] = await english.worker.evaluate(
+const filteredPage = await openYouTube(english.context, GTA6_PAGE);
+const filtered = await filteredPage.screenshot();
+const [filteredTab] = await english.worker.evaluate(
   (url) => chrome.tabs.query({ url }),
-  shieldPage.url(),
+  filteredPage.url(),
 );
-const popupEnglish = await popupShot(english, shieldTab.id);
+const popupEnglish = await popupShot(english, filteredTab.id);
 await english.context.close();
 
 const popups = [popupEnglish];
@@ -298,7 +298,7 @@ for (const lang of ["de", "es"]) {
 }
 
 await sharp(acrossTheWeb).toFile(`${README_DIR}/across-the-web.png`);
-await sharp(await withPopup(shield, popupEnglish)).toFile(
+await sharp(await withPopup(filtered, popupEnglish)).toFile(
   `${README_DIR}/screenshot.png`,
 );
 await sharp(await rounded(youtubeHover, WIDTH, HEIGHT, 12)).toFile(
@@ -314,9 +314,11 @@ await sharp(await rounded(searchEngine, WIDTH, HEIGHT, 12)).toFile(
 await frame("screenshot-1-blur.png", "Spoilers blur in place. Click to show.", [
   youtubeBlur,
 ]);
-await frame("screenshot-2-cover.png", "Pages about GTA VI get covered.", [
-  shield,
-]);
+await frame(
+  "screenshot-2-filtered.png",
+  "Filter matching content on GTA pages.",
+  [filtered],
+);
 await frame("screenshot-3-remove.png", "Or remove them from the page.", [
   youtubeHide,
 ]);

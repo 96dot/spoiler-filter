@@ -185,10 +185,6 @@ tr[data-novice="blur"] > * > * {
   outline-offset: -2px !important;
 }
 
-html[data-novice-shield] {
-  overflow: hidden !important;
-}
-
 @media (prefers-reduced-motion: reduce) {
   [data-novice="blur"]:hover,
   [data-novice="blur"]:focus-visible {

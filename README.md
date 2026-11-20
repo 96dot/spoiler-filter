@@ -27,6 +27,8 @@ There is no separate browser-store listing for this fork. The original project's
 - Use the popup and labels in 20 languages.
 - Run filtering locally on your device.
 
+Pages open directly, with matching content filtered in place. Visiting a GTA-related page does not open a page-wide warning, change the tab title, lock scrolling, or pause the page’s media. Blurred Shorts retain their automatic muting.
+
 On the feature branch, **Custom keywords → Import keywords** accepts comma-separated or one-per-line lists, pasted directly or loaded from a `.txt` file. Existing keywords are kept; duplicates and entries over 60 characters are skipped. Imports accept up to 1 MB of text.
 
 The feature branch also adds **Excluded sites**. A bare domain such as `reddit.com` excludes that domain and its subdomains. A full HTTP(S) URL such as `https://www.reddit.com/user/ExampleProfile/` excludes only that exact address, preserving its path, query string, and fragment. Other pages and child paths stay filtered. Excluded pages also leave their embedded frames unfiltered, and protection returns when you navigate to a different URL, including navigation within a single-page app. Remove an exclusion’s **×** chip to restore protection immediately.

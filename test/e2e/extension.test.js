@@ -487,32 +487,31 @@ test("clicking a blurred unit reveals it without following its link", async () =
   await page.close();
 });
 
-test("covers a page whose title is about GTA VI with a see-through blur", async () => {
+test("GTA page titles keep their native title and only matching content is blurred", async () => {
   const page = await context.newPage();
   await page.goto(`${base}/news/1`);
-  await page.waitForSelector("novice-shield", { state: "attached" });
-  assert.equal(await page.title(), "Spoiler ahead");
-  assert.equal(
-    await page.evaluate(
-      () =>
-        document
-          .querySelector("novice-shield")
-          .shadowRoot?.querySelector(".found")?.textContent,
-    ),
-    undefined,
-    "the cover keeps its shadow root closed",
-  );
-  assert.equal(
-    await page.$eval("body", (b) => getComputedStyle(b).opacity),
-    "1",
-  );
+  await page.waitForSelector("#story[data-novice='blur']", {
+    state: "attached",
+  });
+  assert.equal(await page.title(), "GTA 6 ending explained");
+  assert.equal(await page.$("novice-shield"), null);
+  assert.equal(await page.$("html[data-novice-shield]"), null);
+  assert.equal(await stateOf(page, "safe"), "visible");
   await page.close();
 });
 
-test("covers a page whose URL is about GTA VI before it renders", async () => {
+test("GTA URLs open without a page-wide warning or scroll lock", async () => {
   const page = await context.newPage();
-  await page.goto(`${base}/gta-6-leaks`, { waitUntil: "commit" });
-  await page.waitForSelector("novice-shield", { state: "attached" });
+  await page.goto(`${base}/gta-6-leaks`);
+  await page.waitForSelector("#story[data-novice='blur']", {
+    state: "attached",
+  });
+  assert.equal(await page.$("novice-shield"), null);
+  assert.equal(await page.title(), "GTA 6 ending explained");
+  assert.notEqual(
+    await page.$eval("html", (el) => getComputedStyle(el).overflow),
+    "hidden",
+  );
   await page.close();
 });
 
@@ -537,7 +536,7 @@ test("on NoVice's own front page, blurs spoilers but not the game's name", async
     history.pushState(null, "", "/kpulka247/novice/issues/1");
     document.title = "Spoiler report: GTA 6";
   });
-  await page.waitForSelector("novice-shield", { state: "attached" });
+  assert.equal(await page.$("novice-shield"), null);
   await page.waitForSelector("#name[data-novice='blur']", {
     state: "attached",
   });
@@ -557,14 +556,28 @@ test("a blurred unit the site made click-through still takes the click", async (
   await page.close();
 });
 
-test("the cover takes focus, and show anyway reveals the covered page", async () => {
+test("GTA pages keep normal controls usable and media is not paused page-wide", async () => {
   const page = await context.newPage();
   await page.goto(`${base}/news/2`);
-  await page.waitForSelector("novice-shield", { state: "attached" });
-  await page.keyboard.press("Tab");
-  await page.keyboard.press("Enter");
-  await page.waitForSelector("novice-shield", { state: "detached" });
-  assert.equal(await page.title(), "GTA 6 ending explained");
+  await page.waitForSelector("#story[data-novice='blur']", {
+    state: "attached",
+  });
+  await page.click("#ordinary-action");
+  assert.equal(
+    await page.getAttribute("#ordinary-action", "data-clicked"),
+    "yes",
+  );
+  const pauses = await page.evaluate(() => {
+    let calls = 0;
+    const video = document.createElement("video");
+    video.pause = () => {
+      calls++;
+    };
+    document.body.append(video);
+    video.dispatchEvent(new Event("play", { bubbles: true }));
+    return calls;
+  });
+  assert.equal(pauses, 0);
   await page.close();
 });
 
@@ -624,25 +637,18 @@ test("on a page about GTA, vague story spoilers are blurred too", async () => {
   await page.close();
 });
 
-test("the cover stays visible on pages that hide undefined elements", async () => {
-  const page = await context.newPage();
-  await page.goto(`${base}/news/1`);
-  await page.addStyleTag({ content: ":not(:defined) { visibility: hidden }" });
-  await page.waitForSelector("novice-shield", { state: "visible" });
-  await page.close();
-});
-
-test("take me back leaves the cover behind, even if the site keeps its title", async () => {
+test("clicking a GTA page link and going back uses normal browser navigation", async () => {
   const page = await context.newPage();
   await page.goto(`${base}/spa`);
   await page.waitForSelector("#post[data-novice]", { state: "attached" });
   await page.click("#post");
   await page.click("#open");
-  await page.waitForSelector("novice-shield", { state: "attached" });
-  await page.keyboard.press("Enter");
+  await page.waitForURL(`${base}/spa/gta-6-launch-post`);
+  assert.equal(await page.title(), "GTA 6 launch post");
+  assert.equal(await page.$("novice-shield"), null);
+  await page.goBack();
   await page.waitForURL(`${base}/spa`);
-  await page.waitForSelector("novice-shield", { state: "detached" });
-  assert.equal(await page.title(), "Spa feed");
+  assert.equal(await page.$("novice-shield"), null);
   await page.close();
 });
 
@@ -664,26 +670,30 @@ test("a revealed unit stays revealed when the site renders it again", async () =
   await page.close();
 });
 
-test("show anyway holds for the rest of the tab's session", async () => {
+test("old page-wide reveal records do not disable individual spoiler filtering", async () => {
   const page = await context.newPage();
+  await page.addInitScript(
+    (url) =>
+      sessionStorage.setItem(
+        "novice:revealed",
+        JSON.stringify([`page ${url}`]),
+      ),
+    `${base}/news/3`,
+  );
   await page.goto(`${base}/news/3`);
-  await page.waitForSelector("novice-shield", { state: "attached" });
-  await page.keyboard.press("Tab");
-  await page.keyboard.press("Enter");
-  await page.waitForSelector("novice-shield", { state: "detached" });
-  await page.goto(`${base}/news/4`);
-  await page.waitForSelector("novice-shield", { state: "attached" });
-  await page.goto(`${base}/news/3`);
-  await page.waitForTimeout(300);
+  await page.waitForSelector("#story[data-novice='blur']", {
+    state: "attached",
+  });
   assert.equal(await page.$("novice-shield"), null);
   await page.close();
 });
 
-test("covers a stream whose game is GTA VI, though the page title never says so", async () => {
+test("GTA stream subjects are filtered individually without covering the player", async () => {
   const page = await context.newPage();
   await page.goto("https://kick.com/streamer");
-  await page.waitForSelector("novice-shield", { state: "attached" });
-  assert.equal(await page.title(), "Spoiler ahead");
+  await page.waitForSelector("a[data-novice='blur']", { state: "attached" });
+  assert.equal(await page.$("novice-shield"), null);
+  assert.equal(await page.title(), "Streamer Live Stream - Watch Live on KICK");
   await page.close();
 });
 
@@ -791,7 +801,9 @@ test("popup manages domain exclusions and unmutes open pages including embedded 
       state: "attached",
     });
     await covered.goto(`${base}/gta-6`);
-    await covered.waitForSelector("novice-shield");
+    await covered.waitForSelector("#story[data-novice='blur']", {
+      state: "attached",
+    });
     const tabId = await worker.evaluate(async () => {
       const [tab] = await chrome.tabs.query({
         url: "https://news.example.test/*",
@@ -832,7 +844,9 @@ test("popup manages domain exclusions and unmutes open pages including embedded 
     await popup.fill("#domain-input", "127.0.0.1");
     await popup.click("#domain-add");
     await popup.waitForSelector("#domain-list li:nth-child(2)");
-    await covered.waitForSelector("novice-shield", { state: "detached" });
+    await covered.waitForFunction(
+      () => !document.querySelector("#story[data-novice]"),
+    );
     await feed.waitForFunction(
       () => !document.querySelector("[data-novice='blur']"),
     );
@@ -851,7 +865,9 @@ test("popup manages domain exclusions and unmutes open pages including embedded 
       state: "attached",
     });
     await popup.locator("#domain-list button").click();
-    await covered.waitForSelector("novice-shield");
+    await covered.waitForSelector("#story[data-novice='blur']", {
+      state: "attached",
+    });
     await feed.waitForSelector("#pasta[data-novice='blur']", {
       state: "attached",
     });

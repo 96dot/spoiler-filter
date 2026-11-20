@@ -37,8 +37,6 @@ ext.runtime.onMessage.addListener((message, sender, sendResponse) => {
       tabId,
       text: message.count > 0 ? String(Math.min(message.count, 999)) : "",
     });
-  } else if (message.type === "close-tab") {
-    ext.tabs.remove(tabId);
   }
 });
 

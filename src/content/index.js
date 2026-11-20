@@ -12,9 +12,8 @@ import {
   onSettingsChange,
 } from "../settings.js";
 import { findSubjects } from "../sites.js";
-import { WATCHED_ATTRS, createBlocker, termLabel } from "./blocker.js";
+import { WATCHED_ATTRS, createBlocker } from "./blocker.js";
 import { createReveals } from "./reveals.js";
-import { BLOCKED_TITLE, createShield } from "./shield.js";
 
 const host = location.hostname;
 const isTopFrame = window === window.top;
@@ -25,28 +24,16 @@ let settings = DEFAULT_SETTINGS;
 let topUrl = location.href;
 let topUrlKnown = isTopFrame;
 let keywords = null;
-const siteTitles = new Map();
+let lastTitle = document.title;
 let lastHref = location.href;
 let lastSubjects = "";
 let lastReported = -1;
 let appliedConfig = "off";
 
-const shield = createShield({
-  onLeave: () => {
-    if (history.length > 1) history.back();
-    else ext.runtime.sendMessage({ type: "close-tab" });
-  },
-  onReveal: () => {
-    reveals.addPage(location.href);
-    sync();
-  },
-});
-
 function isActive() {
   return (
     blocksOn(settings, location.href) &&
-    (isTopFrame || blocksOn(settings, topUrl)) &&
-    !reveals.hasPage(location.href)
+    (isTopFrame || blocksOn(settings, topUrl))
   );
 }
 
@@ -56,7 +43,7 @@ function pageMatches() {
   const page = rules();
   return [
     findUrlSpoiler(location.href, keywords, page),
-    findSpoiler(siteTitle(), keywords, page),
+    findSpoiler(document.title, keywords, page),
     ...findSubjects(host).flatMap((subject) => [
       findSpoiler(subject.textContent, keywords, page),
       subject.href ? findUrlSpoiler(subject.href, keywords, page) : null,
@@ -64,8 +51,6 @@ function pageMatches() {
   ].filter(Boolean);
 }
 
-const pageSpoiler = () =>
-  pageMatches().find((match) => match.level === "gta6") ?? null;
 const isAboutGta = () => pageMatches().length > 0;
 
 const subjectsText = () =>
@@ -73,22 +58,8 @@ const subjectsText = () =>
     .map((subject) => `${subject.textContent} ${subject.href ?? ""}`)
     .join("\n");
 
-// Titles are kept per URL, so a site that keeps its title on Back cannot lend
-// this page the title of the page it left.
-const siteTitle = () => siteTitles.get(location.href) ?? "";
-
-function readSiteTitle() {
-  if (document.title !== BLOCKED_TITLE) {
-    siteTitles.set(location.href, document.title);
-  }
-}
-
-function restoreTitle() {
-  if (document.title === BLOCKED_TITLE) document.title = siteTitle();
-}
-
 function count() {
-  return blocker.count() + (shield.shown ? 1 : 0);
+  return blocker.count();
 }
 
 function report() {
@@ -102,7 +73,7 @@ function report() {
 }
 
 function sync() {
-  readSiteTitle();
+  lastTitle = document.title;
   const active = isActive();
   const aboutGta = active && isAboutGta();
   const { nameAllowed } = rules();
@@ -114,13 +85,6 @@ function sync() {
     blocker.clearAll();
     blocker.configure(settings, { aboutGta, nameAllowed });
     if (active) blocker.scan(document.documentElement);
-  }
-  const spoiler = active ? pageSpoiler() : null;
-  if (spoiler) {
-    shield.show(termLabel(spoiler.term));
-  } else {
-    shield.hide();
-    restoreTitle();
   }
   blocker.syncMedia();
   report();
@@ -136,15 +100,9 @@ function handleMutations(records) {
     }
   }
   blocker.syncMedia();
-  const titleChanged =
-    document.title !== BLOCKED_TITLE && document.title !== siteTitle();
+  const titleChanged = document.title !== lastTitle;
   const subjects = subjectsText();
-  if (
-    titleChanged ||
-    location.href !== lastHref ||
-    subjects !== lastSubjects ||
-    shield.shown
-  ) {
+  if (titleChanged || location.href !== lastHref || subjects !== lastSubjects) {
     lastHref = location.href;
     lastSubjects = subjects;
     sync();
@@ -192,14 +150,6 @@ function start() {
     window.addEventListener(type, revealOnActivate, true);
   }
 
-  document.addEventListener(
-    "play",
-    (event) => {
-      if (shield.shown) event.target.pause();
-    },
-    true,
-  );
-
   sync();
   const apply = (next) => {
     settings = next;
@@ -227,7 +177,6 @@ function start() {
         host,
         url: location.href,
         count: count(),
-        shielded: shield.shown,
       });
     }
   });

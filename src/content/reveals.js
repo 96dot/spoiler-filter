@@ -12,7 +12,7 @@ function load() {
   }
 }
 
-// What the user chose to see stays shown for the rest of the tab's session,
+// A unit the user chose to see stays shown for the rest of the tab's session,
 // even after the site renders it again or the tab loads a new page.
 export function createReveals() {
   const keys = load();
@@ -27,8 +27,6 @@ export function createReveals() {
   }
 
   return {
-    hasPage: (href) => keys.has(`page ${href}`),
-    addPage: (href) => remember(`page ${href}`),
     hasUnit: (unit) => keys.has(unitKey(unit)),
     addUnit: (unit) => remember(unitKey(unit)),
   };

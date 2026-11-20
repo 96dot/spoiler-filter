@@ -38,7 +38,6 @@ const SKIPPED = new Set([
   "TEXTAREA",
   "INPUT",
   "SELECT",
-  "NOVICE-SHIELD",
 ]);
 
 const TEXT_ATTRS = ["alt", "title", "aria-label"];
