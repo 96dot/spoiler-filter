@@ -11,7 +11,7 @@
     --novice-blur: 24px;
   }
   to {
-    --novice-blur: 12px;
+    --novice-blur: 2.4px;
   }
 }
 
@@ -39,7 +39,7 @@
 [data-novice="blur"]:focus-visible {
   /* Start fully blurred even when an item is first covered under the pointer.
      Leaving hover/focus removes the animation and restores protection at once. */
-  animation: novice-preview 1.5s ease-out forwards !important;
+  animation: novice-preview 0.8s ease-out forwards !important;
   --novice-tag-width: var(--novice-term-width);
   --novice-eye: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='white' stroke-opacity='0.8' stroke-width='2.2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M2.5 12s3.5-6 9.5-6 9.5 6 9.5 6-3.5 6-9.5 6-9.5-6-9.5-6z'/%3E%3Ccircle cx='12' cy='12' r='3'/%3E%3C/svg%3E");
 }

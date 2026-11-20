@@ -33,7 +33,7 @@ The feature branch also adds **Excluded sites**. A bare domain such as `reddit.c
 
 Earlier versions saved full URLs as domains. If you previously pasted a URL and now want only that page excluded, remove the old domain entry and add the full URL again. Existing domain entries remain domain exclusions.
 
-Hover over a blurred item (or focus it with the keyboard) to preview it at half blur: the blur gradually reduces from 24px to 12px over 1.5 seconds. Moving away restores full blur immediately. Click to reveal the item completely. The hover animation respects your system’s reduced-motion preference.
+Hover over a blurred item (or focus it with the keyboard) to preview it at 10% blur: the blur gradually reduces from 24px to 2.4px over 0.8 seconds. Moving away restores full blur immediately. Click to reveal the item completely. The hover animation respects your system’s reduced-motion preference.
 
 ## Build and install locally
 

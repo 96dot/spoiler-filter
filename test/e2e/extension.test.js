@@ -742,7 +742,7 @@ const waitForBlur = (page, selector, radius) =>
     { selector, radius },
   );
 
-test("hover gradually previews half blur, restores full blur on leave, and still allows click reveal", async () => {
+test("hover gradually previews 10% blur, restores full blur on leave, and still allows click reveal", async () => {
   const page = await openFeed();
   try {
     assert.equal(await blurRadius(page, "#gcard > img"), 24);
@@ -753,11 +753,11 @@ test("hover gradually previews half blur, restores full blur on leave, and still
           "--novice-blur",
         ),
       );
-      return blur > 12 && blur < 24;
+      return blur > 2.4 && blur < 24;
     });
     const midway = await blurRadius(page, "#gcard > img");
-    assert.ok(midway > 12 && midway < 24, `gradually unblurs: ${midway}`);
-    await waitForBlur(page, "#gcard > img", 12);
+    assert.ok(midway > 2.4 && midway < 24, `gradually unblurs: ${midway}`);
+    await waitForBlur(page, "#gcard > img", 2.4);
     assert.equal(
       await stateOf(page, "gcard"),
       "blur",
@@ -773,13 +773,13 @@ test("hover gradually previews half blur, restores full blur on leave, and still
     await page.hover("#trailer");
     await page.waitForFunction(() =>
       getComputedStyle(document.querySelector("#trailer")).textShadow.endsWith(
-        " 6px",
+        " 1.2px",
       ),
     );
     assert.equal(
       await stateOf(page, "trailer"),
       "blur",
-      "plain text also previews at half blur",
+      "plain text also previews at 10% blur",
     );
     await page.mouse.move(0, 0);
     await page.waitForFunction(() =>
@@ -807,7 +807,7 @@ test("table cells preview without blurring the chip, and keyboard focus respects
     });
     assert.equal(await blurRadius(page, "#spoiler-name > a"), 24);
     await page.hover("#spoiler-name");
-    await waitForBlur(page, "#spoiler-name > a", 12);
+    await waitForBlur(page, "#spoiler-name > a", 2.4);
     assert.equal(
       await page.$eval("#spoiler-name", (el) => getComputedStyle(el).filter),
       "none",
@@ -822,7 +822,7 @@ test("table cells preview without blurring the chip, and keyboard focus respects
       await page.$eval("#spoiler", (el) => el.matches(":focus-visible")),
       true,
     );
-    await waitForBlur(page, "#spoiler-name > a", 12);
+    await waitForBlur(page, "#spoiler-name > a", 2.4);
     assert.equal(
       await page.$eval(
         "#spoiler",
@@ -848,10 +848,10 @@ test("a keyword covered under the pointer starts at full blur rather than animat
     const radius = await page.$eval("#pasta", (el) =>
       parseFloat(getComputedStyle(el).getPropertyValue("--novice-blur")),
     );
-    assert.ok(radius > 12 && radius <= 24, `starts protected: ${radius}`);
+    assert.ok(radius > 2.4 && radius <= 24, `starts protected: ${radius}`);
     await page.waitForFunction(() =>
       getComputedStyle(document.querySelector("#pasta")).textShadow.endsWith(
-        " 6px",
+        " 1.2px",
       ),
     );
   } finally {
