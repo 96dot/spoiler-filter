@@ -29,12 +29,8 @@ ext.runtime.onMessage.addListener((message, sender, sendResponse) => {
   const tabId = sender.tab?.id;
   if (tabId === undefined) return;
 
-  if (message.type === "site-host") {
-    try {
-      sendResponse(new URL(sender.tab.url).hostname);
-    } catch {
-      sendResponse(null);
-    }
+  if (message.type === "page-url") {
+    sendResponse(sender.tab.url ?? null);
   } else if (message.type === "blocked-count") {
     ext.action.setBadgeBackgroundColor({ tabId, color: BADGE_COLOR });
     ext.action.setBadgeText({
@@ -44,4 +40,12 @@ ext.runtime.onMessage.addListener((message, sender, sendResponse) => {
   } else if (message.type === "close-tab") {
     ext.tabs.remove(tabId);
   }
+});
+
+// URL updates include pushState/replaceState navigation without DOM changes.
+ext.tabs.onUpdated.addListener((tabId, changes) => {
+  if (!changes.url) return;
+  ext.tabs
+    .sendMessage(tabId, { type: "page-url-changed", url: changes.url })
+    .catch(() => {});
 });

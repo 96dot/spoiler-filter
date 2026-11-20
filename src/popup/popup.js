@@ -1,13 +1,13 @@
 import logo from "../assets/logo.svg";
 import { mergeKeywords, sameKeyword } from "../keywords.js";
 import {
-  allowedDomainFor,
+  allowedExclusionFor,
   ext,
   getSettings,
-  isSiteAllowed,
-  normalizeDomain,
+  normalizeExclusion,
   onSettingsChange,
   setSiteAllowed,
+  setExclusionAllowed,
   updateSettings,
 } from "../settings.js";
 
@@ -64,6 +64,7 @@ function renderDomains(settings) {
       const text = document.createElement("span");
       const remove = document.createElement("button");
       text.textContent = domain;
+      text.title = domain;
       remove.type = "button";
       remove.textContent = "×";
       remove.title = t("keywordRemove");
@@ -115,13 +116,13 @@ function render(settings, status) {
     return;
   }
 
-  const siteBlocked = !isSiteAllowed(settings, status.host);
-  const inherited =
-    !siteBlocked && allowedDomainFor(settings, status.host) !== status.host;
+  const exclusion = allowedExclusionFor(settings, status.url ?? status.host);
+  const siteBlocked = exclusion === null;
+  const inherited = !siteBlocked && exclusion !== status.host;
   $("site").checked = siteBlocked;
   $("site").disabled = !settings.enabled || inherited;
   $("site-host").textContent = inherited
-    ? t("siteExcludedBy", [allowedDomainFor(settings, status.host)])
+    ? t("siteExcludedBy", [exclusion])
     : siteBlocked
       ? status.host
       : t("siteAllowed");
@@ -206,13 +207,13 @@ async function init() {
 
   $("domain-form").addEventListener("submit", async (e) => {
     e.preventDefault();
-    const domain = normalizeDomain($("domain-input").value);
+    const domain = normalizeExclusion($("domain-input").value);
     if (!domain) {
       $("domain-status").textContent = t("domainInvalid");
       return;
     }
     try {
-      await setSiteAllowed(domain, true);
+      await setExclusionAllowed(domain, true);
       $("domain-input").value = "";
       $("domain-status").textContent = "";
     } catch {

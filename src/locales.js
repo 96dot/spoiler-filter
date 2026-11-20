@@ -11,8 +11,9 @@ export const MESSAGES = {
     importTooLarge: "Import is too large. Use up to 1 MB of text.",
     excludedSites: "Excluded sites",
     excludedSitesHint:
-      "Never mute these domains or their subdomains. Enter a domain or website URL.",
-    siteExcludedBy: "Excluded by $1. Remove that domain below to block here.",
+      "A domain excludes it and its subdomains. A full HTTP(S) URL excludes only that exact page.",
+    siteExcludedBy:
+      "Excluded by $1. Remove that exclusion below to block here.",
     domainInvalid: "Enter a valid domain or HTTP(S) website URL.",
     saveError: "Could not save settings. Please try again.",
     extName: "Spoiler Filter - Block GTA 6 Spoilers",
@@ -57,9 +58,9 @@ export const MESSAGES = {
     importTooLarge: "Import jest zbyt duży. Użyj tekstu do 1 MB.",
     excludedSites: "Wykluczone witryny",
     excludedSitesHint:
-      "Nie blokuj tych domen ani ich subdomen. Wpisz domenę lub adres witryny.",
+      "Domena wyklucza ją i jej subdomeny. Pełny adres HTTP(S) wyklucza tylko tę konkretną stronę.",
     siteExcludedBy:
-      "Wykluczone przez $1. Usuń tę domenę poniżej, aby tutaj blokować.",
+      "Wykluczone przez $1. Usuń to wykluczenie poniżej, aby tutaj blokować.",
     domainInvalid: "Wpisz prawidłową domenę lub adres witryny HTTP(S).",
     saveError: "Nie udało się zapisać ustawień. Spróbuj ponownie.",
     extName: "Spoiler Filter - Block GTA 6 Spoilers",
@@ -106,9 +107,9 @@ export const MESSAGES = {
     importTooLarge: "Import zu groß. Maximal 1 MB Text verwenden.",
     excludedSites: "Ausgeschlossene Websites",
     excludedSitesHint:
-      "Diese Domains und ihre Subdomains nie blockieren. Domain oder Website-URL eingeben.",
+      "Eine Domain schließt auch ihre Subdomains aus. Eine vollständige HTTP(S)-URL schließt nur genau diese Seite aus.",
     siteExcludedBy:
-      "Durch $1 ausgeschlossen. Diese Domain unten entfernen, um hier zu blockieren.",
+      "Durch $1 ausgeschlossen. Diesen Ausschluss unten entfernen, um hier zu blockieren.",
     domainInvalid: "Eine gültige Domain oder HTTP(S)-Website-URL eingeben.",
     saveError:
       "Einstellungen konnten nicht gespeichert werden. Bitte erneut versuchen.",
@@ -157,9 +158,9 @@ export const MESSAGES = {
       "La importación es demasiado grande. Usa hasta 1 MB de texto.",
     excludedSites: "Sitios excluidos",
     excludedSitesHint:
-      "No bloquear estos dominios ni sus subdominios. Introduce un dominio o la URL de un sitio.",
+      "Un dominio excluye también sus subdominios. Una URL HTTP(S) completa excluye solo esa página exacta.",
     siteExcludedBy:
-      "Excluido por $1. Elimina ese dominio abajo para bloquear aquí.",
+      "Excluido por $1. Elimina esa exclusión abajo para bloquear aquí.",
     domainInvalid: "Introduce un dominio válido o la URL HTTP(S) de un sitio.",
     saveError: "No se pudo guardar la configuración. Inténtalo de nuevo.",
     extName: "Spoiler Filter - Block GTA 6 Spoilers",
@@ -206,9 +207,9 @@ export const MESSAGES = {
       "Import trop volumineux. Utilisez au maximum 1 Mo de texte.",
     excludedSites: "Sites exclus",
     excludedSitesHint:
-      "Ne jamais bloquer ces domaines ni leurs sous-domaines. Saisissez un domaine ou une URL de site.",
+      "Un domaine exclut aussi ses sous-domaines. Une URL HTTP(S) complète exclut uniquement cette page précise.",
     siteExcludedBy:
-      "Exclu par $1. Supprimez ce domaine ci-dessous pour bloquer ici.",
+      "Exclu par $1. Supprimez cette exclusion ci-dessous pour bloquer ici.",
     domainInvalid: "Saisissez un domaine valide ou une URL de site HTTP(S).",
     saveError: "Impossible d’enregistrer les paramètres. Réessayez.",
     extName: "Spoiler Filter - Block GTA 6 Spoilers",
@@ -254,9 +255,9 @@ export const MESSAGES = {
     importTooLarge: "Importazione troppo grande. Usa fino a 1 MB di testo.",
     excludedSites: "Siti esclusi",
     excludedSitesHint:
-      "Non bloccare mai questi domini o i loro sottodomini. Inserisci un dominio o un URL di sito.",
+      "Un dominio esclude anche i suoi sottodomini. Un URL HTTP(S) completo esclude solo quella pagina esatta.",
     siteExcludedBy:
-      "Escluso da $1. Rimuovi quel dominio qui sotto per bloccare qui.",
+      "Escluso da $1. Rimuovi questa esclusione qui sotto per bloccare qui.",
     domainInvalid: "Inserisci un dominio valido o un URL di sito HTTP(S).",
     saveError: "Impossibile salvare le impostazioni. Riprova.",
     extName: "Spoiler Filter - Block GTA 6 Spoilers",
@@ -303,9 +304,9 @@ export const MESSAGES = {
     importTooLarge: "Importação muito grande. Use até 1 MB de texto.",
     excludedSites: "Sites excluídos",
     excludedSitesHint:
-      "Nunca bloquear estes domínios ou seus subdomínios. Digite um domínio ou URL de site.",
+      "Um domínio exclui também seus subdomínios. Uma URL HTTP(S) completa exclui apenas aquela página exata.",
     siteExcludedBy:
-      "Excluído por $1. Remova esse domínio abaixo para bloquear aqui.",
+      "Excluído por $1. Remova essa exclusão abaixo para bloquear aqui.",
     domainInvalid: "Digite um domínio válido ou URL de site HTTP(S).",
     saveError: "Não foi possível salvar as configurações. Tente novamente.",
     extName: "Spoiler Filter - Block GTA 6 Spoilers",
@@ -352,9 +353,9 @@ export const MESSAGES = {
     importTooLarge: "Import is te groot. Gebruik maximaal 1 MB tekst.",
     excludedSites: "Uitgesloten websites",
     excludedSitesHint:
-      "Blokkeer deze domeinen en hun subdomeinen nooit. Voer een domein of website-URL in.",
+      "Een domein sluit ook zijn subdomeinen uit. Een volledige HTTP(S)-URL sluit alleen die exacte pagina uit.",
     siteExcludedBy:
-      "Uitgesloten door $1. Verwijder dat domein hieronder om hier te blokkeren.",
+      "Uitgesloten door $1. Verwijder die uitsluiting hieronder om hier te blokkeren.",
     domainInvalid: "Voer een geldig domein of een HTTP(S)-website-URL in.",
     saveError:
       "Instellingen konden niet worden opgeslagen. Probeer het opnieuw.",
@@ -401,9 +402,9 @@ export const MESSAGES = {
     importTooLarge: "Importen är för stor. Använd högst 1 MB text.",
     excludedSites: "Undantagna webbplatser",
     excludedSitesHint:
-      "Blockera aldrig dessa domäner eller deras underdomäner. Ange en domän eller webbplatsadress.",
+      "En domän undantar även dess underdomäner. En fullständig HTTP(S)-adress undantar bara exakt den sidan.",
     siteExcludedBy:
-      "Undantagen via $1. Ta bort domänen nedan för att blockera här.",
+      "Undantagen via $1. Ta bort undantaget nedan för att blockera här.",
     domainInvalid: "Ange en giltig domän eller HTTP(S)-webbplatsadress.",
     saveError: "Det gick inte att spara inställningarna. Försök igen.",
     extName: "Spoiler Filter - Block GTA 6 Spoilers",
@@ -448,8 +449,9 @@ export const MESSAGES = {
     importTooLarge: "Import je příliš velký. Použijte nejvýše 1 MB textu.",
     excludedSites: "Vyloučené weby",
     excludedSitesHint:
-      "Tyto domény ani jejich subdomény nikdy neblokovat. Zadejte doménu nebo URL webu.",
-    siteExcludedBy: "Vyloučeno doménou $1. Pro blokování zde ji odeberte níže.",
+      "Doména vyloučí i své subdomény. Úplná HTTP(S) URL vyloučí pouze tuto konkrétní stránku.",
+    siteExcludedBy:
+      "Vyloučeno pravidlem $1. Pro blokování zde odeberte toto vyloučení níže.",
     domainInvalid: "Zadejte platnou doménu nebo HTTP(S) URL webu.",
     saveError: "Nastavení se nepodařilo uložit. Zkuste to znovu.",
     extName: "Spoiler Filter - Block GTA 6 Spoilers",
@@ -495,9 +497,9 @@ export const MESSAGES = {
     importTooLarge: "Слишком большой объём. Используйте не более 1 МБ текста.",
     excludedSites: "Исключённые сайты",
     excludedSitesHint:
-      "Не блокировать эти домены и их поддомены. Введите домен или URL сайта.",
+      "Домен исключает и свои поддомены. Полный HTTP(S) URL исключает только страницу по этому точному адресу.",
     siteExcludedBy:
-      "Исключено доменом $1. Удалите его ниже, чтобы включить блокировку здесь.",
+      "Исключено правилом $1. Удалите это исключение ниже, чтобы включить блокировку здесь.",
     domainInvalid: "Введите допустимый домен или HTTP(S) URL сайта.",
     saveError: "Не удалось сохранить настройки. Попробуйте ещё раз.",
     extName: "Spoiler Filter - Block GTA 6 Spoilers",
@@ -542,9 +544,9 @@ export const MESSAGES = {
     importTooLarge: "Завеликий обсяг. Використайте не більше 1 МБ тексту.",
     excludedSites: "Виключені сайти",
     excludedSitesHint:
-      "Не блокувати ці домени та їхні піддомени. Введіть домен або URL сайту.",
+      "Домен виключає також свої піддомени. Повний HTTP(S) URL виключає лише сторінку за цією точною адресою.",
     siteExcludedBy:
-      "Виключено доменом $1. Видаліть його нижче, щоб увімкнути блокування тут.",
+      "Виключено правилом $1. Видаліть цей виняток нижче, щоб увімкнути блокування тут.",
     domainInvalid: "Введіть дійсний домен або HTTP(S) URL сайту.",
     saveError: "Не вдалося зберегти налаштування. Спробуйте ще раз.",
     extName: "Spoiler Filter - Block GTA 6 Spoilers",
@@ -589,9 +591,9 @@ export const MESSAGES = {
     importTooLarge: "İçe aktarma çok büyük. En fazla 1 MB metin kullanın.",
     excludedSites: "Hariç tutulan siteler",
     excludedSitesHint:
-      "Bu alan adlarını ve alt alan adlarını asla engelleme. Bir alan adı veya site URL’si girin.",
+      "Alan adı, alt alan adlarını da hariç tutar. Tam bir HTTP(S) URL’si yalnızca o tam sayfayı hariç tutar.",
     siteExcludedBy:
-      "$1 nedeniyle hariç tutuldu. Burada engellemek için aşağıdan bu alan adını kaldırın.",
+      "$1 nedeniyle hariç tutuldu. Burada engellemek için aşağıdan bu istisnayı kaldırın.",
     domainInvalid: "Geçerli bir alan adı veya HTTP(S) site URL’si girin.",
     saveError: "Ayarlar kaydedilemedi. Tekrar deneyin.",
     extName: "Spoiler Filter - Block GTA 6 Spoilers",
@@ -636,8 +638,8 @@ export const MESSAGES = {
     importTooLarge: "حجم الاستيراد كبير جدًا. استخدم نصًا حتى 1 ميغابايت.",
     excludedSites: "المواقع المستثناة",
     excludedSitesHint:
-      "لا تحجب هذه النطاقات أو نطاقاتها الفرعية مطلقًا. أدخل نطاقًا أو رابط موقع.",
-    siteExcludedBy: "مستثنى بواسطة $1. أزل هذا النطاق أدناه للحجب هنا.",
+      "يستثني النطاق نطاقاته الفرعية أيضًا. يستثني رابط HTTP(S) كامل الصفحة المطابقة تمامًا فقط.",
+    siteExcludedBy: "مستثنى بواسطة $1. أزل هذا الاستثناء أدناه للحجب هنا.",
     domainInvalid: "أدخل نطاقًا صالحًا أو رابط موقع HTTP(S).",
     saveError: "تعذّر حفظ الإعدادات. حاول مجددًا.",
     extName: "Spoiler Filter - Block GTA 6 Spoilers",
@@ -682,9 +684,9 @@ export const MESSAGES = {
     importTooLarge: "आयात बहुत बड़ा है। अधिकतम 1 MB टेक्स्ट इस्तेमाल करें।",
     excludedSites: "बाहर रखी गई साइटें",
     excludedSitesHint:
-      "इन डोमेन या उनके सबडोमेन को कभी ब्लॉक न करें। डोमेन या वेबसाइट URL दर्ज करें।",
+      "डोमेन अपने सबडोमेन को भी बाहर रखता है। पूरा HTTP(S) URL केवल उसी सटीक पेज को बाहर रखता है।",
     siteExcludedBy:
-      "$1 के कारण बाहर रखा गया। यहाँ ब्लॉक करने के लिए नीचे वह डोमेन हटाएँ।",
+      "$1 के कारण बाहर रखा गया। यहाँ ब्लॉक करने के लिए नीचे वह अपवाद हटाएँ।",
     domainInvalid: "मान्य डोमेन या HTTP(S) वेबसाइट URL दर्ज करें।",
     saveError: "सेटिंग सहेजी नहीं जा सकी। फिर कोशिश करें।",
     extName: "Spoiler Filter - Block GTA 6 Spoilers",
@@ -730,9 +732,9 @@ export const MESSAGES = {
     importTooLarge: "Impor terlalu besar. Gunakan teks hingga 1 MB.",
     excludedSites: "Situs yang dikecualikan",
     excludedSitesHint:
-      "Jangan pernah memblokir domain ini atau subdomainnya. Masukkan domain atau URL situs.",
+      "Domain juga mengecualikan subdomainnya. URL HTTP(S) lengkap hanya mengecualikan halaman yang persis sama.",
     siteExcludedBy:
-      "Dikecualikan oleh $1. Hapus domain tersebut di bawah untuk memblokir di sini.",
+      "Dikecualikan oleh $1. Hapus pengecualian tersebut di bawah untuk memblokir di sini.",
     domainInvalid: "Masukkan domain atau URL situs HTTP(S) yang valid.",
     saveError: "Tidak dapat menyimpan pengaturan. Coba lagi.",
     extName: "Spoiler Filter - Block GTA 6 Spoilers",
@@ -779,9 +781,9 @@ export const MESSAGES = {
       "インポートする量が多すぎます。1 MB以内のテキストを使用してください。",
     excludedSites: "除外するサイト",
     excludedSitesHint:
-      "これらのドメインとサブドメインではブロックしません。ドメインまたはサイトのURLを入力してください。",
+      "ドメインを指定するとサブドメインも除外されます。完全なHTTP(S) URLは、その正確なページだけを除外します。",
     siteExcludedBy:
-      "$1により除外されています。ここでブロックするには、下のリストからそのドメインを削除してください。",
+      "$1により除外されています。ここでブロックするには、下のリストからこの除外設定を削除してください。",
     domainInvalid: "有効なドメインまたはHTTP(S)のサイトURLを入力してください。",
     saveError: "設定を保存できませんでした。もう一度お試しください。",
     extName: "Spoiler Filter - GTA 6 ネタバレブロッカー",
@@ -827,9 +829,9 @@ export const MESSAGES = {
       "가져올 내용이 너무 큽니다. 최대 1 MB의 텍스트를 사용하세요.",
     excludedSites: "제외된 사이트",
     excludedSitesHint:
-      "이 도메인과 하위 도메인에서는 차단하지 않습니다. 도메인 또는 사이트 URL을 입력하세요.",
+      "도메인은 하위 도메인도 제외합니다. 전체 HTTP(S) URL은 정확히 일치하는 해당 페이지만 제외합니다.",
     siteExcludedBy:
-      "$1에 의해 제외되었습니다. 여기서 차단하려면 아래에서 해당 도메인을 삭제하세요.",
+      "$1에 의해 제외되었습니다. 여기서 차단하려면 아래에서 해당 제외 항목을 삭제하세요.",
     domainInvalid: "유효한 도메인 또는 HTTP(S) 사이트 URL을 입력하세요.",
     saveError: "설정을 저장할 수 없습니다. 다시 시도하세요.",
     extName: "Spoiler Filter - GTA 6 스포일러 차단기",
@@ -872,8 +874,9 @@ export const MESSAGES = {
     importError: "无法导入关键词，请重试。",
     importTooLarge: "导入内容过大，请使用不超过1 MB的文本。",
     excludedSites: "排除的网站",
-    excludedSitesHint: "不在这些域名及其子域名上屏蔽内容。输入域名或网站网址。",
-    siteExcludedBy: "已通过$1排除。要在此处屏蔽，请在下方移除该域名。",
+    excludedSitesHint:
+      "域名会同时排除其子域名。完整的HTTP(S)网址仅排除完全匹配的那个页面。",
+    siteExcludedBy: "已通过$1排除。要在此处屏蔽，请在下方移除该排除项。",
     domainInvalid: "请输入有效的域名或HTTP(S)网站网址。",
     saveError: "无法保存设置，请重试。",
     extName: "Spoiler Filter - GTA 6 剧透拦截器",
@@ -915,8 +918,9 @@ export const MESSAGES = {
     importError: "無法匯入關鍵字，請重試。",
     importTooLarge: "匯入內容過大，請使用不超過1 MB的文字。",
     excludedSites: "排除的網站",
-    excludedSitesHint: "不在這些網域及其子網域封鎖內容。輸入網域或網站網址。",
-    siteExcludedBy: "已透過$1排除。若要在此處封鎖，請在下方移除該網域。",
+    excludedSitesHint:
+      "網域會同時排除其子網域。完整的HTTP(S)網址僅排除完全相符的那個頁面。",
+    siteExcludedBy: "已透過$1排除。若要在此處封鎖，請在下方移除該排除項。",
     domainInvalid: "請輸入有效的網域或HTTP(S)網站網址。",
     saveError: "無法儲存設定，請重試。",
     extName: "Spoiler Filter - GTA 6 劇透攔截器",

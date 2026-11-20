@@ -671,7 +671,7 @@ test("popup manages domain exclusions and unmutes open pages including embedded 
         .getElementById("domain-status")
         .textContent.includes("valid domain"),
     );
-    await popup.fill("#domain-input", "https://EXAMPLE.test:443/path");
+    await popup.fill("#domain-input", "EXAMPLE.test.");
     await popup.click("#domain-add");
     await popup.waitForSelector("#domain-list li");
     assert.equal(await popup.textContent("#domain-list span"), "example.test");
@@ -857,5 +857,136 @@ test("a keyword covered under the pointer starts at full blur rather than animat
   } finally {
     await setSettings({ keywords: [] });
     await page.close();
+  }
+});
+
+test("exact URL exclusions unfilter only one page and follow SPA navigation in its frames", async () => {
+  const profile = "https://www.reddit.com/user/ExampleProfile/";
+  await setSettings({
+    enabled: true,
+    allowedSites: [],
+    keywords: ["carbonara"],
+  });
+  await context.route("https://www.reddit.com/**", async (route) =>
+    route.fulfill({
+      contentType: "text/html",
+      body: await readFile(path.join(here, "fixtures", "feed.html")),
+    }),
+  );
+  const embeddedUrl = "https://embedded.example.test/exact-url-frame";
+  await context.route(embeddedUrl, async (route) =>
+    route.fulfill({
+      contentType: "text/html",
+      body: await readFile(path.join(here, "fixtures", "feed.html")),
+    }),
+  );
+  const page = await context.newPage();
+  const other = await context.newPage();
+  const popup = await context.newPage();
+  try {
+    await page.goto(profile);
+    await page.waitForSelector("#trailer[data-novice='blur']", {
+      state: "attached",
+    });
+    const frameNavigation = page.waitForEvent("framenavigated", {
+      predicate: (frame) => frame.url() === embeddedUrl,
+    });
+    await page.evaluate((url) => {
+      const iframe = document.createElement("iframe");
+      iframe.src = url;
+      document.body.append(iframe);
+    }, embeddedUrl);
+    const frame = await frameNavigation;
+    await frame.waitForSelector("#trailer[data-novice='blur']", {
+      state: "attached",
+    });
+    await other.goto("https://www.reddit.com/r/example/");
+    await other.waitForSelector("#trailer[data-novice='blur']", {
+      state: "attached",
+    });
+    const tabId = await worker.evaluate(
+      async (url) => (await chrome.tabs.query({ url }))[0].id,
+      profile,
+    );
+    await popup.addInitScript((id) => {
+      chrome.tabs.query = async () => [{ id }];
+    }, tabId);
+    await popup.goto(`chrome-extension://${extensionId}/popup.html`);
+    await popup.fill("#domain-input", profile);
+    await popup.click("#domain-add");
+    await popup.waitForSelector("#domain-list li");
+    assert.equal(await popup.textContent("#domain-list span"), profile);
+    assert.deepEqual(
+      await worker.evaluate(() =>
+        chrome.storage.local.get("allowedSites").then((s) => s.allowedSites),
+      ),
+      [profile],
+    );
+    await page.waitForFunction(
+      () => !document.querySelector("[data-novice='blur']"),
+    );
+    await frame.waitForFunction(
+      () => !document.querySelector("[data-novice='blur']"),
+    );
+    assert.equal(await stateOf(page, "pasta"), "visible");
+    assert.equal(
+      await stateOf(other, "pasta"),
+      "blur",
+      "other Reddit pages keep custom-keyword filtering",
+    );
+    await popup.waitForFunction(() => document.getElementById("site").disabled);
+    assert.equal(await popup.isChecked("#site"), false);
+    assert.ok((await popup.textContent("#site-host")).includes(profile));
+    // Browser URL events must catch history changes even when no DOM changes.
+    await page.evaluate(() => history.pushState({}, "", "./comments/"));
+    await page.waitForSelector("#trailer[data-novice='blur']", {
+      state: "attached",
+    });
+    await frame.waitForSelector("#trailer[data-novice='blur']", {
+      state: "attached",
+    });
+    await page.evaluate((url) => history.replaceState({}, "", url), profile);
+    await page.waitForFunction(
+      () => !document.querySelector("[data-novice='blur']"),
+    );
+    await frame.waitForFunction(
+      () => !document.querySelector("[data-novice='blur']"),
+    );
+    await page.evaluate(() => history.pushState({}, "", "?sort=new"));
+    await page.waitForSelector("#trailer[data-novice='blur']", {
+      state: "attached",
+    });
+    await page.goBack();
+    await page.waitForFunction(
+      () => !document.querySelector("[data-novice='blur']"),
+    );
+    await frame.waitForFunction(
+      () => !document.querySelector("[data-novice='blur']"),
+    );
+    await popup.reload();
+    await popup.waitForSelector("#domain-list li");
+    assert.equal(
+      await popup.textContent("#domain-list span"),
+      profile,
+      "exact URL survives popup reload",
+    );
+    await popup.locator("#domain-list button").click();
+    await page.waitForSelector("#trailer[data-novice='blur']", {
+      state: "attached",
+    });
+    await frame.waitForSelector("#trailer[data-novice='blur']", {
+      state: "attached",
+    });
+    // A domain entry still deliberately excludes every matching page.
+    await popup.fill("#domain-input", "reddit.com");
+    await popup.click("#domain-add");
+    await other.waitForFunction(
+      () => !document.querySelector("[data-novice='blur']"),
+    );
+  } finally {
+    await Promise.all([page.close(), other.close(), popup.close()]);
+    await context.unroute("https://www.reddit.com/**");
+    await context.unroute(embeddedUrl);
+    await setSettings({ allowedSites: [], keywords: [] });
   }
 });

@@ -22,7 +22,8 @@ const reveals = createReveals();
 const blocker = createBlocker(host, reveals);
 
 let settings = DEFAULT_SETTINGS;
-let topHost = host;
+let topUrl = location.href;
+let topUrlKnown = isTopFrame;
 let keywords = null;
 const siteTitles = new Map();
 let lastHref = location.href;
@@ -43,8 +44,8 @@ const shield = createShield({
 
 function isActive() {
   return (
-    blocksOn(settings, host) &&
-    blocksOn(settings, topHost) &&
+    blocksOn(settings, location.href) &&
+    (isTopFrame || blocksOn(settings, topUrl)) &&
     !reveals.hasPage(location.href)
   );
 }
@@ -205,20 +206,28 @@ function start() {
   Promise.all([
     getSettings(),
     isTopFrame
-      ? Promise.resolve(host)
-      : ext.runtime.sendMessage({ type: "site-host" }).catch(() => null),
-  ]).then(([next, siteHost]) => {
-    topHost = siteHost || host;
+      ? Promise.resolve(location.href)
+      : ext.runtime.sendMessage({ type: "page-url" }).catch(() => null),
+  ]).then(([next, siteUrl]) => {
+    if (!topUrlKnown) topUrl = siteUrl || location.href;
     apply(next);
   });
   onSettingsChange(apply);
 
-  if (isTopFrame) {
-    ext.runtime.onMessage.addListener((message, _sender, sendResponse) => {
-      if (message.type !== "status") return;
-      sendResponse({ host, count: count(), shielded: shield.shown });
-    });
-  }
+  ext.runtime.onMessage.addListener((message, _sender, sendResponse) => {
+    if (message.type === "page-url-changed") {
+      topUrl = message.url;
+      topUrlKnown = true;
+      sync();
+    } else if (message.type === "status" && isTopFrame) {
+      sendResponse({
+        host,
+        url: location.href,
+        count: count(),
+        shielded: shield.shown,
+      });
+    }
+  });
 }
 
 if (!window.__novice) {

@@ -29,7 +29,9 @@ There is no separate browser-store listing for this fork. The original project's
 
 On the feature branch, **Custom keywords → Import keywords** accepts comma-separated or one-per-line lists, pasted directly or loaded from a `.txt` file. Existing keywords are kept; duplicates and entries over 60 characters are skipped. Imports accept up to 1 MB of text.
 
-The feature branch also adds **Excluded sites**. Enter a domain or website URL to exclude its hostname and subdomains, including embedded frames on excluded pages. Remove its **×** chip to restore protection immediately.
+The feature branch also adds **Excluded sites**. A bare domain such as `reddit.com` excludes that domain and its subdomains. A full HTTP(S) URL such as `https://www.reddit.com/user/ExampleProfile/` excludes only that exact address, preserving its path, query string, and fragment. Other pages and child paths stay filtered. Excluded pages also leave their embedded frames unfiltered, and protection returns when you navigate to a different URL, including navigation within a single-page app. Remove an exclusion’s **×** chip to restore protection immediately.
+
+Earlier versions saved full URLs as domains. If you previously pasted a URL and now want only that page excluded, remove the old domain entry and add the full URL again. Existing domain entries remain domain exclusions.
 
 Hover over a blurred item (or focus it with the keyboard) to preview it at half blur: the blur gradually reduces from 24px to 12px over 1.5 seconds. Moving away restores full blur immediately. Click to reveal the item completely. The hover animation respects your system’s reduced-motion preference.
 

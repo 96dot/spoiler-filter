@@ -20,11 +20,20 @@ export async function updateSettings(patch) {
 }
 
 export async function setSiteAllowed(host, allowed) {
-  host = normalizeDomain(host);
-  if (!host) return;
+  const domain = normalizeDomain(host);
+  if (domain) await setExclusionAllowed(domain, allowed);
+}
+
+export async function setExclusionAllowed(input, allowed) {
+  const exclusion = normalizeExclusion(input);
+  if (!exclusion) return;
   const { allowedSites } = await getSettings();
-  const others = allowedSites.filter((site) => normalizeDomain(site) !== host);
-  await updateSettings({ allowedSites: allowed ? [...others, host] : others });
+  const others = allowedSites.filter(
+    (site) => normalizeExclusion(site) !== exclusion,
+  );
+  await updateSettings({
+    allowedSites: allowed ? [...others, exclusion] : others,
+  });
 }
 
 export function onSettingsChange(callback) {
@@ -38,8 +47,8 @@ export function onSettingsChange(callback) {
   });
 }
 
-export function isSiteAllowed(settings, host) {
-  return allowedDomainFor(settings, host) !== null;
+export function isSiteAllowed(settings, address) {
+  return allowedExclusionFor(settings, address) !== null;
 }
 
 // Accept a hostname or HTTP(S) URL; store only the canonical hostname.
@@ -66,15 +75,34 @@ export function normalizeDomain(input) {
   }
 }
 
+export function normalizePageUrl(input) {
+  const value = input.trim();
+  if (!/^https?:\/\//iu.test(value)) return null;
+  const host = normalizeDomain(value);
+  if (!host) return null;
+  const url = new URL(value);
+  url.hostname = host;
+  return url.href;
+}
+
+// Bare hostnames cover a domain; addresses with a scheme or path stay exact.
+export function normalizeExclusion(input) {
+  const value = input.trim();
+  if (value.includes("://")) return normalizePageUrl(value);
+  if (/[/?#]/u.test(value)) return normalizePageUrl(`https://${value}`);
+  return normalizeDomain(value);
+}
+
 export function allowedDomainFor(settings, host) {
   const normalized = normalizeDomain(host);
   if (!normalized) return null;
   let match = null;
   let shortest = Infinity;
   for (const site of settings.allowedSites) {
-    const domain = normalizeDomain(site);
+    const domain = normalizeExclusion(site);
     if (
       domain &&
+      !domain.includes("://") &&
       domain.length < shortest &&
       (normalized === domain || normalized.endsWith(`.${domain}`))
     ) {
@@ -85,6 +113,17 @@ export function allowedDomainFor(settings, host) {
   return match;
 }
 
-export function blocksOn(settings, host) {
-  return settings.enabled && !isSiteAllowed(settings, host);
+export function allowedExclusionFor(settings, address) {
+  const domain = allowedDomainFor(settings, address);
+  if (domain) return domain;
+  const url = normalizePageUrl(address);
+  if (!url) return null;
+  return (
+    settings.allowedSites.find((site) => normalizeExclusion(site) === url) ??
+    null
+  );
+}
+
+export function blocksOn(settings, address) {
+  return settings.enabled && !isSiteAllowed(settings, address);
 }
