@@ -64,6 +64,10 @@ You need [Node.js](https://nodejs.org) 22 or later, [pnpm](https://pnpm.io/) 11,
 - **A new site.** Add an entry to `SITE_UNITS` in `src/sites.js`. List the selectors of the smallest element that holds one whole item, such as a post or a video tile, so its thumbnail is blurred with its title.
 - **A new language.** Copy the `en` block in `src/locales.js`, rename it to the [Chrome locale code](https://developer.chrome.com/docs/extensions/reference/api/i18n#locales), and translate every value. `pnpm test` checks that no key is missing and that the store description fits in 132 characters.
 
+## Version each delivered update
+
+Run `pnpm build:update` once per delivered extension update and commit the incremented `package.json`. This gives each update a distinct patch version visible beside the popup title and in the browser’s extension manager. Use `pnpm build` for repeatable validation of the same version; automated semantic-release builds already receive a version from the release process.
+
 ## Check your change
 
 Run these commands before you open a pull request. CI runs the same checks.

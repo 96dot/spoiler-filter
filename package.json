@@ -1,6 +1,6 @@
 {
   "name": "spoiler-filter",
-  "version": "1.3.2",
+  "version": "1.3.3",
   "private": true,
   "license": "GPL-3.0-only",
   "type": "module",
@@ -13,7 +13,8 @@
     "lint:firefox": "web-ext lint --source-dir dist/novice-firefox",
     "format": "prettier --write .",
     "format:check": "prettier --check .",
-    "screenshots": "webpack --mode development && node scripts/capture-screenshots.js"
+    "screenshots": "webpack --mode development && node scripts/capture-screenshots.js",
+    "build:update": "node scripts/bump-version.js && pnpm build"
   },
   "devDependencies": {
     "@semantic-release/changelog": "^6.0.3",

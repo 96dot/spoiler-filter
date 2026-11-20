@@ -63,6 +63,8 @@ pnpm format:check  # check formatting
 pnpm lint:firefox  # lint the Firefox build
 ```
 
+When delivering an extension update, run `pnpm build:update` to increment the patch version and build both browsers. Commit the resulting `package.json` with the update. The installed version appears beside the popup title and on the browser’s extension page. Use `pnpm build` to reproduce an existing version without incrementing it. After replacing an unpacked build, reload the extension in Brave and refresh the pages you want to filter.
+
 Read [CONTRIBUTING.md](CONTRIBUTING.md) before contributing. Report fork-specific bugs in [this fork's issue tracker](https://github.com/96dot/spoiler-filter/issues). Keep story spoilers out of issue titles, descriptions, and screenshots.
 
 ## Attribution and license

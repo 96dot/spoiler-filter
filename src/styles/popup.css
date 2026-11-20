@@ -36,6 +36,23 @@ header {
   min-width: 0;
 }
 
+.brand-heading {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 6px;
+}
+
+.version {
+  padding: 2px 6px;
+  border: 1px solid var(--novice-line);
+  border-radius: 6px;
+  color: var(--novice-muted);
+  font-size: 10px;
+  font-variant-numeric: tabular-nums;
+  white-space: nowrap;
+}
+
 .logo {
   width: 32px;
   height: 32px;
