@@ -15,7 +15,7 @@ export const MESSAGES = {
     siteExcludedBy: "Excluded by $1. Remove that domain below to block here.",
     domainInvalid: "Enter a valid domain or HTTP(S) website URL.",
     saveError: "Could not save settings. Please try again.",
-    extName: "NoVice - Block GTA 6 Spoilers",
+    extName: "Spoiler Filter - Block GTA 6 Spoilers",
     extDescription:
       "Blurs GTA 6 trailers, leaks, videos, posts and story spoilers across the web so you go in blind. Not affiliated with Rockstar.",
     countLabel: "spoilers blocked on this page",
@@ -62,7 +62,7 @@ export const MESSAGES = {
       "Wykluczone przez $1. Usuń tę domenę poniżej, aby tutaj blokować.",
     domainInvalid: "Wpisz prawidłową domenę lub adres witryny HTTP(S).",
     saveError: "Nie udało się zapisać ustawień. Spróbuj ponownie.",
-    extName: "NoVice - Block GTA 6 Spoilers",
+    extName: "Spoiler Filter - Block GTA 6 Spoilers",
     extDescription:
       "Rozmywa zwiastuny, przecieki, filmy, posty i spoilery fabuły GTA 6 w całym internecie. Nie jest powiązane z Rockstar.",
     countLabel: "zablokowanych spoilerów na tej stronie",
@@ -112,7 +112,7 @@ export const MESSAGES = {
     domainInvalid: "Eine gültige Domain oder HTTP(S)-Website-URL eingeben.",
     saveError:
       "Einstellungen konnten nicht gespeichert werden. Bitte erneut versuchen.",
-    extName: "NoVice - Block GTA 6 Spoilers",
+    extName: "Spoiler Filter - Block GTA 6 Spoilers",
     extDescription:
       "Verwischt GTA-6-Trailer, Leaks, Videos, Posts und Story-Spoiler im ganzen Web. Nicht mit Rockstar verbunden.",
     countLabel: "Spoiler auf dieser Seite blockiert",
@@ -162,7 +162,7 @@ export const MESSAGES = {
       "Excluido por $1. Elimina ese dominio abajo para bloquear aquí.",
     domainInvalid: "Introduce un dominio válido o la URL HTTP(S) de un sitio.",
     saveError: "No se pudo guardar la configuración. Inténtalo de nuevo.",
-    extName: "NoVice - Block GTA 6 Spoilers",
+    extName: "Spoiler Filter - Block GTA 6 Spoilers",
     extDescription:
       "Difumina tráilers, filtraciones, vídeos, publicaciones y spoilers de la historia de GTA 6 en toda la web. Sin relación con Rockstar.",
     countLabel: "spoilers bloqueados en esta página",
@@ -211,7 +211,7 @@ export const MESSAGES = {
       "Exclu par $1. Supprimez ce domaine ci-dessous pour bloquer ici.",
     domainInvalid: "Saisissez un domaine valide ou une URL de site HTTP(S).",
     saveError: "Impossible d’enregistrer les paramètres. Réessayez.",
-    extName: "NoVice - Block GTA 6 Spoilers",
+    extName: "Spoiler Filter - Block GTA 6 Spoilers",
     extDescription:
       "Floute les bandes-annonces, fuites, vidéos, posts et spoilers de GTA 6 sur tout le web. Non affilié à Rockstar.",
     countLabel: "spoilers bloqués sur cette page",
@@ -259,7 +259,7 @@ export const MESSAGES = {
       "Escluso da $1. Rimuovi quel dominio qui sotto per bloccare qui.",
     domainInvalid: "Inserisci un dominio valido o un URL di sito HTTP(S).",
     saveError: "Impossibile salvare le impostazioni. Riprova.",
-    extName: "NoVice - Block GTA 6 Spoilers",
+    extName: "Spoiler Filter - Block GTA 6 Spoilers",
     extDescription:
       "Sfoca trailer, leak, video, post e spoiler della trama di GTA 6 su tutto il web. Non affiliato a Rockstar.",
     countLabel: "spoiler bloccati in questa pagina",
@@ -308,7 +308,7 @@ export const MESSAGES = {
       "Excluído por $1. Remova esse domínio abaixo para bloquear aqui.",
     domainInvalid: "Digite um domínio válido ou URL de site HTTP(S).",
     saveError: "Não foi possível salvar as configurações. Tente novamente.",
-    extName: "NoVice - Block GTA 6 Spoilers",
+    extName: "Spoiler Filter - Block GTA 6 Spoilers",
     extDescription:
       "Desfoca trailers, vazamentos, vídeos, posts e spoilers da história de GTA 6 em toda a web. Sem vínculo com a Rockstar.",
     countLabel: "spoilers bloqueados nesta página",
@@ -358,7 +358,7 @@ export const MESSAGES = {
     domainInvalid: "Voer een geldig domein of een HTTP(S)-website-URL in.",
     saveError:
       "Instellingen konden niet worden opgeslagen. Probeer het opnieuw.",
-    extName: "NoVice - Block GTA 6 Spoilers",
+    extName: "Spoiler Filter - Block GTA 6 Spoilers",
     extDescription:
       "Vervaagt GTA 6-trailers, leaks, video's, posts en verhaalspoilers op het hele web. Niet verbonden aan Rockstar.",
     countLabel: "spoilers geblokkeerd op deze pagina",
@@ -406,7 +406,7 @@ export const MESSAGES = {
       "Undantagen via $1. Ta bort domänen nedan för att blockera här.",
     domainInvalid: "Ange en giltig domän eller HTTP(S)-webbplatsadress.",
     saveError: "Det gick inte att spara inställningarna. Försök igen.",
-    extName: "NoVice - Block GTA 6 Spoilers",
+    extName: "Spoiler Filter - Block GTA 6 Spoilers",
     extDescription:
       "Suddar ut GTA 6-trailers, läckor, videor, inlägg och storyspoilers på hela webben. Inte ansluten till Rockstar.",
     countLabel: "spoilers blockerade på den här sidan",
@@ -452,7 +452,7 @@ export const MESSAGES = {
     siteExcludedBy: "Vyloučeno doménou $1. Pro blokování zde ji odeberte níže.",
     domainInvalid: "Zadejte platnou doménu nebo HTTP(S) URL webu.",
     saveError: "Nastavení se nepodařilo uložit. Zkuste to znovu.",
-    extName: "NoVice - Block GTA 6 Spoilers",
+    extName: "Spoiler Filter - Block GTA 6 Spoilers",
     extDescription:
       "Rozmazává trailery, úniky, videa, příspěvky a spoilery příběhu GTA 6 na celém webu. Nesouvisí s Rockstar.",
     countLabel: "zablokovaných spoilerů na této stránce",
@@ -500,7 +500,7 @@ export const MESSAGES = {
       "Исключено доменом $1. Удалите его ниже, чтобы включить блокировку здесь.",
     domainInvalid: "Введите допустимый домен или HTTP(S) URL сайта.",
     saveError: "Не удалось сохранить настройки. Попробуйте ещё раз.",
-    extName: "NoVice - Block GTA 6 Spoilers",
+    extName: "Spoiler Filter - Block GTA 6 Spoilers",
     extDescription:
       "Размывает трейлеры, утечки, видео, посты и спойлеры сюжета GTA 6 по всему интернету. Не связано с Rockstar.",
     countLabel: "спойлеров заблокировано на этой странице",
@@ -547,7 +547,7 @@ export const MESSAGES = {
       "Виключено доменом $1. Видаліть його нижче, щоб увімкнути блокування тут.",
     domainInvalid: "Введіть дійсний домен або HTTP(S) URL сайту.",
     saveError: "Не вдалося зберегти налаштування. Спробуйте ще раз.",
-    extName: "NoVice - Block GTA 6 Spoilers",
+    extName: "Spoiler Filter - Block GTA 6 Spoilers",
     extDescription:
       "Розмиває трейлери, витоки, відео, дописи та спойлери сюжету GTA 6 по всьому інтернету. Не пов'язано з Rockstar.",
     countLabel: "спойлерів заблоковано на цій сторінці",
@@ -594,7 +594,7 @@ export const MESSAGES = {
       "$1 nedeniyle hariç tutuldu. Burada engellemek için aşağıdan bu alan adını kaldırın.",
     domainInvalid: "Geçerli bir alan adı veya HTTP(S) site URL’si girin.",
     saveError: "Ayarlar kaydedilemedi. Tekrar deneyin.",
-    extName: "NoVice - Block GTA 6 Spoilers",
+    extName: "Spoiler Filter - Block GTA 6 Spoilers",
     extDescription:
       "GTA 6 fragmanlarını, sızıntılarını, videolarını ve hikâye spoilerlarını tüm webde bulanıklaştırır. Rockstar ile ilgisi yoktur.",
     countLabel: "spoiler bu sayfada engellendi",
@@ -640,7 +640,7 @@ export const MESSAGES = {
     siteExcludedBy: "مستثنى بواسطة $1. أزل هذا النطاق أدناه للحجب هنا.",
     domainInvalid: "أدخل نطاقًا صالحًا أو رابط موقع HTTP(S).",
     saveError: "تعذّر حفظ الإعدادات. حاول مجددًا.",
-    extName: "NoVice - Block GTA 6 Spoilers",
+    extName: "Spoiler Filter - Block GTA 6 Spoilers",
     extDescription:
       "يطمس عروض وتسريبات وفيديوهات ومنشورات وحرق أحداث GTA 6 في كل الويب. لا علاقة له بـ Rockstar.",
     countLabel: "حرق أحداث محجوب في هذه الصفحة",
@@ -687,7 +687,7 @@ export const MESSAGES = {
       "$1 के कारण बाहर रखा गया। यहाँ ब्लॉक करने के लिए नीचे वह डोमेन हटाएँ।",
     domainInvalid: "मान्य डोमेन या HTTP(S) वेबसाइट URL दर्ज करें।",
     saveError: "सेटिंग सहेजी नहीं जा सकी। फिर कोशिश करें।",
-    extName: "NoVice - Block GTA 6 Spoilers",
+    extName: "Spoiler Filter - Block GTA 6 Spoilers",
     extDescription:
       "पूरे वेब पर GTA 6 के ट्रेलर, लीक, वीडियो, पोस्ट और कहानी के स्पॉइलर धुंधले करता है। Rockstar से संबद्ध नहीं।",
     countLabel: "स्पॉइलर इस पेज पर ब्लॉक किए गए",
@@ -735,7 +735,7 @@ export const MESSAGES = {
       "Dikecualikan oleh $1. Hapus domain tersebut di bawah untuk memblokir di sini.",
     domainInvalid: "Masukkan domain atau URL situs HTTP(S) yang valid.",
     saveError: "Tidak dapat menyimpan pengaturan. Coba lagi.",
-    extName: "NoVice - Block GTA 6 Spoilers",
+    extName: "Spoiler Filter - Block GTA 6 Spoilers",
     extDescription:
       "Mengaburkan trailer, bocoran, video, postingan, dan spoiler cerita GTA 6 di seluruh web. Tidak berafiliasi dengan Rockstar.",
     countLabel: "spoiler diblokir di halaman ini",
@@ -784,7 +784,7 @@ export const MESSAGES = {
       "$1により除外されています。ここでブロックするには、下のリストからそのドメインを削除してください。",
     domainInvalid: "有効なドメインまたはHTTP(S)のサイトURLを入力してください。",
     saveError: "設定を保存できませんでした。もう一度お試しください。",
-    extName: "NoVice - GTA 6 ネタバレブロッカー",
+    extName: "Spoiler Filter - GTA 6 ネタバレブロッカー",
     extDescription:
       "GTA 6 のトレーラー、リーク、動画、投稿、ストーリーのネタバレをウェブ全体でぼかします。Rockstar とは無関係です。",
     countLabel: "件のネタバレをこのページでブロックしました",
@@ -832,7 +832,7 @@ export const MESSAGES = {
       "$1에 의해 제외되었습니다. 여기서 차단하려면 아래에서 해당 도메인을 삭제하세요.",
     domainInvalid: "유효한 도메인 또는 HTTP(S) 사이트 URL을 입력하세요.",
     saveError: "설정을 저장할 수 없습니다. 다시 시도하세요.",
-    extName: "NoVice - GTA 6 스포일러 차단기",
+    extName: "Spoiler Filter - GTA 6 스포일러 차단기",
     extDescription:
       "웹 전체에서 GTA 6 트레일러, 유출, 영상, 게시물, 스토리 스포일러를 흐리게 처리합니다. Rockstar와 관련이 없습니다.",
     countLabel: "개의 스포일러를 이 페이지에서 차단함",
@@ -876,7 +876,7 @@ export const MESSAGES = {
     siteExcludedBy: "已通过$1排除。要在此处屏蔽，请在下方移除该域名。",
     domainInvalid: "请输入有效的域名或HTTP(S)网站网址。",
     saveError: "无法保存设置，请重试。",
-    extName: "NoVice - GTA 6 剧透拦截器",
+    extName: "Spoiler Filter - GTA 6 剧透拦截器",
     extDescription:
       "在整个网络上模糊 GTA 6 的预告片、泄露、视频、帖子和剧情剧透。与 Rockstar 无关。",
     countLabel: "条剧透已在此页面拦截",
@@ -919,7 +919,7 @@ export const MESSAGES = {
     siteExcludedBy: "已透過$1排除。若要在此處封鎖，請在下方移除該網域。",
     domainInvalid: "請輸入有效的網域或HTTP(S)網站網址。",
     saveError: "無法儲存設定，請重試。",
-    extName: "NoVice - GTA 6 劇透攔截器",
+    extName: "Spoiler Filter - GTA 6 劇透攔截器",
     extDescription:
       "在整個網路上模糊 GTA 6 的預告片、外流、影片、貼文和劇情劇透。與 Rockstar 無關。",
     countLabel: "則劇透已在此頁面攔截",

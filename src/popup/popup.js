@@ -1,4 +1,3 @@
-import coffee from "../assets/coffee.svg";
 import logo from "../assets/logo.svg";
 import { mergeKeywords, sameKeyword } from "../keywords.js";
 import {
@@ -23,7 +22,6 @@ function translate() {
     el.textContent = t(el.dataset.i18n);
   });
   $("logo").innerHTML = logo;
-  $("coffee-cup").outerHTML = coffee;
   $("version").textContent = `v${ext.runtime.getManifest().version}`;
   $("keyword-input").placeholder = t("keywordPlaceholder");
 }

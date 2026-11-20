@@ -1,5 +1,5 @@
 name: A spoiler got through
-description: Report GTA VI content that NoVice did not blur.
+description: Report GTA VI content that Spoiler Filter did not blur.
 labels: ["spoiler report"]
 body:
   - type: markdown

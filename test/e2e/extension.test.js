@@ -434,7 +434,7 @@ test("popup switches turn blurring off globally and per site", async () => {
   const feed = await openFeed();
   const popup = await context.newPage();
   await popup.goto(`chrome-extension://${extensionId}/popup.html`);
-  assert.equal(await popup.textContent("h1"), "NoVice");
+  assert.equal(await popup.textContent("h1"), "Spoiler Filter");
   assert.equal(await popup.textContent("footer a"), "Report an issue");
 
   await popup.fill("#keyword-input", "  Lucia   actress ");

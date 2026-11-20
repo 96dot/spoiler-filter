@@ -1,114 +1,72 @@
-<div align="center">
+<p align="center"><img src="src/assets/logo.svg" alt="Spoiler Filter icon" width="88"></p>
 
-<p><img src="static/images/banner.png" alt="NoVice banner" width="440"></p>
+# Spoiler Filter — 96dot fork
 
-<a href="https://github.com/kpulka247/novice/actions" title="GitHub Actions Workflow Status"><img src="https://img.shields.io/github/actions/workflow/status/kpulka247/novice/release.yml"></a>
-<a title="Chrome Web Store Size"><img src="https://img.shields.io/chrome-web-store/size/caledcpfdapmmhmflbpjmjnenmjggghp?color=blue"></a>
-<a href="https://github.com/kpulka247/novice/releases" title="GitHub Release"><img src="https://img.shields.io/github/v/release/kpulka247/novice?logo=github&logoColor=white&color=%236f42c1"></a>
-<a href="https://github.com/kpulka247/novice/blob/main/LICENSE" title="GitHub License"><img src="https://img.shields.io/github/license/kpulka247/novice?color=%23252525"></a>
+A browser extension that blurs GTA VI spoilers and custom keywords across the web.
 
-<a href="https://chromewebstore.google.com/detail/novice-block-gta-6-spoile/caledcpfdapmmhmflbpjmjnenmjggghp" title="Chrome Web Store Users"><img src="https://img.shields.io/chrome-web-store/users/caledcpfdapmmhmflbpjmjnenmjggghp?logo=Google%20Chrome&logoColor=white&color=blue"></a>
-<a href="https://chromewebstore.google.com/detail/novice-block-gta-6-spoile/caledcpfdapmmhmflbpjmjnenmjggghp" title="Chrome Web Store Rating"><img src="https://img.shields.io/chrome-web-store/rating/caledcpfdapmmhmflbpjmjnenmjggghp?color=blue"></a>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-<a href="https://addons.mozilla.org/firefox/addon/novice/" title="Mozilla Add-on Users"><img src="https://img.shields.io/amo/users/novice?logo=Firefox&logoColor=white&color=red"></a>
-<a href="https://addons.mozilla.org/firefox/addon/novice/" title="Mozilla Add-on Rating"><img src="https://img.shields.io/amo/rating/novice?color=red"></a>
+> **Independent fork of [NoVice by kpulka247 and contributors](https://github.com/kpulka247/novice).** This fork is maintained by [96dot](https://github.com/96dot) and uses a different name and icon. It is not an official NoVice release and is not endorsed by the upstream author. The original code remains credited to its authors and licensed under GPL-3.0-only.
 
-</div>
+**Modification notice — 2026-11-19:** this fork introduces its own name, icon, repository presentation, and extension identity. See [NOTICE.md](NOTICE.md) for attribution, modifications, and license information. The upstream license text and Git history are preserved.
 
-## Overview
+## Fork development
 
-Play GTA VI knowing nothing about it. NoVice blurs every trailer, leak, post, and story spoiler about Grand Theft Auto VI on every website you visit, and leaves the rest of the internet alone. It is on from the moment you install it.
+[Batch keyword import and domain exclusions](https://github.com/96dot/spoiler-filter/tree/feat/batch-import-domain-exclusions) are available on the feature branch. Switch to that branch to use and develop those additions:
 
-![GTA VI content blurred on YouTube, Wikipedia, Steam, and Twitch](static/images/across-the-web.png)
+```bash
+git switch feat/batch-import-domain-exclusions
+```
+
+There is no separate browser-store listing for this fork. The original project's store listings distribute the upstream extension, not these fork modifications.
 
 ## Features
 
-- 🌫️ **Blur or remove.** Spoilers blur in place with a small tag. Hover to see which words matched, click to see the post, or switch to removing them.
-- 🧠 **Knows the game.** Every spelling of the title in every script, the characters, the places of Leonida, and Rockstar's own channels.
-- 🎯 **Strict mode.** Also catches GTA and Rockstar posts, insiders, leakers, GTA creators and roleplay servers from many countries, and posts that hide GTA VI behind "See more".
-- ✍️ **Your own keywords.** Add any word or phrase, or import a list by pasting text or choosing a text file.
-- 🏡 **Site exclusions.** Keep selected domains and their subdomains clear, including embedded frames. Manage exclusions from the popup.
-- 🌅 **Covers whole pages.** Trailers, reviews, and wikis about GTA VI get a see-through cover.
-- 🌍 **20 languages.** The popup and labels follow your browser language.
-- 🔒 **Private.** Everything runs on your device. No data leaves it.
+- Blur matching posts in place or remove them from the page.
+- Detect GTA VI names, links, and story spoilers, with a strict mode for broader GTA and Rockstar content.
+- Add custom words and phrases to filter.
+- Turn protection off globally or for the current site.
+- Use the popup and labels in 20 languages.
+- Run filtering locally on your device.
 
-## Screenshots
+On the feature branch, **Custom keywords → Import keywords** accepts comma-separated or one-per-line lists, pasted directly or loaded from a `.txt` file. Existing keywords are kept; duplicates and entries over 60 characters are skipped. Imports accept up to 1 MB of text.
 
-![The extension popup over a page about GTA VI under the see-through cover](static/images/screenshot.png)
+The feature branch also adds **Excluded sites**. Enter a domain or website URL to exclude its hostname and subdomains, including embedded frames on excluded pages. Remove its **×** chip to restore protection immediately.
 
-<details>
-<summary>More screenshots</summary>
+## Build and install locally
 
-![A blurred YouTube result that shows the matched words on hover](static/images/screenshot-hover.png)
-
-![Bing results for Rockstar Games with the GTA results blurred](static/images/screenshot-search.png)
-
-![The Take-Two Interactive article on Wikipedia with the GTA parts blurred](static/images/screenshot-article.png)
-
-</details>
-
-## Installation
-
-<div align="center">
-
-<a href="https://chromewebstore.google.com/detail/novice-block-gta-6-spoile/caledcpfdapmmhmflbpjmjnenmjggghp" title="Chrome Web Store Version"><img src="https://img.shields.io/chrome-web-store/v/caledcpfdapmmhmflbpjmjnenmjggghp?style=for-the-badge&logo=google%20chrome&logoColor=white&labelColor=%23252525&color=blue"></a>
-<a href="https://addons.mozilla.org/firefox/addon/novice/" title="Mozilla Add-on Version"><img src="https://img.shields.io/amo/v/novice?style=for-the-badge&logo=firefox&logoColor=white&labelColor=%23252525&color=red"></a>
-
-</div>
-
-Click your browser's store and add the extension. For 🦁 Brave, 🔴 Opera, or 🌀 Microsoft Edge, use the Chrome Web Store.
-
-## Usage
-
-Browse as usual. Hover a blurred card to see which words matched, and click it to see the card. Click the toolbar icon to switch between blur and remove, turn strict mode off, add your own keywords, or turn the extension off for one site.
-
-To add a list of mute words, open **Custom keywords → Import keywords**. Paste words or phrases separated by commas or new lines, or choose a `.txt` file, then click **Import keywords**. Existing keywords are kept. Blank entries are ignored; duplicates (ignoring case) and entries longer than 60 characters are skipped. Imports accept up to 1 MB of text and show how many entries were added or skipped.
-
-Under **Excluded sites**, add a domain such as `example.com` or paste a website URL. Only its hostname is saved, so `https://example.com/news` excludes the whole domain. An exclusion covers that domain and its subdomains, including all embedded frames on excluded pages. For a narrower exception, add `news.example.com` instead. Remove a domain with its **×** button to restore protection immediately. The current-site switch uses the same exclusion list; when a parent domain excludes the current site, remove that parent from the list to enable blocking here.
-
-Found a spoiler that got through? [Open a spoiler report](https://github.com/kpulka247/novice/issues/new?template=spoiler.yml) with the page address, but leave the spoiler itself out.
-
-<details>
-<summary>Known limitations</summary>
-
-- The extension reads text, links, and image descriptions. An image whose page never mentions GTA stays clear.
-- Strict mode also blurs GTA V and GTA Online posts, and everything from GTA creators and roleplay servers. Click to see them, or turn strict mode off.
-
-- "Vice City" counts as a GTA VI place, so pages about GTA: Vice City (2002) are blurred too.
-- Facebook posts open in full, because the extension clicks **See more** to check the hidden text.
-
-</details>
-
-## Development & Build
-
-You need [Node.js](https://nodejs.org) (LTS), [pnpm](https://pnpm.io/), and [Git](https://git-scm.com/).
+Install Node.js 22 or later, pnpm 11, and Git, then:
 
 ```bash
-pnpm install     # install dependencies
-pnpm dev         # build both browsers and rebuild on every change
-pnpm build       # production build with ZIPs in dist/
-pnpm test        # matcher and translation tests
-pnpm test:e2e    # loads the extension into Chromium and checks real pages
+git clone https://github.com/96dot/spoiler-filter.git
+cd spoiler-filter
+# Optional: switch to the feature branch described above.
+pnpm install --frozen-lockfile
+pnpm build
 ```
 
-To try it, open `chrome://extensions`, turn on **Developer mode**, click **Load unpacked**, and select `dist/novice-chrome/`.
+In Chrome or a Chromium-based browser, open `chrome://extensions`, turn on **Developer mode**, choose **Load unpacked**, and select `dist/novice-chrome/`.
 
-Every merge to `main` is released automatically with [semantic-release](https://github.com/semantic-release/semantic-release): a new version, a changelog entry, a GitHub Release, and uploads to both stores. [docs/publishing.md](docs/publishing.md) explains the setup.
+In Firefox, open `about:debugging#/runtime/this-firefox`, choose **Load Temporary Add-on**, and select `dist/novice-firefox/manifest.json`.
 
-## Contributing
+The build folders retain the internal `novice` identifier. Both builds display **Spoiler Filter** with the fork's new icon and include copies of `LICENSE` and `NOTICE.md`.
 
-> **Contributions are highly welcome!** 💖 New terms, translations, site support, and false-positive reports help the most.
+## Development
 
-Read **[CONTRIBUTING.md](./CONTRIBUTING.md)** for the project layout, the target branch (`dev`), and the Pull Request naming rules.
+```bash
+pnpm dev           # build both browsers and watch for changes
+pnpm test          # unit tests
+pnpm test:e2e      # extension tests in Chromium
+pnpm format:check  # check formatting
+pnpm lint:firefox  # lint the Firefox build
+```
 
-If NoVice saved you from a spoiler, you can [buy me a coffee](https://ko-fi.com/kpulka) ☕.
+Read [CONTRIBUTING.md](CONTRIBUTING.md) before contributing. Report fork-specific bugs in [this fork's issue tracker](https://github.com/96dot/spoiler-filter/issues). Keep story spoilers out of issue titles, descriptions, and screenshots.
 
-## License
+## Attribution and license
 
-[GPL-3.0](./LICENSE). The license covers the code. It does not give you the right to use the NoVice name, logo, or store graphics.
+Original project: [NoVice](https://github.com/kpulka247/novice) by [kpulka247](https://github.com/kpulka247) and contributors. Original authors retain copyright in their contributions; changes made in this fork are identified in [NOTICE.md](NOTICE.md) and the commit history.
+
+The code and this fork's new icon are licensed under **[GNU GPL version 3 only](LICENSE)**. You may copy, modify, and redistribute the software under that license, including its source-distribution and notice requirements. This software is provided **without warranty**; see the license for details.
+
+The upstream NoVice name, logo, and store graphics are reserved by the original project. This fork uses its own public name and icon and removes those upstream graphics from its current presentation. Historical upstream commits and [CHANGELOG.md](CHANGELOG.md) are retained for provenance.
 
 An unofficial fan project, not affiliated with Rockstar Games or Take-Two Interactive. Grand Theft Auto is a trademark of Take-Two Interactive Software, Inc.
-
-## Changelog
-
-Changes for each release are in [CHANGELOG.md](./CHANGELOG.md).

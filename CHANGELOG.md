@@ -1,3 +1,30 @@
+## [1.3.2](https://github.com/kpulka247/novice/compare/v1.3.1...v1.3.2) (2026-11-20)
+
+### Bug Fixes
+
+* **content:** keep a table's columns when a row is blurred ([9870ca6](https://github.com/kpulka247/novice/commit/9870ca6b49513fa65cd3e78277dd032e0baa50ae))
+
+## [1.3.1](https://github.com/kpulka247/novice/compare/v1.3.0...v1.3.1) (2026-11-19)
+
+### Bug Fixes
+
+* stop covering the novice repo's own front page and files ([#6](https://github.com/kpulka247/novice/issues/6)) ([130ad35](https://github.com/kpulka247/novice/commit/130ad3559bc2fa8640d2a4ade10c1a3a658e9e7d))
+
+## [1.3.0](https://github.com/kpulka247/novice/compare/v1.2.0...v1.3.0) (2026-11-18)
+
+### Features
+
+* **content:** remember what the user revealed for the tab's session ([8f5e9fc](https://github.com/kpulka247/novice/commit/8f5e9fcb3048fdeaec30d6d5d92f4df045b1e176))
+* **firefox:** support Firefox for Android ([78d32f1](https://github.com/kpulka247/novice/commit/78d32f141a89540106e162c7c7c4ccec459981d7))
+* **sites:** cover Kick and Twitch streams whose title or game is GTA VI ([9c5ea4c](https://github.com/kpulka247/novice/commit/9c5ea4cea768117e83e4d4025a8b3784226a917b))
+* **spoilers:** blur vague story spoilers on pages about GTA ([390a220](https://github.com/kpulka247/novice/commit/390a220d7c0735f6788623462a433d1912ae94d0))
+
+### Bug Fixes
+
+* **content:** drop the cover after Take me back on single-page sites ([e8690a4](https://github.com/kpulka247/novice/commit/e8690a47b866e8ebacf3f86bdec3289b34950acb))
+* **shield:** keep the warning visible on pages that hide undefined elements ([220f68a](https://github.com/kpulka247/novice/commit/220f68a2ffeea4201a5b1a792ba0c0736258304e))
+* **shield:** move focus into the cover when it opens ([f3506ac](https://github.com/kpulka247/novice/commit/f3506ac4c5cab801bff971dc25dbb29dd3f2a7cb))
+
 ## [1.2.0](https://github.com/kpulka247/novice/compare/v1.1.0...v1.2.0) (2026-11-15)
 
 ### Features
