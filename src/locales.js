@@ -2,6 +2,7 @@ export const DEFAULT_LOCALE = "en";
 
 export const MESSAGES = {
   en: {
+    revealPageTemporarily: "Reveal all on this page temporarily",
     keywordImport: "Import keywords",
     importHint:
       "Paste words or phrases, separated by commas or new lines. Maximum 60 characters per entry.",
@@ -49,6 +50,7 @@ export const MESSAGES = {
     shieldFound: "Matched:",
   },
   pl: {
+    revealPageTemporarily: "Tymczasowo pokaż wszystko na tej stronie",
     keywordImport: "Importuj słowa",
     importHint:
       "Wklej słowa lub frazy oddzielone przecinkami lub nowymi wierszami. Maksymalnie 60 znaków na wpis.",
@@ -96,6 +98,7 @@ export const MESSAGES = {
     shieldFound: "Wykryto:",
   },
   de: {
+    revealPageTemporarily: "Alles auf dieser Seite vorübergehend anzeigen",
     keywordImport: "Begriffe importieren",
     importHint:
       "Wörter oder Sätze einfügen, getrennt durch Kommas oder Zeilenumbrüche. Höchstens 60 Zeichen pro Eintrag.",
@@ -146,6 +149,7 @@ export const MESSAGES = {
     shieldFound: "Gefunden:",
   },
   es: {
+    revealPageTemporarily: "Mostrar todo en esta página temporalmente",
     keywordImport: "Importar palabras clave",
     importHint:
       "Pega palabras o frases separadas por comas o saltos de línea. Máximo 60 caracteres por entrada.",
@@ -196,6 +200,7 @@ export const MESSAGES = {
     shieldFound: "Detectado:",
   },
   fr: {
+    revealPageTemporarily: "Tout afficher temporairement sur cette page",
     keywordImport: "Importer des mots-clés",
     importHint:
       "Collez des mots ou expressions séparés par des virgules ou des retours à la ligne. 60 caractères maximum par entrée.",
@@ -245,6 +250,7 @@ export const MESSAGES = {
     shieldFound: "Détecté :",
   },
   it: {
+    revealPageTemporarily: "Mostra tutto temporaneamente su questa pagina",
     keywordImport: "Importa parole chiave",
     importHint:
       "Incolla parole o frasi separate da virgole o nuove righe. Massimo 60 caratteri per voce.",
@@ -293,6 +299,7 @@ export const MESSAGES = {
     shieldFound: "Rilevato:",
   },
   pt_BR: {
+    revealPageTemporarily: "Mostrar tudo nesta página temporariamente",
     keywordImport: "Importar palavras-chave",
     importHint:
       "Cole palavras ou frases separadas por vírgulas ou quebras de linha. Máximo de 60 caracteres por entrada.",
@@ -342,6 +349,7 @@ export const MESSAGES = {
     shieldFound: "Detectado:",
   },
   nl: {
+    revealPageTemporarily: "Alles op deze pagina tijdelijk tonen",
     keywordImport: "Trefwoorden importeren",
     importHint:
       "Plak woorden of zinnen, gescheiden door komma’s of nieuwe regels. Maximaal 60 tekens per item.",
@@ -392,6 +400,7 @@ export const MESSAGES = {
     shieldFound: "Gevonden:",
   },
   sv: {
+    revealPageTemporarily: "Visa allt på den här sidan tillfälligt",
     keywordImport: "Importera nyckelord",
     importHint:
       "Klistra in ord eller fraser, åtskilda av kommatecken eller radbrytningar. Högst 60 tecken per post.",
@@ -440,6 +449,7 @@ export const MESSAGES = {
     shieldFound: "Hittade:",
   },
   cs: {
+    revealPageTemporarily: "Dočasně zobrazit vše na této stránce",
     keywordImport: "Importovat klíčová slova",
     importHint:
       "Vložte slova nebo fráze oddělené čárkami nebo novými řádky. Nejvýše 60 znaků na položku.",
@@ -487,6 +497,7 @@ export const MESSAGES = {
     shieldFound: "Nalezeno:",
   },
   ru: {
+    revealPageTemporarily: "Временно показать всё на этой странице",
     keywordImport: "Импорт ключевых слов",
     importHint:
       "Вставьте слова или фразы через запятую или с новой строки. Не более 60 символов на запись.",
@@ -535,6 +546,7 @@ export const MESSAGES = {
     shieldFound: "Найдено:",
   },
   uk: {
+    revealPageTemporarily: "Тимчасово показати все на цій сторінці",
     keywordImport: "Імпорт ключових слів",
     importHint:
       "Вставте слова або фрази через кому або з нового рядка. Не більше 60 символів на запис.",
@@ -582,6 +594,7 @@ export const MESSAGES = {
     shieldFound: "Знайдено:",
   },
   tr: {
+    revealPageTemporarily: "Bu sayfadaki her şeyi geçici olarak göster",
     keywordImport: "Anahtar kelimeleri içe aktar",
     importHint:
       "Virgül veya yeni satırla ayrılmış kelime ya da ifadeleri yapıştırın. Her giriş en fazla 60 karakter.",
@@ -629,6 +642,7 @@ export const MESSAGES = {
     shieldFound: "Bulunan:",
   },
   ar: {
+    revealPageTemporarily: "إظهار كل شيء في هذه الصفحة مؤقتًا",
     keywordImport: "استيراد الكلمات المفتاحية",
     importHint:
       "الصق كلمات أو عبارات مفصولة بفواصل أو أسطر جديدة. 60 حرفًا كحد أقصى لكل إدخال.",
@@ -675,6 +689,7 @@ export const MESSAGES = {
     shieldFound: "تم العثور على:",
   },
   hi: {
+    revealPageTemporarily: "इस पेज पर अस्थायी रूप से सब कुछ दिखाएँ",
     keywordImport: "कीवर्ड आयात करें",
     importHint:
       "अल्पविराम या नई पंक्तियों से अलग किए गए शब्द या वाक्यांश पेस्ट करें। प्रति प्रविष्टि अधिकतम 60 अक्षर।",
@@ -722,6 +737,7 @@ export const MESSAGES = {
     shieldFound: "मिला:",
   },
   id: {
+    revealPageTemporarily: "Tampilkan semua di halaman ini sementara",
     keywordImport: "Impor kata kunci",
     importHint:
       "Tempel kata atau frasa, dipisahkan koma atau baris baru. Maksimal 60 karakter per entri.",
@@ -770,6 +786,7 @@ export const MESSAGES = {
     shieldFound: "Ditemukan:",
   },
   ja: {
+    revealPageTemporarily: "このページのすべてを一時的に表示",
     keywordImport: "キーワードをインポート",
     importHint:
       "単語やフレーズをカンマまたは改行で区切って貼り付けます。1件につき最大60文字。",
@@ -819,6 +836,7 @@ export const MESSAGES = {
     shieldFound: "検出:",
   },
   ko: {
+    revealPageTemporarily: "이 페이지의 모든 항목을 일시적으로 표시",
     keywordImport: "키워드 가져오기",
     importHint:
       "쉼표나 줄 바꿈으로 구분된 단어나 문구를 붙여넣으세요. 항목당 최대 60자입니다.",
@@ -867,6 +885,7 @@ export const MESSAGES = {
     shieldFound: "감지됨:",
   },
   zh_CN: {
+    revealPageTemporarily: "临时显示此页面上的所有内容",
     keywordImport: "导入关键词",
     importHint: "粘贴以逗号或换行分隔的词语或短语。每项最多60个字符。",
     importFile: "或选择文本文件（.txt，最大1 MB）",
@@ -911,6 +930,7 @@ export const MESSAGES = {
     shieldFound: "匹配：",
   },
   zh_TW: {
+    revealPageTemporarily: "暫時顯示此頁面上的所有內容",
     keywordImport: "匯入關鍵字",
     importHint: "貼上以逗號或換行分隔的字詞或片語。每項最多60個字元。",
     importFile: "或選擇文字檔案（.txt，最大1 MB）",

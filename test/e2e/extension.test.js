@@ -1144,3 +1144,196 @@ test("exact URL exclusions unfilter only one page and follow SPA navigation in i
     await setSettings({ allowedSites: [], keywords: [] });
   }
 });
+
+test("temporary page reveal covers existing and late frames and expires on navigation and reload", async () => {
+  const page = await openFeed();
+  const other = await openFeed();
+  const embeddedUrl = "https://embedded.example.test/temporary-reveal";
+  await context.route(embeddedUrl, async (route) =>
+    route.fulfill({
+      contentType: "text/html",
+      body: await readFile(path.join(here, "fixtures", "feed.html")),
+    }),
+  );
+  try {
+    await worker.evaluate(() =>
+      chrome.contextMenus.update("reveal-page-temporarily", { enabled: true }),
+    );
+    await page.evaluate(() =>
+      document.addEventListener("contextmenu", () => {
+        document.body.dataset.contextMenuOpened = "yes";
+      }),
+    );
+    await page.click("#trailer", { button: "right" });
+    assert.equal(
+      await page.getAttribute("body", "data-context-menu-opened"),
+      "yes",
+    );
+    assert.equal(
+      await stateOf(page, "trailer"),
+      "blur",
+      "opening the menu never permanently reveals an item",
+    );
+    await page.keyboard.press("Escape");
+    const addFrame = async (id) => {
+      const navigation = page.waitForEvent("framenavigated", {
+        predicate: (frame) => frame.url() === embeddedUrl,
+      });
+      await page.evaluate(
+        ({ id, url }) => {
+          const iframe = document.createElement("iframe");
+          iframe.id = id;
+          iframe.src = url;
+          document.body.append(iframe);
+        },
+        { id, url: embeddedUrl },
+      );
+      return navigation;
+    };
+    const frame = await addFrame("existing-frame");
+    await frame.waitForSelector("#trailer[data-novice='blur']", {
+      state: "attached",
+    });
+    await page.bringToFront();
+    const activeTabId = await worker.evaluate(
+      async () =>
+        (await chrome.tabs.query({ active: true, currentWindow: true }))[0].id,
+    );
+    const saved = await worker.evaluate(() => chrome.storage.local.get(null));
+    await worker.evaluate(
+      ({ id, url }) =>
+        chrome.tabs.sendMessage(id, { type: "reveal-page", url }),
+      { id: activeTabId, url: `${base}/feed` },
+    );
+    await page.waitForFunction(
+      () =>
+        !document.querySelector("[data-novice='blur'],[data-novice='hide']"),
+    );
+    await frame.waitForFunction(
+      () => !document.querySelector("[data-novice='blur']"),
+    );
+    assert.equal(
+      await stateOf(other, "trailer"),
+      "blur",
+      "the other tab stays protected",
+    );
+    const lateFrame = await addFrame("late-frame");
+    await lateFrame.waitForSelector("#late");
+    assert.equal(await stateOf(lateFrame, "trailer"), "visible");
+    await page.evaluate(() => {
+      const post = document.createElement("article");
+      post.id = "new-spoiler";
+      post.textContent = "GTA VI trailer";
+      document.body.append(post);
+    });
+    await page.waitForFunction(
+      () => !document.querySelector("#new-spoiler[data-novice]"),
+    );
+    assert.deepEqual(
+      await worker.evaluate(() => chrome.storage.local.get(null)),
+      saved,
+      "no persistent settings are written",
+    );
+    await page.evaluate(() => history.pushState({}, "", "/feed/another-page"));
+    await page.waitForSelector("#trailer[data-novice='blur']", {
+      state: "attached",
+    });
+    await frame.waitForSelector("#trailer[data-novice='blur']", {
+      state: "attached",
+    });
+    await lateFrame.waitForSelector("#trailer[data-novice='blur']", {
+      state: "attached",
+    });
+    await page.goBack();
+    await page.waitForSelector("#trailer[data-novice='blur']", {
+      state: "attached",
+    });
+    await worker.evaluate(
+      ({ id, url }) =>
+        chrome.tabs.sendMessage(id, { type: "reveal-page", url }),
+      { id: activeTabId, url: `${base}/feed` },
+    );
+    await page.waitForFunction(
+      () => !document.querySelector("[data-novice='blur']"),
+    );
+    await page.reload();
+    await page.waitForSelector("#trailer[data-novice='blur']", {
+      state: "attached",
+    });
+    assert.equal(
+      await page.evaluate(() => sessionStorage.getItem("novice:revealed")),
+      null,
+      "page reveals do not become individual permanent reveals",
+    );
+    await worker.evaluate(
+      ({ id, url }) =>
+        chrome.tabs.sendMessage(id, { type: "reveal-page", url }),
+      { id: activeTabId, url: `${base}/feed` },
+    );
+    await page.waitForFunction(
+      () => !document.querySelector("[data-novice='blur']"),
+    );
+    await page.goto(`${base}/feed/different-document`);
+    await page.waitForSelector("#trailer[data-novice='blur']", {
+      state: "attached",
+    });
+    await page.goBack();
+    await page.waitForSelector("#trailer[data-novice='blur']", {
+      state: "attached",
+    });
+  } finally {
+    await Promise.all([page.close(), other.close()]);
+    await context.unroute(embeddedUrl);
+  }
+});
+
+test("temporary reveal restores hidden items and the prior Shorts audio state", async () => {
+  const page = await openShorts();
+  try {
+    await page.waitForFunction(
+      () => document.querySelector("#first video").muted,
+    );
+    await setSettings({ style: "hide" });
+    await page.waitForSelector("#first[data-novice='hide']", {
+      state: "attached",
+    });
+    await page.bringToFront();
+    const tabId = await worker.evaluate(
+      async () =>
+        (await chrome.tabs.query({ active: true, currentWindow: true }))[0].id,
+    );
+    await worker.evaluate(
+      ({ id, url }) =>
+        chrome.tabs.sendMessage(id, { type: "reveal-page", url }),
+      { id: tabId, url: page.url() },
+    );
+    await page.waitForFunction(
+      () =>
+        !document.querySelector("[data-novice='blur'],[data-novice='hide']"),
+    );
+    assert.equal(
+      await page.$eval("#first video", (video) => video.muted),
+      false,
+    );
+    assert.equal(
+      await page.$eval("#premuted video", (video) => video.muted),
+      true,
+    );
+    await setSettings({ style: "blur" });
+    assert.equal(
+      await stateOf(page, "first"),
+      "visible",
+      "settings changes do not end the temporary reveal",
+    );
+    await page.reload();
+    await page.waitForSelector("#first[data-novice='blur']", {
+      state: "attached",
+    });
+    await page.waitForFunction(
+      () => document.querySelector("#first video").muted,
+    );
+  } finally {
+    await setSettings({ style: "blur" });
+    await page.close();
+  }
+});

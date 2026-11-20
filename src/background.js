@@ -1,6 +1,8 @@
 import { ext } from "./settings.js";
+import { registerContextMenu } from "./context-menu.js";
 
 const BADGE_COLOR = "#ff3d9a";
+registerContextMenu(ext);
 
 ext.runtime.onInstalled.addListener(async ({ reason }) => {
   if (reason !== "install") return;
@@ -29,8 +31,14 @@ ext.runtime.onMessage.addListener((message, sender, sendResponse) => {
   const tabId = sender.tab?.id;
   if (tabId === undefined) return;
 
-  if (message.type === "page-url") {
-    sendResponse(sender.tab.url ?? null);
+  if (message.type === "page-context") {
+    ext.tabs
+      .sendMessage(tabId, { type: "page-context" }, { frameId: 0 })
+      .then(sendResponse)
+      .catch(() =>
+        sendResponse({ url: sender.tab.url, temporarilyRevealed: false }),
+      );
+    return true;
   } else if (message.type === "blocked-count") {
     ext.action.setBadgeBackgroundColor({ tabId, color: BADGE_COLOR });
     ext.action.setBadgeText({

@@ -12,6 +12,8 @@ Modified on **2026-11-19**: renamed the GitHub repository to `96dot/spoiler-filt
 
 **Update v1.3.6 — 2026-11-20:** removed the page-wide GTA warning overlay, its title replacement, scroll lock, media pausing, and page-wide reveal exemptions. Individual spoiler filtering, click-to-reveal, and Shorts muting remain available. Updated navigation, page controls, and legacy-session regression coverage.
 
+**Update v1.3.7 — 2026-11-20:** added a localized right-click action to temporarily reveal all filtered content on the current page, including embedded frames and later-loaded items. Temporary reveals expire on reload or navigation without changing saved exclusions or individual reveal records.
+
 The software, including these modifications and the new icon, is distributed under **GNU GPL version 3 only (SPDX: GPL-3.0-only)**. The complete, unmodified license text is in [LICENSE](LICENSE).
 
 This program is distributed in the hope that it will be useful, but **WITHOUT ANY WARRANTY**; without even the implied warranty of **MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE**. See the GNU General Public License for details.

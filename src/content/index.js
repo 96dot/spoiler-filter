@@ -23,6 +23,7 @@ const blocker = createBlocker(host, reveals);
 let settings = DEFAULT_SETTINGS;
 let topUrl = location.href;
 let topUrlKnown = isTopFrame;
+let temporarilyRevealedUrl = null;
 let keywords = null;
 let lastTitle = document.title;
 let lastHref = location.href;
@@ -30,10 +31,13 @@ let lastSubjects = "";
 let lastReported = -1;
 let appliedConfig = "off";
 
+const pageUrl = () => (isTopFrame ? location.href : topUrl);
+
 function isActive() {
   return (
     blocksOn(settings, location.href) &&
-    (isTopFrame || blocksOn(settings, topUrl))
+    (isTopFrame || blocksOn(settings, topUrl)) &&
+    temporarilyRevealedUrl !== pageUrl()
   );
 }
 
@@ -73,6 +77,7 @@ function report() {
 }
 
 function sync() {
+  if (temporarilyRevealedUrl !== pageUrl()) temporarilyRevealedUrl = null;
   lastTitle = document.title;
   const active = isActive();
   const aboutGta = active && isAboutGta();
@@ -113,6 +118,7 @@ function handleMutations(records) {
 
 function revealOnActivate(event) {
   if (!event.isTrusted) return;
+  if (event.button === 2) return;
   const unit = blocker.blurredUnitAt(event.target);
   if (!unit) return;
   if (event.type === "keydown" && event.key !== "Enter" && event.key !== " ") {
@@ -145,6 +151,12 @@ function start() {
   });
 
   window.addEventListener("popstate", () => handleMutations([]));
+  window.addEventListener("pagehide", () => {
+    temporarilyRevealedUrl = null;
+  });
+  window.addEventListener("pageshow", (event) => {
+    if (event.persisted) sync();
+  });
 
   for (const type of GUARDED_EVENTS) {
     window.addEventListener(type, revealOnActivate, true);
@@ -159,10 +171,14 @@ function start() {
   Promise.all([
     getSettings(),
     isTopFrame
-      ? Promise.resolve(location.href)
-      : ext.runtime.sendMessage({ type: "page-url" }).catch(() => null),
-  ]).then(([next, siteUrl]) => {
-    if (!topUrlKnown) topUrl = siteUrl || location.href;
+      ? Promise.resolve(null)
+      : ext.runtime.sendMessage({ type: "page-context" }).catch(() => null),
+  ]).then(([next, context]) => {
+    if (!topUrlKnown) {
+      topUrl = context?.url || location.href;
+      topUrlKnown = Boolean(context?.url);
+      if (context?.temporarilyRevealed) temporarilyRevealedUrl = topUrl;
+    }
     apply(next);
   });
   onSettingsChange(apply);
@@ -171,12 +187,31 @@ function start() {
     if (message.type === "page-url-changed") {
       topUrl = message.url;
       topUrlKnown = true;
+      if (temporarilyRevealedUrl !== message.url) temporarilyRevealedUrl = null;
       sync();
+    } else if (message.type === "reveal-page") {
+      if (
+        isTopFrame
+          ? message.url !== location.href
+          : topUrlKnown && message.url !== topUrl
+      )
+        return;
+      topUrl = message.url;
+      topUrlKnown = true;
+      temporarilyRevealedUrl = message.url;
+      sync();
+      sendResponse({ revealed: true });
+    } else if (message.type === "page-context" && isTopFrame) {
+      sendResponse({
+        url: location.href,
+        temporarilyRevealed: temporarilyRevealedUrl === location.href,
+      });
     } else if (message.type === "status" && isTopFrame) {
       sendResponse({
         host,
         url: location.href,
         count: count(),
+        temporarilyRevealed: temporarilyRevealedUrl === location.href,
       });
     }
   });
