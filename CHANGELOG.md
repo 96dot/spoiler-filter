@@ -1,3 +1,9 @@
+## [1.3.2](https://github.com/kpulka247/novice/compare/v1.3.1...v1.3.2) (2026-11-20)
+
+### Bug Fixes
+
+* **content:** keep a table's columns when a row is blurred ([9870ca6](https://github.com/kpulka247/novice/commit/9870ca6b49513fa65cd3e78277dd032e0baa50ae))
+
 ## [1.3.1](https://github.com/kpulka247/novice/compare/v1.3.0...v1.3.1) (2026-11-19)
 
 ### Bug Fixes
