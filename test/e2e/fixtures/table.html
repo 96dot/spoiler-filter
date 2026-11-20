@@ -1,0 +1,50 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <title>Files</title>
+    <style>
+      table {
+        width: 600px;
+        table-layout: fixed;
+        border-collapse: collapse;
+      }
+      td {
+        padding: 0;
+        height: 40px;
+      }
+      .mobile {
+        width: 0;
+        display: none;
+      }
+    </style>
+  </head>
+  <body>
+    <table>
+      <colgroup>
+        <col class="mobile" />
+        <col style="width: 200px" />
+        <col style="width: 300px" />
+        <col style="width: 100px" />
+      </colgroup>
+      <tbody>
+        <tr id="plain">
+          <td class="mobile"></td>
+          <td id="plain-name"><a href="/docs">docs</a></td>
+          <td><a href="/c/1" title="docs: fix a typo">docs: fix a typo</a></td>
+          <td>2 days ago</td>
+        </tr>
+        <tr id="spoiler">
+          <td class="mobile"></td>
+          <td id="spoiler-name"><a href="/src">src</a></td>
+          <td>
+            <a href="/c/2" title="feat: add places&#10;&#10;Leonida's places"
+              >feat: add places</a
+            >
+          </td>
+          <td>last week</td>
+        </tr>
+      </tbody>
+    </table>
+  </body>
+</html>

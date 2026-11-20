@@ -1,0 +1,27 @@
+name: PR title
+
+on:
+  pull_request:
+    branches:
+      - dev
+    types: [opened, edited, reopened]
+
+permissions: {}
+
+jobs:
+  title:
+    name: Check the PR title
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Check the Conventional Commits format
+        env:
+          TITLE: ${{ github.event.pull_request.title }}
+        run: |
+          pattern='^(feat|fix|perf|refactor|docs|test|ci|build|chore|style|revert)(\([a-z0-9-]+\))?!?: [^ ].*[^.]$'
+          if [[ "$TITLE" =~ $pattern ]]; then
+            echo "The title follows Conventional Commits."
+          else
+            echo "::error::Rename the pull request to '<type>: <description>', for example 'fix: hide reddit search cards'. CONTRIBUTING.md lists the types."
+            exit 1
+          fi

@@ -61,7 +61,7 @@ Click your browser's store and add the extension. For 🦁 Brave, 🔴 Opera, or
 
 Browse as usual. Hover a blurred card to see which words matched, and click it to see the card. Click the toolbar icon to switch between blur and remove, turn strict mode off, add your own keywords, or turn the extension off for one site.
 
-Found a spoiler that got through? [Open an issue](https://github.com/kpulka247/novice/issues) with the page address, but leave the spoiler itself out.
+Found a spoiler that got through? [Open a spoiler report](https://github.com/kpulka247/novice/issues/new?template=spoiler.yml) with the page address, but leave the spoiler itself out.
 
 <details>
 <summary>Known limitations</summary>

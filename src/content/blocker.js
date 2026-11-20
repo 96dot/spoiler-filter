@@ -20,6 +20,7 @@ const TERM = "data-novice-term";
 const TERM_WIDTH = "--novice-term-width";
 const SIZE = "data-novice-size";
 const ADDED = "data-novice-added";
+const CHIP = "data-novice-chip";
 const OFFSET_X = "--novice-x";
 const OFFSET_Y = "--novice-y";
 const EXPANDED = "data-novice-expanded";
@@ -123,6 +124,21 @@ export function termLabel(term) {
   return `“${short}”`;
 }
 
+// Chromium lays out the pseudo-elements of a table row as extra columns, even
+// when they are absolutely positioned, so a row shows its chip on a cell.
+function pickChipHost(unit) {
+  if (unit.tagName !== "TR") return unit;
+  const cells = [...unit.cells];
+  return (
+    cells.find((cell) => cell.getBoundingClientRect().width > 0) ??
+    cells[0] ??
+    null
+  );
+}
+
+const chipHostOf = (unit) =>
+  unit.hasAttribute(CHIP) ? unit : unit.querySelector(`:scope > [${CHIP}]`);
+
 const isGta6 = (match) => match?.level === "gta6";
 const stronger = (a, b) => (isGta6(a) ? a : isGta6(b) ? b : (a ?? b));
 
@@ -162,11 +178,12 @@ export function createBlocker(host, reveals) {
 
   function label(unit, { level, term }) {
     unit.setAttribute(LEVEL, level);
-    if (unit.getAttribute(STATE) === "blur") {
+    const host = chipHostOf(unit);
+    if (unit.getAttribute(STATE) === "blur" && host) {
       const reason = termLabel(term);
-      unit.setAttribute(TAG, TAGS[level]);
-      unit.setAttribute(SHOW_LABEL, SHOW);
-      unit.setAttribute(TERM, reason);
+      host.setAttribute(TAG, TAGS[level]);
+      host.setAttribute(SHOW_LABEL, SHOW);
+      host.setAttribute(TERM, reason);
       unit.style.setProperty(TERM_WIDTH, chipWidth(reason));
     }
   }
@@ -178,9 +195,15 @@ export function createBlocker(host, reveals) {
         installChipWidths();
         chipWidthsInstalled = true;
       }
-      sizes.observe(unit);
-      if (getComputedStyle(unit).position === "static") {
-        unit.setAttribute(ANCHOR, "");
+      const host = pickChipHost(unit);
+      if (host) {
+        // A cell keeps a note to drop the style attribute the chip gave it.
+        const addsStyle = host !== unit && !host.hasAttribute("style");
+        host.setAttribute(CHIP, addsStyle ? "style" : "");
+        sizes.observe(host);
+        if (getComputedStyle(host).position === "static") {
+          host.setAttribute(ANCHOR, "");
+        }
       }
       const added = [...Object.keys(ACCESSIBLE), "style"].filter(
         (a) => !unit.hasAttribute(a),
@@ -216,14 +239,19 @@ export function createBlocker(host, reveals) {
   }
 
   function clear(unit, nextState) {
-    sizes.unobserve(unit);
-    unit.style.removeProperty(OFFSET_X);
-    unit.style.removeProperty(OFFSET_Y);
+    const host = chipHostOf(unit);
+    if (host) {
+      sizes.unobserve(host);
+      host.style.removeProperty(OFFSET_X);
+      host.style.removeProperty(OFFSET_Y);
+      if (host.getAttribute(CHIP) === "style") host.removeAttribute("style");
+      [CHIP, ANCHOR, TAG, SHOW_LABEL, TERM, SIZE].forEach((a) =>
+        host.removeAttribute(a),
+      );
+    }
     unit.style.removeProperty(TERM_WIDTH);
     const added = unit.getAttribute(ADDED)?.split(" ").filter(Boolean) ?? [];
-    [...added, ANCHOR, TAG, SHOW_LABEL, TERM, SIZE, ADDED, LEVEL].forEach((a) =>
-      unit.removeAttribute(a),
-    );
+    [...added, ADDED, LEVEL].forEach((a) => unit.removeAttribute(a));
     if (nextState) unit.setAttribute(STATE, nextState);
     else unit.removeAttribute(STATE);
   }

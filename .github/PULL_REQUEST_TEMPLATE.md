@@ -1,31 +1,19 @@
-> **IMPORTANT:** Please target your PR against the `dev` branch, not `main`.
+> [!IMPORTANT]
+> Target the `dev` branch, not `main`. Keep spoilers out of the text and the screenshots.
 
-## Description
+## What and why
 
-<!-- Please describe clearly what your PR does and why it is needed. -->
+<!-- What does this pull request change, and why? If it fixes an issue, write "Closes #123". -->
 
-<!-- If it fixes an open issue, add "Closes #<issue_number>" below to automatically close it. -->
+## How to test
 
-## Testing
+<!-- Steps that a reviewer can follow, and what they should see. Add screenshots for visible changes. -->
 
-<!-- Please describe how you tested your changes. -->
-
-<!-- Provide clear, step-by-step instructions so the reviewer can easily test and verify your changes. -->
-
-**Steps to test:**
-
-<!-- To check a box below, replace [ ] with [x]. -->
-
-- [ ] Checked in **Google Chrome**
-- [ ] Checked in **Mozilla Firefox**
-- [ ] Verified there are no new console errors in Developer Tools
+1.
 
 ## Checklist
 
-<!-- To check a box, replace [ ] with [x]. -->
-
-- [ ] I have read the [CONTRIBUTING.md](./CONTRIBUTING.md).
-- [ ] I agree that this contribution is covered by the [LICENSE](./LICENSE).
-- [ ] The **title of this Pull Request** follows Conventional Commits (e.g. `fix: hide reddit search cards`, `feat: block spoilers on threads`).
-- [ ] `pnpm test` and `pnpm test:e2e` pass.
-- [ ] I have run Prettier to format my code (`pnpm dev` or format on save).
+- [ ] The title follows [the naming rules](https://github.com/kpulka247/novice/blob/dev/CONTRIBUTING.md#name-your-pull-request), for example `fix: hide reddit search cards`.
+- [ ] I tested the change in Chrome and Firefox, and the console shows no new errors.
+- [ ] `pnpm format`, `pnpm test`, `pnpm test:e2e`, and `pnpm lint:firefox` pass.
+- [ ] I agree to license this contribution under [GPL-3.0](https://github.com/kpulka247/novice/blob/main/LICENSE).

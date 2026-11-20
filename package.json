@@ -11,6 +11,8 @@
     "test": "node --test test/unit/*.test.js",
     "test:e2e": "webpack --mode development && node --test test/e2e/*.test.js",
     "lint:firefox": "web-ext lint --source-dir dist/novice-firefox",
+    "format": "prettier --write .",
+    "format:check": "prettier --check .",
     "screenshots": "webpack --mode development && node scripts/capture-screenshots.js"
   },
   "devDependencies": {
@@ -25,6 +27,7 @@
     "css-minimizer-webpack-plugin": "^7.0.2",
     "mini-css-extract-plugin": "^2.9.2",
     "playwright": "^1.52.0",
+    "prettier": "3.9.10",
     "semantic-release": "^24.2.3",
     "sharp": "^0.34.1",
     "web-ext": "^8.6.0",

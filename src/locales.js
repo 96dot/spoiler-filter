@@ -447,7 +447,8 @@ export const MESSAGES = {
     reportIssue: "الإبلاغ عن مشكلة",
     support: "ادعم المشروع",
     shieldTitle: "حرق أحداث أمامك",
-    shieldText: "هذه الصفحة عن GTA VI. ستبقى مطموسة حتى تلعب دون أن تعرف شيئًا.",
+    shieldText:
+      "هذه الصفحة عن GTA VI. ستبقى مطموسة حتى تلعب دون أن تعرف شيئًا.",
     shieldBack: "أعدني",
     shieldShow: "اعرضها على أي حال",
     show: "اعرض",
