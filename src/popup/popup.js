@@ -1,16 +1,20 @@
 import coffee from "../assets/coffee.svg";
 import logo from "../assets/logo.svg";
+import { mergeKeywords, sameKeyword } from "../keywords.js";
 import {
+  allowedDomainFor,
   ext,
   getSettings,
   isSiteAllowed,
+  normalizeDomain,
   onSettingsChange,
   setSiteAllowed,
   updateSettings,
 } from "../settings.js";
 
 const $ = (id) => document.getElementById(id);
-const t = (key) => ext.i18n.getMessage(key);
+const t = (key, substitutions) => ext.i18n.getMessage(key, substitutions);
+const MAX_IMPORT_BYTES = 1024 * 1024;
 
 function translate() {
   document.documentElement.lang = ext.i18n.getUILanguage();
@@ -23,9 +27,6 @@ function translate() {
   $("version").textContent = `v${ext.runtime.getManifest().version}`;
   $("keyword-input").placeholder = t("keywordPlaceholder");
 }
-
-const sameKeyword = (a, b) =>
-  a.localeCompare(b, undefined, { sensitivity: "accent" }) === 0;
 
 function renderKeywords(settings) {
   const list = $("keyword-list");
@@ -52,6 +53,37 @@ function renderKeywords(settings) {
   list.hidden = settings.keywords.length === 0;
   $("keyword-input").disabled = !settings.enabled;
   $("keyword-add").disabled = !settings.enabled;
+  ["import-input", "import-file", "import-add"].forEach((id) => {
+    $(id).disabled = !settings.enabled;
+  });
+}
+
+function renderDomains(settings) {
+  const list = $("domain-list");
+  list.replaceChildren(
+    ...settings.allowedSites.map((domain) => {
+      const item = document.createElement("li");
+      const text = document.createElement("span");
+      const remove = document.createElement("button");
+      text.textContent = domain;
+      remove.type = "button";
+      remove.textContent = "×";
+      remove.title = t("keywordRemove");
+      remove.setAttribute("aria-label", `${t("keywordRemove")}: ${domain}`);
+      remove.disabled = !settings.enabled;
+      remove.addEventListener("click", async () => {
+        const current = await getSettings();
+        await updateSettings({
+          allowedSites: current.allowedSites.filter((site) => site !== domain),
+        });
+      });
+      item.append(text, remove);
+      return item;
+    }),
+  );
+  list.hidden = settings.allowedSites.length === 0;
+  $("domain-input").disabled = !settings.enabled;
+  $("domain-add").disabled = !settings.enabled;
 }
 
 async function pageStatus() {
@@ -76,6 +108,7 @@ function render(settings, status) {
     radio.disabled = !settings.enabled;
   });
   renderKeywords(settings);
+  renderDomains(settings);
 
   $("site-row").hidden = !status;
   if (!status) {
@@ -85,9 +118,15 @@ function render(settings, status) {
   }
 
   const siteBlocked = !isSiteAllowed(settings, status.host);
+  const inherited =
+    !siteBlocked && allowedDomainFor(settings, status.host) !== status.host;
   $("site").checked = siteBlocked;
-  $("site").disabled = !settings.enabled;
-  $("site-host").textContent = siteBlocked ? status.host : t("siteAllowed");
+  $("site").disabled = !settings.enabled || inherited;
+  $("site-host").textContent = inherited
+    ? t("siteExcludedBy", [allowedDomainFor(settings, status.host)])
+    : siteBlocked
+      ? status.host
+      : t("siteAllowed");
   $("count").textContent = status.count;
   $("count-label").textContent = t(
     status.shielded ? "countLabelPage" : "countLabel",
@@ -112,14 +151,79 @@ async function init() {
   $("site").addEventListener("change", (e) => {
     if (status) setSiteAllowed(status.host, !e.target.checked);
   });
-  $("keyword-form").addEventListener("submit", (e) => {
+  $("keyword-form").addEventListener("submit", async (e) => {
     e.preventDefault();
     const keyword = $("keyword-input").value.trim().replace(/\s+/g, " ");
     $("keyword-input").value = "";
-    if (!keyword || settings.keywords.some((k) => sameKeyword(k, keyword))) {
+    const current = await getSettings();
+    if (!keyword || current.keywords.some((k) => sameKeyword(k, keyword))) {
       return;
     }
-    updateSettings({ keywords: [...settings.keywords, keyword] });
+    await updateSettings({ keywords: [...current.keywords, keyword] });
+  });
+
+  $("import-file").addEventListener("change", async (e) => {
+    const [file] = e.target.files;
+    if (!file) return;
+    $("import-status").textContent = "";
+    try {
+      if (file.size > MAX_IMPORT_BYTES) {
+        $("import-status").textContent = t("importTooLarge");
+        return;
+      }
+      $("import-input").value = await file.text();
+    } catch {
+      $("import-status").textContent = t("importError");
+    } finally {
+      e.target.value = "";
+    }
+  });
+
+  $("import-form").addEventListener("submit", async (e) => {
+    e.preventDefault();
+    const text = $("import-input").value;
+    if (new Blob([text]).size > MAX_IMPORT_BYTES) {
+      $("import-status").textContent = t("importTooLarge");
+      return;
+    }
+    $("import-add").disabled = true;
+    try {
+      const current = await getSettings();
+      const { keywords, added, skipped } = mergeKeywords(
+        current.keywords,
+        text,
+      );
+      if (added) await updateSettings({ keywords });
+      $("import-status").textContent = t("importResult", [
+        String(added),
+        String(skipped),
+      ]);
+      $("import-input").value = "";
+    } catch {
+      $("import-status").textContent = t("importError");
+    } finally {
+      $("import-add").disabled = !settings.enabled;
+    }
+  });
+
+  $("domain-form").addEventListener("submit", async (e) => {
+    e.preventDefault();
+    const domain = normalizeDomain($("domain-input").value);
+    if (!domain) {
+      $("domain-status").textContent = t("domainInvalid");
+      return;
+    }
+    try {
+      await setSiteAllowed(domain, true);
+      $("domain-input").value = "";
+      $("domain-status").textContent = "";
+    } catch {
+      $("domain-status").textContent = t("saveError");
+    }
+  });
+
+  $("domain-input").addEventListener("input", () => {
+    $("domain-status").textContent = "";
   });
 
   onSettingsChange(async (next) => {

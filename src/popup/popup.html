@@ -58,13 +58,18 @@
 
       <section class="keywords">
         <div class="row-text">
-          <span class="row-title" data-i18n="keywords"></span>
+          <span
+            class="row-title"
+            id="keywords-title"
+            data-i18n="keywords"
+          ></span>
           <span class="row-hint" data-i18n="keywordsHint"></span>
         </div>
         <form class="keyword-form" id="keyword-form">
           <input
             type="text"
             id="keyword-input"
+            aria-labelledby="keywords-title"
             maxlength="60"
             autocomplete="off"
             spellcheck="false"
@@ -76,6 +81,68 @@
           ></button>
         </form>
         <ul class="chips" id="keyword-list"></ul>
+        <details>
+          <summary data-i18n="keywordImport"></summary>
+          <form class="import-form" id="import-form">
+            <label
+              class="row-hint"
+              for="import-input"
+              data-i18n="importHint"
+            ></label>
+            <textarea id="import-input" rows="4" spellcheck="false"></textarea>
+            <label
+              class="row-hint"
+              for="import-file"
+              data-i18n="importFile"
+            ></label>
+            <input type="file" id="import-file" accept=".txt,text/plain" />
+            <button
+              type="submit"
+              id="import-add"
+              data-i18n="keywordImport"
+            ></button>
+          </form>
+        </details>
+        <p
+          class="row-hint feedback"
+          id="import-status"
+          role="status"
+          aria-live="polite"
+        ></p>
+      </section>
+
+      <section class="keywords">
+        <div class="row-text">
+          <label
+            class="row-title"
+            for="domain-input"
+            data-i18n="excludedSites"
+          ></label>
+          <span
+            class="row-hint"
+            id="domain-hint"
+            data-i18n="excludedSitesHint"
+          ></span>
+        </div>
+        <form class="keyword-form" id="domain-form">
+          <input
+            type="text"
+            id="domain-input"
+            placeholder="example.com"
+            aria-describedby="domain-hint"
+            autocomplete="off"
+            spellcheck="false"
+            required
+          />
+          <button type="submit" id="domain-add" data-i18n="keywordAdd"></button>
+        </form>
+        <ul class="chips" id="domain-list"></ul>
+        <p
+          class="row-hint feedback"
+          id="domain-status"
+          role="status"
+          aria-live="polite"
+        ></p>
       </section>
     </main>
 

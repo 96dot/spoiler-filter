@@ -25,11 +25,17 @@ ext.runtime.onInstalled.addListener(async ({ reason }) => {
   }
 });
 
-ext.runtime.onMessage.addListener((message, sender) => {
+ext.runtime.onMessage.addListener((message, sender, sendResponse) => {
   const tabId = sender.tab?.id;
   if (tabId === undefined) return;
 
-  if (message.type === "blocked-count") {
+  if (message.type === "site-host") {
+    try {
+      sendResponse(new URL(sender.tab.url).hostname);
+    } catch {
+      sendResponse(null);
+    }
+  } else if (message.type === "blocked-count") {
     ext.action.setBadgeBackgroundColor({ tabId, color: BADGE_COLOR });
     ext.action.setBadgeText({
       tabId,

@@ -548,3 +548,184 @@ test("covers a stream whose game is GTA VI, though the page title never says so"
   assert.equal(await page.title(), "Spoiler ahead");
   await page.close();
 });
+
+test("popup batch imports pasted and file keywords without replacing saved words", async () => {
+  await setSettings({ keywords: ["saved"], allowedSites: [], enabled: true });
+  const feed = await openFeed();
+  const popup = await context.newPage();
+  try {
+    await popup.goto(`chrome-extension://${extensionId}/popup.html`);
+    await popup.click("summary");
+    await popup.fill(
+      "#import-input",
+      ` carbonara, new   phrase\r\nCARBONARA\nsaved\n${"x".repeat(61)}`,
+    );
+    await popup.click("#import-add");
+    await popup.waitForFunction(() =>
+      document
+        .getElementById("import-status")
+        .textContent.includes("Added: 2. Skipped"),
+    );
+    assert.match(
+      await popup.textContent("#import-status"),
+      /Added: 2\. Skipped.*: 3\./,
+    );
+    await feed.waitForSelector("#pasta[data-novice='blur']", {
+      state: "attached",
+    });
+    assert.equal(await popup.inputValue("#import-input"), "");
+    await popup.setInputFiles("#import-file", {
+      name: "words.txt",
+      mimeType: "text/plain",
+      buffer: Buffer.from("\uFEFFanother phrase\nNEW phrase\r\nfinal term"),
+    });
+    await popup.waitForFunction(() =>
+      document.getElementById("import-input").value.includes("final term"),
+    );
+    await popup.click("#import-add");
+    await popup.waitForFunction(() =>
+      document.getElementById("import-status").textContent.endsWith(": 1."),
+    );
+    assert.deepEqual(
+      await worker.evaluate(() =>
+        chrome.storage.local.get("keywords").then((s) => s.keywords),
+      ),
+      ["saved", "carbonara", "new phrase", "another phrase", "final term"],
+    );
+    // Oversized files must leave both the draft and stored keywords intact.
+    await popup.fill("#import-input", "keep draft");
+    await popup.setInputFiles("#import-file", {
+      name: "large.txt",
+      mimeType: "text/plain",
+      buffer: Buffer.alloc(1024 * 1024 + 1, "x"),
+    });
+    await popup.waitForFunction(() =>
+      document
+        .getElementById("import-status")
+        .textContent.includes("too large"),
+    );
+    assert.equal(await popup.inputValue("#import-input"), "keep draft");
+    await popup.reload();
+    await popup.waitForSelector("#keyword-list li:nth-child(5)");
+    assert.equal(await popup.locator("#keyword-list li").count(), 5);
+  } finally {
+    await popup.close();
+    await feed.close();
+    await setSettings({ keywords: [] });
+  }
+});
+
+test("popup manages domain exclusions and unmutes open pages including embedded frames", async () => {
+  await setSettings({
+    keywords: ["carbonara"],
+    allowedSites: [],
+    enabled: true,
+  });
+  await context.route("https://**example.test/**", async (route) =>
+    route.fulfill({
+      contentType: "text/html",
+      body: await readFile(path.join(here, "fixtures", "feed.html")),
+    }),
+  );
+  const feed = await openFeed();
+  const excluded = await context.newPage();
+  const lookalike = await context.newPage();
+  const covered = await context.newPage();
+  const popup = await context.newPage();
+  try {
+    await excluded.goto("https://news.example.test/feed");
+    await excluded.waitForSelector("#trailer[data-novice='blur']", {
+      state: "attached",
+    });
+    await excluded.evaluate(() => {
+      const iframe = document.createElement("iframe");
+      iframe.src = "https://embedded.otherexample.test/feed";
+      document.body.append(iframe);
+    });
+    const frame = await excluded.waitForEvent("framenavigated", {
+      predicate: (f) => f.url().includes("embedded.otherexample.test"),
+    });
+    await frame.waitForSelector("#trailer[data-novice='blur']", {
+      state: "attached",
+    });
+    await lookalike.goto("https://notexample.test/feed");
+    await lookalike.waitForSelector("#trailer[data-novice='blur']", {
+      state: "attached",
+    });
+    await covered.goto(`${base}/gta-6`);
+    await covered.waitForSelector("novice-shield");
+    const tabId = await worker.evaluate(async () => {
+      const [tab] = await chrome.tabs.query({
+        url: "https://news.example.test/*",
+      });
+      return tab.id;
+    });
+    await popup.addInitScript((id) => {
+      chrome.tabs.query = async () => [{ id }];
+    }, tabId);
+    await popup.goto(`chrome-extension://${extensionId}/popup.html`);
+    await popup.fill("#domain-input", "not a domain");
+    await popup.click("#domain-add");
+    await popup.waitForFunction(() =>
+      document
+        .getElementById("domain-status")
+        .textContent.includes("valid domain"),
+    );
+    await popup.fill("#domain-input", "https://EXAMPLE.test:443/path");
+    await popup.click("#domain-add");
+    await popup.waitForSelector("#domain-list li");
+    assert.equal(await popup.textContent("#domain-list span"), "example.test");
+    await popup.waitForFunction(() => document.getElementById("site").disabled);
+    assert.equal(await popup.isChecked("#site"), false);
+    assert.match(
+      await popup.textContent("#site-host"),
+      /Excluded by example.test/,
+    );
+    await excluded.waitForFunction(
+      () => !document.querySelector("[data-novice='blur']"),
+    );
+    await frame.waitForFunction(
+      () => !document.querySelector("[data-novice='blur']"),
+    );
+    assert.equal(await stateOf(excluded, "pasta"), "visible");
+    assert.equal(await stateOf(lookalike, "trailer"), "blur");
+    await popup.fill("#domain-input", "example.test");
+    await popup.click("#domain-add");
+    await popup.fill("#domain-input", "127.0.0.1");
+    await popup.click("#domain-add");
+    await popup.waitForSelector("#domain-list li:nth-child(2)");
+    await covered.waitForSelector("novice-shield", { state: "detached" });
+    await feed.waitForFunction(
+      () => !document.querySelector("[data-novice='blur']"),
+    );
+    await popup.reload();
+    await popup.waitForSelector("#domain-list li:nth-child(2)");
+    assert.equal(await popup.locator("#domain-list li").count(), 2);
+    await popup
+      .locator("#domain-list li")
+      .filter({ hasText: "example.test" })
+      .getByRole("button")
+      .click();
+    await excluded.waitForSelector("#trailer[data-novice='blur']", {
+      state: "attached",
+    });
+    await frame.waitForSelector("#trailer[data-novice='blur']", {
+      state: "attached",
+    });
+    await popup.locator("#domain-list button").click();
+    await covered.waitForSelector("novice-shield");
+    await feed.waitForSelector("#pasta[data-novice='blur']", {
+      state: "attached",
+    });
+  } finally {
+    await Promise.all([
+      feed.close(),
+      excluded.close(),
+      lookalike.close(),
+      covered.close(),
+      popup.close(),
+    ]);
+    await context.unroute("https://**example.test/**");
+    await setSettings({ keywords: [], allowedSites: [] });
+  }
+});

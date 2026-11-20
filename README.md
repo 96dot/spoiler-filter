@@ -26,7 +26,8 @@ Play GTA VI knowing nothing about it. NoVice blurs every trailer, leak, post, an
 - 🌫️ **Blur or remove.** Spoilers blur in place with a small tag. Hover to see which words matched, click to see the post, or switch to removing them.
 - 🧠 **Knows the game.** Every spelling of the title in every script, the characters, the places of Leonida, and Rockstar's own channels.
 - 🎯 **Strict mode.** Also catches GTA and Rockstar posts, insiders, leakers, GTA creators and roleplay servers from many countries, and posts that hide GTA VI behind "See more".
-- ✍️ **Your own keywords.** Add any word or phrase, and it is blocked everywhere, like GTA VI.
+- ✍️ **Your own keywords.** Add any word or phrase, or import a list by pasting text or choosing a text file.
+- 🏡 **Site exclusions.** Keep selected domains and their subdomains clear, including embedded frames. Manage exclusions from the popup.
 - 🌅 **Covers whole pages.** Trailers, reviews, and wikis about GTA VI get a see-through cover.
 - 🌍 **20 languages.** The popup and labels follow your browser language.
 - 🔒 **Private.** Everything runs on your device. No data leaves it.
@@ -60,6 +61,10 @@ Click your browser's store and add the extension. For 🦁 Brave, 🔴 Opera, or
 ## Usage
 
 Browse as usual. Hover a blurred card to see which words matched, and click it to see the card. Click the toolbar icon to switch between blur and remove, turn strict mode off, add your own keywords, or turn the extension off for one site.
+
+To add a list of mute words, open **Custom keywords → Import keywords**. Paste words or phrases separated by commas or new lines, or choose a `.txt` file, then click **Import keywords**. Existing keywords are kept. Blank entries are ignored; duplicates (ignoring case) and entries longer than 60 characters are skipped. Imports accept up to 1 MB of text and show how many entries were added or skipped.
+
+Under **Excluded sites**, add a domain such as `example.com` or paste a website URL. Only its hostname is saved, so `https://example.com/news` excludes the whole domain. An exclusion covers that domain and its subdomains, including all embedded frames on excluded pages. For a narrower exception, add `news.example.com` instead. Remove a domain with its **×** button to restore protection immediately. The current-site switch uses the same exclusion list; when a parent domain excludes the current site, remove that parent from the list to enable blocking here.
 
 Found a spoiler that got through? [Open a spoiler report](https://github.com/kpulka247/novice/issues/new?template=spoiler.yml) with the page address, but leave the spoiler itself out.
 

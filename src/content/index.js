@@ -22,6 +22,7 @@ const reveals = createReveals();
 const blocker = createBlocker(host, reveals);
 
 let settings = DEFAULT_SETTINGS;
+let topHost = host;
 let keywords = null;
 const siteTitles = new Map();
 let lastHref = location.href;
@@ -41,7 +42,11 @@ const shield = createShield({
 });
 
 function isActive() {
-  return blocksOn(settings, host) && !reveals.hasPage(location.href);
+  return (
+    blocksOn(settings, host) &&
+    blocksOn(settings, topHost) &&
+    !reveals.hasPage(location.href)
+  );
 }
 
 const rules = () => ({ nameAllowed: isNovicePage(location.href) });
@@ -197,7 +202,15 @@ function start() {
     keywords = compileKeywords(next.keywords);
     sync();
   };
-  getSettings().then(apply);
+  Promise.all([
+    getSettings(),
+    isTopFrame
+      ? Promise.resolve(host)
+      : ext.runtime.sendMessage({ type: "site-host" }).catch(() => null),
+  ]).then(([next, siteHost]) => {
+    topHost = siteHost || host;
+    apply(next);
+  });
   onSettingsChange(apply);
 
   if (isTopFrame) {

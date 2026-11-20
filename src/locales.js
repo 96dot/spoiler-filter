@@ -2,6 +2,19 @@ export const DEFAULT_LOCALE = "en";
 
 export const MESSAGES = {
   en: {
+    keywordImport: "Import keywords",
+    importHint:
+      "Paste words or phrases, separated by commas or new lines. Maximum 60 characters per entry.",
+    importFile: "Or choose a text file (.txt, up to 1 MB)",
+    importResult: "Added: $1. Skipped (duplicates or over 60 characters): $2.",
+    importError: "Could not import keywords. Please try again.",
+    importTooLarge: "Import is too large. Use up to 1 MB of text.",
+    excludedSites: "Excluded sites",
+    excludedSitesHint:
+      "Never mute these domains or their subdomains. Enter a domain or website URL.",
+    siteExcludedBy: "Excluded by $1. Remove that domain below to block here.",
+    domainInvalid: "Enter a valid domain or HTTP(S) website URL.",
+    saveError: "Could not save settings. Please try again.",
     extName: "NoVice - Block GTA 6 Spoilers",
     extDescription:
       "Blurs GTA 6 trailers, leaks, videos, posts and story spoilers across the web so you go in blind. Not affiliated with Rockstar.",
@@ -35,6 +48,20 @@ export const MESSAGES = {
     shieldFound: "Matched:",
   },
   pl: {
+    keywordImport: "Importuj słowa",
+    importHint:
+      "Wklej słowa lub frazy oddzielone przecinkami lub nowymi wierszami. Maksymalnie 60 znaków na wpis.",
+    importFile: "Lub wybierz plik tekstowy (.txt, do 1 MB)",
+    importResult: "Dodano: $1. Pominięto (duplikaty lub ponad 60 znaków): $2.",
+    importError: "Nie udało się zaimportować słów. Spróbuj ponownie.",
+    importTooLarge: "Import jest zbyt duży. Użyj tekstu do 1 MB.",
+    excludedSites: "Wykluczone witryny",
+    excludedSitesHint:
+      "Nie blokuj tych domen ani ich subdomen. Wpisz domenę lub adres witryny.",
+    siteExcludedBy:
+      "Wykluczone przez $1. Usuń tę domenę poniżej, aby tutaj blokować.",
+    domainInvalid: "Wpisz prawidłową domenę lub adres witryny HTTP(S).",
+    saveError: "Nie udało się zapisać ustawień. Spróbuj ponownie.",
     extName: "NoVice - Block GTA 6 Spoilers",
     extDescription:
       "Rozmywa zwiastuny, przecieki, filmy, posty i spoilery fabuły GTA 6 w całym internecie. Nie jest powiązane z Rockstar.",
@@ -68,6 +95,23 @@ export const MESSAGES = {
     shieldFound: "Wykryto:",
   },
   de: {
+    keywordImport: "Begriffe importieren",
+    importHint:
+      "Wörter oder Sätze einfügen, getrennt durch Kommas oder Zeilenumbrüche. Höchstens 60 Zeichen pro Eintrag.",
+    importFile: "Oder eine Textdatei wählen (.txt, bis 1 MB)",
+    importResult:
+      "Hinzugefügt: $1. Übersprungen (Duplikate oder über 60 Zeichen): $2.",
+    importError:
+      "Begriffe konnten nicht importiert werden. Bitte erneut versuchen.",
+    importTooLarge: "Import zu groß. Maximal 1 MB Text verwenden.",
+    excludedSites: "Ausgeschlossene Websites",
+    excludedSitesHint:
+      "Diese Domains und ihre Subdomains nie blockieren. Domain oder Website-URL eingeben.",
+    siteExcludedBy:
+      "Durch $1 ausgeschlossen. Diese Domain unten entfernen, um hier zu blockieren.",
+    domainInvalid: "Eine gültige Domain oder HTTP(S)-Website-URL eingeben.",
+    saveError:
+      "Einstellungen konnten nicht gespeichert werden. Bitte erneut versuchen.",
     extName: "NoVice - Block GTA 6 Spoilers",
     extDescription:
       "Verwischt GTA-6-Trailer, Leaks, Videos, Posts und Story-Spoiler im ganzen Web. Nicht mit Rockstar verbunden.",
@@ -101,6 +145,23 @@ export const MESSAGES = {
     shieldFound: "Gefunden:",
   },
   es: {
+    keywordImport: "Importar palabras clave",
+    importHint:
+      "Pega palabras o frases separadas por comas o saltos de línea. Máximo 60 caracteres por entrada.",
+    importFile: "O elige un archivo de texto (.txt, hasta 1 MB)",
+    importResult:
+      "Añadidas: $1. Omitidas (duplicadas o de más de 60 caracteres): $2.",
+    importError:
+      "No se pudieron importar las palabras clave. Inténtalo de nuevo.",
+    importTooLarge:
+      "La importación es demasiado grande. Usa hasta 1 MB de texto.",
+    excludedSites: "Sitios excluidos",
+    excludedSitesHint:
+      "No bloquear estos dominios ni sus subdominios. Introduce un dominio o la URL de un sitio.",
+    siteExcludedBy:
+      "Excluido por $1. Elimina ese dominio abajo para bloquear aquí.",
+    domainInvalid: "Introduce un dominio válido o la URL HTTP(S) de un sitio.",
+    saveError: "No se pudo guardar la configuración. Inténtalo de nuevo.",
     extName: "NoVice - Block GTA 6 Spoilers",
     extDescription:
       "Difumina tráilers, filtraciones, vídeos, publicaciones y spoilers de la historia de GTA 6 en toda la web. Sin relación con Rockstar.",
@@ -134,6 +195,22 @@ export const MESSAGES = {
     shieldFound: "Detectado:",
   },
   fr: {
+    keywordImport: "Importer des mots-clés",
+    importHint:
+      "Collez des mots ou expressions séparés par des virgules ou des retours à la ligne. 60 caractères maximum par entrée.",
+    importFile: "Ou choisissez un fichier texte (.txt, jusqu’à 1 Mo)",
+    importResult:
+      "Ajoutés : $1. Ignorés (doublons ou plus de 60 caractères) : $2.",
+    importError: "Impossible d’importer les mots-clés. Réessayez.",
+    importTooLarge:
+      "Import trop volumineux. Utilisez au maximum 1 Mo de texte.",
+    excludedSites: "Sites exclus",
+    excludedSitesHint:
+      "Ne jamais bloquer ces domaines ni leurs sous-domaines. Saisissez un domaine ou une URL de site.",
+    siteExcludedBy:
+      "Exclu par $1. Supprimez ce domaine ci-dessous pour bloquer ici.",
+    domainInvalid: "Saisissez un domaine valide ou une URL de site HTTP(S).",
+    saveError: "Impossible d’enregistrer les paramètres. Réessayez.",
     extName: "NoVice - Block GTA 6 Spoilers",
     extDescription:
       "Floute les bandes-annonces, fuites, vidéos, posts et spoilers de GTA 6 sur tout le web. Non affilié à Rockstar.",
@@ -167,6 +244,21 @@ export const MESSAGES = {
     shieldFound: "Détecté :",
   },
   it: {
+    keywordImport: "Importa parole chiave",
+    importHint:
+      "Incolla parole o frasi separate da virgole o nuove righe. Massimo 60 caratteri per voce.",
+    importFile: "Oppure scegli un file di testo (.txt, fino a 1 MB)",
+    importResult:
+      "Aggiunte: $1. Ignorate (duplicate o oltre 60 caratteri): $2.",
+    importError: "Impossibile importare le parole chiave. Riprova.",
+    importTooLarge: "Importazione troppo grande. Usa fino a 1 MB di testo.",
+    excludedSites: "Siti esclusi",
+    excludedSitesHint:
+      "Non bloccare mai questi domini o i loro sottodomini. Inserisci un dominio o un URL di sito.",
+    siteExcludedBy:
+      "Escluso da $1. Rimuovi quel dominio qui sotto per bloccare qui.",
+    domainInvalid: "Inserisci un dominio valido o un URL di sito HTTP(S).",
+    saveError: "Impossibile salvare le impostazioni. Riprova.",
     extName: "NoVice - Block GTA 6 Spoilers",
     extDescription:
       "Sfoca trailer, leak, video, post e spoiler della trama di GTA 6 su tutto il web. Non affiliato a Rockstar.",
@@ -200,6 +292,22 @@ export const MESSAGES = {
     shieldFound: "Rilevato:",
   },
   pt_BR: {
+    keywordImport: "Importar palavras-chave",
+    importHint:
+      "Cole palavras ou frases separadas por vírgulas ou quebras de linha. Máximo de 60 caracteres por entrada.",
+    importFile: "Ou escolha um arquivo de texto (.txt, até 1 MB)",
+    importResult:
+      "Adicionadas: $1. Ignoradas (duplicadas ou com mais de 60 caracteres): $2.",
+    importError:
+      "Não foi possível importar as palavras-chave. Tente novamente.",
+    importTooLarge: "Importação muito grande. Use até 1 MB de texto.",
+    excludedSites: "Sites excluídos",
+    excludedSitesHint:
+      "Nunca bloquear estes domínios ou seus subdomínios. Digite um domínio ou URL de site.",
+    siteExcludedBy:
+      "Excluído por $1. Remova esse domínio abaixo para bloquear aqui.",
+    domainInvalid: "Digite um domínio válido ou URL de site HTTP(S).",
+    saveError: "Não foi possível salvar as configurações. Tente novamente.",
     extName: "NoVice - Block GTA 6 Spoilers",
     extDescription:
       "Desfoca trailers, vazamentos, vídeos, posts e spoilers da história de GTA 6 em toda a web. Sem vínculo com a Rockstar.",
@@ -233,6 +341,23 @@ export const MESSAGES = {
     shieldFound: "Detectado:",
   },
   nl: {
+    keywordImport: "Trefwoorden importeren",
+    importHint:
+      "Plak woorden of zinnen, gescheiden door komma’s of nieuwe regels. Maximaal 60 tekens per item.",
+    importFile: "Of kies een tekstbestand (.txt, maximaal 1 MB)",
+    importResult:
+      "Toegevoegd: $1. Overgeslagen (duplicaten of meer dan 60 tekens): $2.",
+    importError:
+      "Trefwoorden konden niet worden geïmporteerd. Probeer het opnieuw.",
+    importTooLarge: "Import is te groot. Gebruik maximaal 1 MB tekst.",
+    excludedSites: "Uitgesloten websites",
+    excludedSitesHint:
+      "Blokkeer deze domeinen en hun subdomeinen nooit. Voer een domein of website-URL in.",
+    siteExcludedBy:
+      "Uitgesloten door $1. Verwijder dat domein hieronder om hier te blokkeren.",
+    domainInvalid: "Voer een geldig domein of een HTTP(S)-website-URL in.",
+    saveError:
+      "Instellingen konden niet worden opgeslagen. Probeer het opnieuw.",
     extName: "NoVice - Block GTA 6 Spoilers",
     extDescription:
       "Vervaagt GTA 6-trailers, leaks, video's, posts en verhaalspoilers op het hele web. Niet verbonden aan Rockstar.",
@@ -266,6 +391,21 @@ export const MESSAGES = {
     shieldFound: "Gevonden:",
   },
   sv: {
+    keywordImport: "Importera nyckelord",
+    importHint:
+      "Klistra in ord eller fraser, åtskilda av kommatecken eller radbrytningar. Högst 60 tecken per post.",
+    importFile: "Eller välj en textfil (.txt, upp till 1 MB)",
+    importResult:
+      "Tillagda: $1. Överhoppade (dubbletter eller över 60 tecken): $2.",
+    importError: "Det gick inte att importera nyckelord. Försök igen.",
+    importTooLarge: "Importen är för stor. Använd högst 1 MB text.",
+    excludedSites: "Undantagna webbplatser",
+    excludedSitesHint:
+      "Blockera aldrig dessa domäner eller deras underdomäner. Ange en domän eller webbplatsadress.",
+    siteExcludedBy:
+      "Undantagen via $1. Ta bort domänen nedan för att blockera här.",
+    domainInvalid: "Ange en giltig domän eller HTTP(S)-webbplatsadress.",
+    saveError: "Det gick inte att spara inställningarna. Försök igen.",
     extName: "NoVice - Block GTA 6 Spoilers",
     extDescription:
       "Suddar ut GTA 6-trailers, läckor, videor, inlägg och storyspoilers på hela webben. Inte ansluten till Rockstar.",
@@ -299,6 +439,19 @@ export const MESSAGES = {
     shieldFound: "Hittade:",
   },
   cs: {
+    keywordImport: "Importovat klíčová slova",
+    importHint:
+      "Vložte slova nebo fráze oddělené čárkami nebo novými řádky. Nejvýše 60 znaků na položku.",
+    importFile: "Nebo vyberte textový soubor (.txt, do 1 MB)",
+    importResult: "Přidáno: $1. Přeskočeno (duplicity nebo přes 60 znaků): $2.",
+    importError: "Klíčová slova se nepodařilo importovat. Zkuste to znovu.",
+    importTooLarge: "Import je příliš velký. Použijte nejvýše 1 MB textu.",
+    excludedSites: "Vyloučené weby",
+    excludedSitesHint:
+      "Tyto domény ani jejich subdomény nikdy neblokovat. Zadejte doménu nebo URL webu.",
+    siteExcludedBy: "Vyloučeno doménou $1. Pro blokování zde ji odeberte níže.",
+    domainInvalid: "Zadejte platnou doménu nebo HTTP(S) URL webu.",
+    saveError: "Nastavení se nepodařilo uložit. Zkuste to znovu.",
     extName: "NoVice - Block GTA 6 Spoilers",
     extDescription:
       "Rozmazává trailery, úniky, videa, příspěvky a spoilery příběhu GTA 6 na celém webu. Nesouvisí s Rockstar.",
@@ -332,6 +485,21 @@ export const MESSAGES = {
     shieldFound: "Nalezeno:",
   },
   ru: {
+    keywordImport: "Импорт ключевых слов",
+    importHint:
+      "Вставьте слова или фразы через запятую или с новой строки. Не более 60 символов на запись.",
+    importFile: "Или выберите текстовый файл (.txt, до 1 МБ)",
+    importResult:
+      "Добавлено: $1. Пропущено (повторы или более 60 символов): $2.",
+    importError: "Не удалось импортировать ключевые слова. Попробуйте ещё раз.",
+    importTooLarge: "Слишком большой объём. Используйте не более 1 МБ текста.",
+    excludedSites: "Исключённые сайты",
+    excludedSitesHint:
+      "Не блокировать эти домены и их поддомены. Введите домен или URL сайта.",
+    siteExcludedBy:
+      "Исключено доменом $1. Удалите его ниже, чтобы включить блокировку здесь.",
+    domainInvalid: "Введите допустимый домен или HTTP(S) URL сайта.",
+    saveError: "Не удалось сохранить настройки. Попробуйте ещё раз.",
     extName: "NoVice - Block GTA 6 Spoilers",
     extDescription:
       "Размывает трейлеры, утечки, видео, посты и спойлеры сюжета GTA 6 по всему интернету. Не связано с Rockstar.",
@@ -365,6 +533,20 @@ export const MESSAGES = {
     shieldFound: "Найдено:",
   },
   uk: {
+    keywordImport: "Імпорт ключових слів",
+    importHint:
+      "Вставте слова або фрази через кому або з нового рядка. Не більше 60 символів на запис.",
+    importFile: "Або виберіть текстовий файл (.txt, до 1 МБ)",
+    importResult: "Додано: $1. Пропущено (повтори або понад 60 символів): $2.",
+    importError: "Не вдалося імпортувати ключові слова. Спробуйте ще раз.",
+    importTooLarge: "Завеликий обсяг. Використайте не більше 1 МБ тексту.",
+    excludedSites: "Виключені сайти",
+    excludedSitesHint:
+      "Не блокувати ці домени та їхні піддомени. Введіть домен або URL сайту.",
+    siteExcludedBy:
+      "Виключено доменом $1. Видаліть його нижче, щоб увімкнути блокування тут.",
+    domainInvalid: "Введіть дійсний домен або HTTP(S) URL сайту.",
+    saveError: "Не вдалося зберегти налаштування. Спробуйте ще раз.",
     extName: "NoVice - Block GTA 6 Spoilers",
     extDescription:
       "Розмиває трейлери, витоки, відео, дописи та спойлери сюжету GTA 6 по всьому інтернету. Не пов'язано з Rockstar.",
@@ -398,6 +580,20 @@ export const MESSAGES = {
     shieldFound: "Знайдено:",
   },
   tr: {
+    keywordImport: "Anahtar kelimeleri içe aktar",
+    importHint:
+      "Virgül veya yeni satırla ayrılmış kelime ya da ifadeleri yapıştırın. Her giriş en fazla 60 karakter.",
+    importFile: "Veya bir metin dosyası seçin (.txt, en fazla 1 MB)",
+    importResult: "Eklenen: $1. Atlanan (tekrar veya 60 karakterden uzun): $2.",
+    importError: "Anahtar kelimeler içe aktarılamadı. Tekrar deneyin.",
+    importTooLarge: "İçe aktarma çok büyük. En fazla 1 MB metin kullanın.",
+    excludedSites: "Hariç tutulan siteler",
+    excludedSitesHint:
+      "Bu alan adlarını ve alt alan adlarını asla engelleme. Bir alan adı veya site URL’si girin.",
+    siteExcludedBy:
+      "$1 nedeniyle hariç tutuldu. Burada engellemek için aşağıdan bu alan adını kaldırın.",
+    domainInvalid: "Geçerli bir alan adı veya HTTP(S) site URL’si girin.",
+    saveError: "Ayarlar kaydedilemedi. Tekrar deneyin.",
     extName: "NoVice - Block GTA 6 Spoilers",
     extDescription:
       "GTA 6 fragmanlarını, sızıntılarını, videolarını ve hikâye spoilerlarını tüm webde bulanıklaştırır. Rockstar ile ilgisi yoktur.",
@@ -431,6 +627,19 @@ export const MESSAGES = {
     shieldFound: "Bulunan:",
   },
   ar: {
+    keywordImport: "استيراد الكلمات المفتاحية",
+    importHint:
+      "الصق كلمات أو عبارات مفصولة بفواصل أو أسطر جديدة. 60 حرفًا كحد أقصى لكل إدخال.",
+    importFile: "أو اختر ملفًا نصيًا (.txt، حتى 1 ميغابايت)",
+    importResult: "أُضيف: $1. تم تخطيه (مكرر أو أكثر من 60 حرفًا): $2.",
+    importError: "تعذّر استيراد الكلمات المفتاحية. حاول مجددًا.",
+    importTooLarge: "حجم الاستيراد كبير جدًا. استخدم نصًا حتى 1 ميغابايت.",
+    excludedSites: "المواقع المستثناة",
+    excludedSitesHint:
+      "لا تحجب هذه النطاقات أو نطاقاتها الفرعية مطلقًا. أدخل نطاقًا أو رابط موقع.",
+    siteExcludedBy: "مستثنى بواسطة $1. أزل هذا النطاق أدناه للحجب هنا.",
+    domainInvalid: "أدخل نطاقًا صالحًا أو رابط موقع HTTP(S).",
+    saveError: "تعذّر حفظ الإعدادات. حاول مجددًا.",
     extName: "NoVice - Block GTA 6 Spoilers",
     extDescription:
       "يطمس عروض وتسريبات وفيديوهات ومنشورات وحرق أحداث GTA 6 في كل الويب. لا علاقة له بـ Rockstar.",
@@ -464,6 +673,20 @@ export const MESSAGES = {
     shieldFound: "تم العثور على:",
   },
   hi: {
+    keywordImport: "कीवर्ड आयात करें",
+    importHint:
+      "अल्पविराम या नई पंक्तियों से अलग किए गए शब्द या वाक्यांश पेस्ट करें। प्रति प्रविष्टि अधिकतम 60 अक्षर।",
+    importFile: "या टेक्स्ट फ़ाइल चुनें (.txt, अधिकतम 1 MB)",
+    importResult: "जोड़े गए: $1। छोड़े गए (दोहराव या 60 अक्षरों से अधिक): $2।",
+    importError: "कीवर्ड आयात नहीं हो सके। फिर कोशिश करें।",
+    importTooLarge: "आयात बहुत बड़ा है। अधिकतम 1 MB टेक्स्ट इस्तेमाल करें।",
+    excludedSites: "बाहर रखी गई साइटें",
+    excludedSitesHint:
+      "इन डोमेन या उनके सबडोमेन को कभी ब्लॉक न करें। डोमेन या वेबसाइट URL दर्ज करें।",
+    siteExcludedBy:
+      "$1 के कारण बाहर रखा गया। यहाँ ब्लॉक करने के लिए नीचे वह डोमेन हटाएँ।",
+    domainInvalid: "मान्य डोमेन या HTTP(S) वेबसाइट URL दर्ज करें।",
+    saveError: "सेटिंग सहेजी नहीं जा सकी। फिर कोशिश करें।",
     extName: "NoVice - Block GTA 6 Spoilers",
     extDescription:
       "पूरे वेब पर GTA 6 के ट्रेलर, लीक, वीडियो, पोस्ट और कहानी के स्पॉइलर धुंधले करता है। Rockstar से संबद्ध नहीं।",
@@ -497,6 +720,21 @@ export const MESSAGES = {
     shieldFound: "मिला:",
   },
   id: {
+    keywordImport: "Impor kata kunci",
+    importHint:
+      "Tempel kata atau frasa, dipisahkan koma atau baris baru. Maksimal 60 karakter per entri.",
+    importFile: "Atau pilih file teks (.txt, hingga 1 MB)",
+    importResult:
+      "Ditambahkan: $1. Dilewati (duplikat atau lebih dari 60 karakter): $2.",
+    importError: "Tidak dapat mengimpor kata kunci. Coba lagi.",
+    importTooLarge: "Impor terlalu besar. Gunakan teks hingga 1 MB.",
+    excludedSites: "Situs yang dikecualikan",
+    excludedSitesHint:
+      "Jangan pernah memblokir domain ini atau subdomainnya. Masukkan domain atau URL situs.",
+    siteExcludedBy:
+      "Dikecualikan oleh $1. Hapus domain tersebut di bawah untuk memblokir di sini.",
+    domainInvalid: "Masukkan domain atau URL situs HTTP(S) yang valid.",
+    saveError: "Tidak dapat menyimpan pengaturan. Coba lagi.",
     extName: "NoVice - Block GTA 6 Spoilers",
     extDescription:
       "Mengaburkan trailer, bocoran, video, postingan, dan spoiler cerita GTA 6 di seluruh web. Tidak berafiliasi dengan Rockstar.",
@@ -530,6 +768,22 @@ export const MESSAGES = {
     shieldFound: "Ditemukan:",
   },
   ja: {
+    keywordImport: "キーワードをインポート",
+    importHint:
+      "単語やフレーズをカンマまたは改行で区切って貼り付けます。1件につき最大60文字。",
+    importFile: "またはテキストファイルを選択（.txt、最大1 MB）",
+    importResult: "追加：$1件。スキップ（重複または60文字超）：$2件。",
+    importError:
+      "キーワードをインポートできませんでした。もう一度お試しください。",
+    importTooLarge:
+      "インポートする量が多すぎます。1 MB以内のテキストを使用してください。",
+    excludedSites: "除外するサイト",
+    excludedSitesHint:
+      "これらのドメインとサブドメインではブロックしません。ドメインまたはサイトのURLを入力してください。",
+    siteExcludedBy:
+      "$1により除外されています。ここでブロックするには、下のリストからそのドメインを削除してください。",
+    domainInvalid: "有効なドメインまたはHTTP(S)のサイトURLを入力してください。",
+    saveError: "設定を保存できませんでした。もう一度お試しください。",
     extName: "NoVice - GTA 6 ネタバレブロッカー",
     extDescription:
       "GTA 6 のトレーラー、リーク、動画、投稿、ストーリーのネタバレをウェブ全体でぼかします。Rockstar とは無関係です。",
@@ -563,6 +817,21 @@ export const MESSAGES = {
     shieldFound: "検出:",
   },
   ko: {
+    keywordImport: "키워드 가져오기",
+    importHint:
+      "쉼표나 줄 바꿈으로 구분된 단어나 문구를 붙여넣으세요. 항목당 최대 60자입니다.",
+    importFile: "또는 텍스트 파일 선택 (.txt, 최대 1 MB)",
+    importResult: "추가: $1개. 건너뜀 (중복 또는 60자 초과): $2개.",
+    importError: "키워드를 가져올 수 없습니다. 다시 시도하세요.",
+    importTooLarge:
+      "가져올 내용이 너무 큽니다. 최대 1 MB의 텍스트를 사용하세요.",
+    excludedSites: "제외된 사이트",
+    excludedSitesHint:
+      "이 도메인과 하위 도메인에서는 차단하지 않습니다. 도메인 또는 사이트 URL을 입력하세요.",
+    siteExcludedBy:
+      "$1에 의해 제외되었습니다. 여기서 차단하려면 아래에서 해당 도메인을 삭제하세요.",
+    domainInvalid: "유효한 도메인 또는 HTTP(S) 사이트 URL을 입력하세요.",
+    saveError: "설정을 저장할 수 없습니다. 다시 시도하세요.",
     extName: "NoVice - GTA 6 스포일러 차단기",
     extDescription:
       "웹 전체에서 GTA 6 트레일러, 유출, 영상, 게시물, 스토리 스포일러를 흐리게 처리합니다. Rockstar와 관련이 없습니다.",
@@ -596,6 +865,17 @@ export const MESSAGES = {
     shieldFound: "감지됨:",
   },
   zh_CN: {
+    keywordImport: "导入关键词",
+    importHint: "粘贴以逗号或换行分隔的词语或短语。每项最多60个字符。",
+    importFile: "或选择文本文件（.txt，最大1 MB）",
+    importResult: "已添加：$1项。已跳过（重复或超过60个字符）：$2项。",
+    importError: "无法导入关键词，请重试。",
+    importTooLarge: "导入内容过大，请使用不超过1 MB的文本。",
+    excludedSites: "排除的网站",
+    excludedSitesHint: "不在这些域名及其子域名上屏蔽内容。输入域名或网站网址。",
+    siteExcludedBy: "已通过$1排除。要在此处屏蔽，请在下方移除该域名。",
+    domainInvalid: "请输入有效的域名或HTTP(S)网站网址。",
+    saveError: "无法保存设置，请重试。",
     extName: "NoVice - GTA 6 剧透拦截器",
     extDescription:
       "在整个网络上模糊 GTA 6 的预告片、泄露、视频、帖子和剧情剧透。与 Rockstar 无关。",
@@ -628,6 +908,17 @@ export const MESSAGES = {
     shieldFound: "匹配：",
   },
   zh_TW: {
+    keywordImport: "匯入關鍵字",
+    importHint: "貼上以逗號或換行分隔的字詞或片語。每項最多60個字元。",
+    importFile: "或選擇文字檔案（.txt，最大1 MB）",
+    importResult: "已新增：$1項。已略過（重複或超過60個字元）：$2項。",
+    importError: "無法匯入關鍵字，請重試。",
+    importTooLarge: "匯入內容過大，請使用不超過1 MB的文字。",
+    excludedSites: "排除的網站",
+    excludedSitesHint: "不在這些網域及其子網域封鎖內容。輸入網域或網站網址。",
+    siteExcludedBy: "已透過$1排除。若要在此處封鎖，請在下方移除該網域。",
+    domainInvalid: "請輸入有效的網域或HTTP(S)網站網址。",
+    saveError: "無法儲存設定，請重試。",
     extName: "NoVice - GTA 6 劇透攔截器",
     extDescription:
       "在整個網路上模糊 GTA 6 的預告片、外流、影片、貼文和劇情劇透。與 Rockstar 無關。",
