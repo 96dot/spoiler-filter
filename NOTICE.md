@@ -12,6 +12,6 @@ This program is distributed in the hope that it will be useful, but **WITHOUT AN
 
 Corresponding source, build scripts, and modification history are available at [96dot/spoiler-filter](https://github.com/96dot/spoiler-filter). For a downloaded build, use the source from the same revision or release tag. GitHub releases provide source archives; the README describes how to build the extension.
 
-The NoVice name, upstream logo, and upstream store graphics are reserved by the original project and are not presented as this fork's branding. Mentions of NoVice identify the upstream work and do not imply endorsement. The repository slug and some internal build/DOM identifiers retain `novice` to preserve provenance and compatibility; the extension's public name and icon are different.
+The NoVice name, upstream logo, and upstream store graphics are reserved by the original project and are not presented as this fork's branding. Mentions of NoVice identify the upstream work and do not imply endorsement. Some internal build/DOM identifiers retain `novice` to preserve provenance and compatibility; the extension's public name and icon are different.
 
 This fork is not an official NoVice release and is not affiliated with Rockstar Games or Take-Two Interactive. Grand Theft Auto is a trademark of Take-Two Interactive Software, Inc.
