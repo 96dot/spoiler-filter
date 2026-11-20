@@ -112,7 +112,7 @@ const createConfig = (browser, mode) => {
             transform: (content) => buildManifest(content, browser),
           },
           { from: "public/icons", to: "icons" },
-          { from: "LICENSE", to: "LICENSE" },
+          { from: "LICENSE", to: "LICENSE", toType: "file" },
           { from: "NOTICE.md", to: "NOTICE.md" },
           { from: "src/popup/popup.html", to: "popup.html" },
         ],
