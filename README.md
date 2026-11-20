@@ -35,6 +35,8 @@ Earlier versions saved full URLs as domains. If you previously pasted a URL and 
 
 Hover over a blurred item (or focus it with the keyboard) to preview it at 10% blur: the blur gradually reduces from 24px to 2.4px over 0.8 seconds. Moving away restores full blur immediately. Click to reveal the item completely. The hover animation respects your system’s reduced-motion preference.
 
+YouTube Shorts are checked again when scrolling reuses a player. A blur or reveal belongs to that video, so safe Shorts do not inherit a blur and revealing one video does not reveal the next. Blurred Shorts are muted, including during hover previews. Revealing a Short, scrolling to safe content, or turning protection off restores the player’s previous mute setting.
+
 ## Build and install locally
 
 Install Node.js 22 or later, pnpm 11, and Git, then:

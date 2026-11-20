@@ -122,17 +122,20 @@ function sync() {
     shield.hide();
     restoreTitle();
   }
+  blocker.syncMedia();
   report();
 }
 
 function handleMutations(records) {
   if (appliedConfig !== "off") {
+    blocker.recheckShorts(records);
     for (const record of records) {
       if (record.type === "attributes") blocker.checkAttributes(record.target);
       else if (record.type === "characterData") blocker.scan(record.target);
       else record.addedNodes.forEach((node) => blocker.scan(node));
     }
   }
+  blocker.syncMedia();
   const titleChanged =
     document.title !== BLOCKED_TITLE && document.title !== siteTitle();
   const subjects = subjectsText();

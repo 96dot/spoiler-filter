@@ -8,6 +8,8 @@ Modified on **2026-11-19**: renamed the GitHub repository to `96dot/spoiler-filt
 
 **Update v1.3.4 — 2026-11-19:** reduced the hover and keyboard-focus preview to 10% of the original blur and shortened its animation to 0.8 seconds.
 
+**Update v1.3.5 — 2026-11-20:** recheck recycled YouTube Shorts players, keep reveals scoped to each video instead of its channel, mute blurred Shorts and late-loaded players, and restore their prior mute state when protection is removed. Added browser regression coverage for scrolling, reveal reuse, and audio behavior.
+
 The software, including these modifications and the new icon, is distributed under **GNU GPL version 3 only (SPDX: GPL-3.0-only)**. The complete, unmodified license text is in [LICENSE](LICENSE).
 
 This program is distributed in the hope that it will be useful, but **WITHOUT ANY WARRANTY**; without even the implied warranty of **MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE**. See the GNU General Public License for details.

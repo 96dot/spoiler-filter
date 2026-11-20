@@ -1,3 +1,5 @@
+import { shortKey } from "./shorts.js";
+
 const STORE = "novice:revealed";
 const LIMIT = 1000;
 const MAX_TEXT_KEY = 300;
@@ -35,6 +37,8 @@ export function createReveals() {
 // A card's links name it better than its text, which holds counts and times
 // that change between renders.
 function unitKey(unit) {
+  const short = shortKey(unit);
+  if (short) return short;
   const anchors = [unit, ...unit.querySelectorAll("a[href]")].filter(
     (el) => el instanceof HTMLAnchorElement && el.href,
   );

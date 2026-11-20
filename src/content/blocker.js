@@ -6,6 +6,7 @@ import {
 } from "../spoilers.js";
 import { expanderSelectorFor, findEmptiedShelf, findUnit } from "../sites.js";
 import { ext } from "../settings.js";
+import { SHORT_PLAYER, createShortsAudio, isYoutube } from "./shorts.js";
 
 const STATE = "data-novice";
 const LEVEL = "data-novice-level";
@@ -42,7 +43,12 @@ const SKIPPED = new Set([
 
 const TEXT_ATTRS = ["alt", "title", "aria-label"];
 const URL_ATTRS = ["href", "src", "poster"];
-export const WATCHED_ATTRS = [...TEXT_ATTRS, ...URL_ATTRS];
+export const WATCHED_ATTRS = [
+  ...TEXT_ATTRS,
+  ...URL_ATTRS,
+  "video-id",
+  "data-video-id",
+];
 const ATTR_SELECTOR = WATCHED_ATTRS.map((a) => `[${a}]`).join(",");
 
 const INLINE_CONTEXT = 300;
@@ -143,6 +149,7 @@ const isGta6 = (match) => match?.level === "gta6";
 const stronger = (a, b) => (isGta6(a) ? a : isGta6(b) ? b : (a ?? b));
 
 export function createBlocker(host, reveals) {
+  const shortsAudio = createShortsAudio(host);
   let strict = true;
   let style = "blur";
   let keywords = null;
@@ -347,6 +354,23 @@ export function createBlocker(host, reveals) {
 
   return {
     scan,
+    recheckShorts(records) {
+      if (!isYoutube(host)) return;
+      const touched = new Set();
+      for (const { target } of records) {
+        const element =
+          target.nodeType === Node.ELEMENT_NODE ? target : target.parentElement;
+        const unit = element?.closest(SHORT_PLAYER);
+        if (unit?.isConnected && unit.hasAttribute(STATE)) touched.add(unit);
+      }
+      // Settled GTA VI/revealed units normally skip scanning. A reused Short
+      // must be evaluated again against its current title, links and video ID.
+      for (const unit of touched) {
+        clear(unit);
+        scan(unit);
+      }
+    },
+    syncMedia: () => shortsAudio.sync(),
     checkAttributes(element) {
       if (!element.closest("head") && !isSkipped(element)) {
         checkElement(element);
@@ -365,9 +389,16 @@ export function createBlocker(host, reveals) {
     reveal(unit) {
       reveals.addUnit(unit);
       clear(unit, "revealed");
+      shortsAudio.sync();
     },
     clearAll() {
       document.querySelectorAll(COVERED).forEach((unit) => clear(unit));
+      if (isYoutube(host)) {
+        document
+          .querySelectorAll(`${SHORT_PLAYER}${REVEALED}`)
+          .forEach((unit) => clear(unit));
+      }
+      shortsAudio.sync();
     },
     count() {
       return document.querySelectorAll(`:is(${COVERED}):not(:is(${COVERED}) *)`)

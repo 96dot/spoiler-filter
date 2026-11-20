@@ -1,0 +1,42 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <title>YouTube Shorts</title>
+    <style>
+      ytd-reel-video-renderer {
+        display: block;
+        padding: 20px;
+        margin: 20px;
+      }
+      video {
+        width: 120px;
+        height: 80px;
+      }
+    </style>
+  </head>
+  <body>
+    <ytd-reel-video-renderer id="first" video-id="first-clip">
+      <video></video>
+      <h2 class="title">GTA VI trailer discussion</h2>
+      <a href="/@ExampleChannel">Example Channel</a>
+    </ytd-reel-video-renderer>
+    <ytd-reel-video-renderer id="safe" video-id="safe-clip">
+      <video></video>
+      <h2 class="title">Making carbonara</h2>
+      <a href="/@ExampleChannel">Example Channel</a>
+    </ytd-reel-video-renderer>
+    <ytd-reel-video-renderer id="premuted" video-id="premuted-clip">
+      <video muted></video>
+      <h2 class="title">GTA VI trailer reactions</h2>
+      <a href="/@ExampleChannel">Example Channel</a>
+    </ytd-reel-video-renderer>
+    <script>
+      window.loadShort = (slot, id, title) => {
+        const player = document.getElementById(slot);
+        player.setAttribute("video-id", id);
+        player.querySelector(".title").textContent = title;
+      };
+    </script>
+  </body>
+</html>

@@ -117,6 +117,144 @@ test("blurs GTA VI units and leaves everything else", async () => {
   await page.close();
 });
 
+async function openShorts() {
+  const url = "https://www.youtube.com/shorts/fixture-clip";
+  await context.route(url, async (route) =>
+    route.fulfill({
+      contentType: "text/html",
+      body: await readFile(path.join(here, "fixtures", "shorts.html")),
+    }),
+  );
+  const page = await context.newPage();
+  await page.goto(url);
+  await page.waitForSelector("#first[data-novice='blur']", {
+    state: "attached",
+  });
+  return page;
+}
+
+test("recycled Shorts lose stale blur and do not inherit another video's reveal", async () => {
+  const page = await openShorts();
+  try {
+    await page.evaluate(() =>
+      loadShort("first", "cooking-clip", "Making pasta"),
+    );
+    await page.waitForFunction(
+      () => !document.querySelector("#first[data-novice]"),
+    );
+    assert.equal(
+      await page.$eval("#first video", (video) => video.muted),
+      false,
+    );
+
+    await page.evaluate(() =>
+      loadShort("first", "revealed-clip", "GTA VI trailer"),
+    );
+    await page.waitForSelector("#first[data-novice='blur']", {
+      state: "attached",
+    });
+    await page.click("#first .title");
+    assert.equal(await stateOf(page, "first"), "revealed");
+    assert.equal(
+      await page.$eval("#first video", (video) => video.muted),
+      false,
+    );
+
+    await page.evaluate(() =>
+      loadShort("first", "different-clip", "GTA VI trailer"),
+    );
+    await page.waitForSelector("#first[data-novice='blur']", {
+      state: "attached",
+    });
+    assert.equal(
+      await page.$eval("#first video", (video) => video.muted),
+      true,
+    );
+
+    // Returning to the exact video the user revealed still honors that choice.
+    await page.evaluate(() =>
+      loadShort("first", "revealed-clip", "GTA VI trailer"),
+    );
+    await page.waitForSelector("#first[data-novice='revealed']", {
+      state: "attached",
+    });
+    assert.equal(
+      await page.$eval("#first video", (video) => video.muted),
+      false,
+    );
+
+    await page.evaluate(() => {
+      const player = document.createElement("ytd-reel-video-renderer");
+      player.id = "next-short";
+      player.innerHTML =
+        '<video></video><h2>GTA VI news from another video</h2><a href="/@ExampleChannel">Example Channel</a>';
+      document.body.append(player);
+    });
+    await page.waitForSelector("#next-short[data-novice='blur']", {
+      state: "attached",
+    });
+    assert.equal(
+      await page.$eval("#next-short video", (video) => video.muted),
+      true,
+    );
+  } finally {
+    await page.close();
+  }
+});
+
+test("blurred Shorts stay muted, including late players, and restore prior audio state", async () => {
+  const page = await openShorts();
+  try {
+    await page.waitForFunction(
+      () => document.querySelector("#first video").muted,
+    );
+    assert.equal(
+      await page.$eval("#safe video", (video) => video.muted),
+      false,
+    );
+    await page.hover("#first");
+    assert.equal(
+      await page.$eval("#first video", (video) => video.muted),
+      true,
+    );
+
+    await page.$eval("#first video", (video) => {
+      video.muted = false;
+    });
+    await page.waitForFunction(
+      () => document.querySelector("#first video").muted,
+    );
+    await page.$eval("#first video", (video) => {
+      video.outerHTML = "<video id='late-player'></video>";
+    });
+    await page.waitForFunction(
+      () => document.querySelector("#late-player").muted,
+    );
+    await page.click("#first .title");
+    assert.equal(
+      await page.$eval("#late-player", (video) => video.muted),
+      false,
+    );
+
+    await page.click("#premuted .title");
+    assert.equal(
+      await page.$eval("#premuted video", (video) => video.muted),
+      true,
+    );
+    await page.evaluate(() => loadShort("safe", "blocked-clip", "GTA VI news"));
+    await page.waitForFunction(
+      () => document.querySelector("#safe video").muted,
+    );
+    await setSettings({ enabled: false });
+    await page.waitForFunction(
+      () => !document.querySelector("#safe video").muted,
+    );
+  } finally {
+    await setSettings({ enabled: true });
+    await page.close();
+  }
+});
+
 test("a blurred table row keeps the table's columns and shows its tag", async () => {
   const page = await context.newPage();
   await page.goto(`${base}/table`);
